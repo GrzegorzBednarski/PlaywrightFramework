@@ -1,0 +1,26 @@
+# macOS system files
+.DS_Store
+
+# IDE files
+.idea/
+.vscode/
+*.iml
+
+# Log files
+*.log
+
+# NPM dependencies
+node_modules/
+
+# Environment configs (ignore all except example)
+# All environment files are ignored except env/.env.example,
+# which is an example of environment variables for a specific environment
+env/*
+!env/.env.example
+
+# Build artifacts (reports, results, etc.)
+build/
+
+# Cache files
+.cache/
+.eslintcache
