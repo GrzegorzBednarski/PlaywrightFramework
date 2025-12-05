@@ -25,5 +25,14 @@ npx playwright install
 
 ```
 PlaywrightFramework/
-└── README.md                      # Comprehensive documentation for all framework features
+├── 📁 docs/                       # Documentation files (feature & configuration docs)
+│   └── ... (doc files)
+├── README.md                      # Comprehensive documentation for all framework features
+└── tsconfig.json                  # TypeScript configuration
 ```
+
+## Configuration
+
+### 🎨 Code Quality & Formatting
+- **[TypeScript](./docs/typescript.md)** - Type checking and compiler settings
+  - [Configuration](./docs/typescript.md#configuration)

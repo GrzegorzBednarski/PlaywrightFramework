@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "lib": ["ES2017", "DOM"],
+    "module": "es2020",
+    "moduleResolution": "node",
+    "strict": true,
+    "target": "ES2017"
+  },
+  "include": ["**/*.ts"],
+  "exclude": ["**/*.js", "build", "node_modules"]
+}
