@@ -27,6 +27,7 @@ npx playwright install
 PlaywrightFramework/
 ├── 📁 docs/                       # Documentation files (feature & configuration docs)
 │   └── ... (doc files)
+├── .prettierrc                    # Prettier configuration
 ├── README.md                      # Comprehensive documentation for all framework features
 └── tsconfig.json                  # TypeScript configuration
 ```
@@ -34,5 +35,7 @@ PlaywrightFramework/
 ## Configuration
 
 ### 🎨 Code Quality & Formatting
+- **[Prettier](./docs/prettier.md)** - Code formatting and style enforcement
+  - [Configuration](./docs/prettier.md#configuration) | [Usage](./docs/prettier.md#usage)
 - **[TypeScript](./docs/typescript.md)** - Type checking and compiler settings
   - [Configuration](./docs/typescript.md#configuration)
