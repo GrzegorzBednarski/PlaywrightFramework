@@ -1,11 +1,21 @@
 {
   "devDependencies": {
     "@playwright/test": "^1.57.0",
+    "@typescript-eslint/eslint-plugin": "^8.48.1",
+    "@typescript-eslint/parser": "^8.48.1",
+    "eslint": "^9.39.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-no-only-tests": "^3.3.0",
+    "eslint-plugin-playwright": "^2.4.0",
+    "eslint-plugin-prettier": "^5.5.4",
+    "eslint-plugin-unused-imports": "^4.3.0",
     "playwright": "^1.57.0",
     "prettier": "^3.7.4",
     "typescript": "^5.9.3"
   },
   "scripts": {
+    "test:eslint": "npx eslint . --ext .ts,.js --fix",
     "test:prettier": "npx prettier --write '**/*.{js,ts}'"
   }
 }

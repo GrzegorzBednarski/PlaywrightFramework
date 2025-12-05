@@ -28,13 +28,17 @@ PlaywrightFramework/
 ├── 📁 docs/                       # Documentation files (feature & configuration docs)
 │   └── ... (doc files)
 ├── .prettierrc                    # Prettier configuration
+├── eslint.config.js               # ESLint configuration
 ├── README.md                      # Comprehensive documentation for all framework features
+├── tsconfig.eslint.json           # TypeScript config used by ESLint
 └── tsconfig.json                  # TypeScript configuration
 ```
 
 ## Configuration
 
 ### 🎨 Code Quality & Formatting
+- **[ESLint](./docs/eslint.md)** - Code linting and static analysis
+  - [Configuration](./docs/eslint.md#configuration) | [Usage](./docs/eslint.md#usage)
 - **[Prettier](./docs/prettier.md)** - Code formatting and style enforcement
   - [Configuration](./docs/prettier.md#configuration) | [Usage](./docs/prettier.md#usage)
 - **[TypeScript](./docs/typescript.md)** - Type checking and compiler settings
