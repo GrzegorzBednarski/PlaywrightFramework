@@ -43,3 +43,7 @@ PlaywrightFramework/
   - [Configuration](./docs/prettier.md#configuration) | [Usage](./docs/prettier.md#usage)
 - **[TypeScript](./docs/typescript.md)** - Type checking and compiler settings
   - [Configuration](./docs/typescript.md#configuration)
+
+### 🔗 Git Automation
+- **[Lint-staged](./docs/lintStaged.md)** - Run quality checks on pre-commit files.
+  - [Configuration](./docs/lintStaged.md#configuration)

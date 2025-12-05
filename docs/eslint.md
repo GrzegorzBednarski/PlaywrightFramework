@@ -100,6 +100,7 @@ npm run test:eslint
 ## Integration with other tools
 
 ESLint works seamlessly with:
+- **[Lint-Staged](./lintStaged.md)** - Pre-commit linting
 - **[Prettier](./prettier.md)** - Code formatting
 - **[TypeScript](./typescript.md)** - Type checking and TS-specific rules
 
