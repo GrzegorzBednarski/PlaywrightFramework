@@ -34,6 +34,11 @@ Lint-staged configuration is located in the `package.json` file under the `lint-
 3. **Sequential execution**: Commands run in order - first ESLint fixes issues, then Prettier formats
 4. **Automatic re-staging**: After processing, modified files are automatically re-staged
 
+## Integration with Husky
+
+Lint-Staged works seamlessly with **[Husky](./husky.md)** pre-commit hooks. When you commit changes,
+Husky triggers lint-staged to process only the staged files, ensuring code quality without affecting the entire
+codebase.
 
 For more information about lint-staged, see:
 

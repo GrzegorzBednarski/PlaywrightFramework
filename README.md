@@ -25,6 +25,8 @@ npx playwright install
 
 ```
 PlaywrightFramework/
+├── 📁 .husky/                     # Husky Git hooks
+│   └── pre-commit                 # Runs lint-staged and other checks before commit
 ├── 📁 docs/                       # Documentation files (feature & configuration docs)
 │   └── ... (doc files)
 ├── .prettierrc                    # Prettier configuration
@@ -45,5 +47,7 @@ PlaywrightFramework/
   - [Configuration](./docs/typescript.md#configuration)
 
 ### 🔗 Git Automation
+- **[Husky](./docs/husky.md)** - Git hooks management and pre-commit automation
+  - [Configuration](./docs/husky.md#configuration)
 - **[Lint-staged](./docs/lintStaged.md)** - Run quality checks on pre-commit files.
   - [Configuration](./docs/lintStaged.md#configuration)

@@ -100,9 +100,13 @@ npm run test:eslint
 ## Integration with other tools
 
 ESLint works seamlessly with:
+- **[Husky](./husky.md)** - Git hooks for automated linting
 - **[Lint-Staged](./lintStaged.md)** - Pre-commit linting
 - **[Prettier](./prettier.md)** - Code formatting
 - **[TypeScript](./typescript.md)** - Type checking and TS-specific rules
+
+Automatic linting: ESLint runs automatically on staged files before commits thanks to
+**[lint-staged](./lintStaged.md)** and **[Husky](./husky.md)** integration.
 
 For more information about ESLint, see:
 
