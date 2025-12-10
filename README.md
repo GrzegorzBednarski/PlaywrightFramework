@@ -25,18 +25,34 @@ npx playwright install
 
 ```
 PlaywrightFramework/
+├── 📁 build/                      # Generated reports and artifacts (auto-created)
+│   └── ... (reports)
 ├── 📁 .husky/                     # Husky Git hooks
 │   └── pre-commit                 # Runs lint-staged and other checks before commit
 ├── 📁 docs/                       # Documentation files (feature & configuration docs)
 │   └── ... (doc files)
+├── 📁 utils/                      # Utility functions and helpers
+│   └── ... (helper files)
 ├── .prettierrc                    # Prettier configuration
 ├── eslint.config.js               # ESLint configuration
+├── global-setup.ts                # Pre-test setup (cleaning build folder)
+├── playwright.config.ts           # Main Playwright configuration
 ├── README.md                      # Comprehensive documentation for all framework features
 ├── tsconfig.eslint.json           # TypeScript config used by ESLint
 └── tsconfig.json                  # TypeScript configuration
 ```
 
 ## Configuration
+
+### 🔧 Core Configuration
+- **[Playwright Test Reporters](./docs/reporters.md)**
+    - **[Clean Reporter](./docs/reporters.md#clean-reporter)** - Custom console reporter with cleaner, compact output
+    - **[HTML Reporter](./docs/reporters.md#html-reporter)** - Interactive HTML report with traces and artifacts
+      - [Usage](./docs/reporters.md#usage)
+    - **[JSON Reporter](./docs/reporters.md#json-reporter)** - Machine-readable JSON for custom processing
+    - **[JUnit Reporter](./docs/reporters.md#junit-reporter)** - CI-friendly XML output for pipelines and dashboards
+    - **[Line Reporter](./docs/reporters.md#line-reporter)** - Minimal single-line per test, very low verbosity
+    - **[List Reporter](./docs/reporters.md#list-reporter)** - Grouped list-style console output
 
 ### 🎨 Code Quality & Formatting
 - **[ESLint](./docs/eslint.md)** - Code linting and static analysis
@@ -51,3 +67,13 @@ PlaywrightFramework/
   - [Configuration](./docs/husky.md#configuration)
 - **[Lint-staged](./docs/lintStaged.md)** - Run quality checks on pre-commit files.
   - [Configuration](./docs/lintStaged.md#configuration)
+
+### 📝 Reporters
+**Playwright test reporters**
+- [Configuration](./docs/reporters.md#configuration)
+  - **[Clean Reporter](./docs/reporters.md#clean-reporter)** - Custom console reporter with cleaner, compact output
+  - **[HTML Reporter](./docs/reporters.md#html-reporter)** - Interactive HTML report with traces and artifacts
+  - **[JSON Reporter](./docs/reporters.md#json-reporter)** - Machine-readable JSON for custom processing
+  - **[JUnit Reporter](./docs/reporters.md#junit-reporter)** - CI-friendly XML output for pipelines and dashboards
+  - **[Line Reporter](./docs/reporters.md#line-reporter)** - Minimal single-line per test, very low verbosity
+  - **[List Reporter](./docs/reporters.md#list-reporter)** - Grouped list-style console output
