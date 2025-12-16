@@ -77,3 +77,9 @@ PlaywrightFramework/
   - **[JUnit Reporter](./docs/reporters.md#junit-reporter)** - CI-friendly XML output for pipelines and dashboards
   - **[Line Reporter](./docs/reporters.md#line-reporter)** - Minimal single-line per test, very low verbosity
   - **[List Reporter](./docs/reporters.md#list-reporter)** - Grouped list-style console output
+
+## Usage
+
+### 🛠️ Test Utilities
+- **[Replace Text](./docs/replaceText.md)** - Modify text content in DOM elements for testing scenarios
+  - [Usage](./docs/replaceText.md#usage)
