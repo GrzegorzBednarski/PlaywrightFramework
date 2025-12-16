@@ -27,6 +27,8 @@ npx playwright install
 PlaywrightFramework/
 ├── 📁 build/                      # Generated reports and artifacts (auto-created)
 │   └── ... (reports)
+├── 📁 config/                     # Utils configuration files
+│   └── ... (config files)
 ├── 📁 .husky/                     # Husky Git hooks
 │   └── pre-commit                 # Runs lint-staged and other checks before commit
 ├── 📁 docs/                       # Documentation files (feature & configuration docs)
@@ -83,3 +85,5 @@ PlaywrightFramework/
 ### 🛠️ Test Utilities
 - **[Replace Text](./docs/replaceText.md)** - Modify text content in DOM elements for testing scenarios
   - [Usage](./docs/replaceText.md#usage)
+- **[Wait for Page Idle](./docs/waitForPageIdle.md)** - Waiting for page stability and AJAX completion
+  - [Configuration](./docs/waitForPageIdle.md#configuration) | [Usage](./docs/waitForPageIdle.md#usage)
