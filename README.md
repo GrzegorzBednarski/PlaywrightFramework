@@ -29,6 +29,8 @@ PlaywrightFramework/
 │   └── ... (reports)
 ├── 📁 config/                     # Utils configuration files
 │   └── ... (config files)
+├── 📁 data/                       # Test data and constants
+│   └── intercepts.ts              # Shared URL patterns for request interception
 ├── 📁 .husky/                     # Husky Git hooks
 │   └── pre-commit                 # Runs lint-staged and other checks before commit
 ├── 📁 docs/                       # Documentation files (feature & configuration docs)
@@ -82,8 +84,17 @@ PlaywrightFramework/
 
 ## Usage
 
+### 📊 Data Management
+- **[Intercepts](docs/intercepts.md)** - Centralized URL patterns for HTTP request interception
+  - [Configuration](docs/intercepts.md#configuration) | [Usage](docs/intercepts.md#usage)
+
 ### 🛠️ Test Utilities
 - **[Replace Text](./docs/replaceText.md)** - Modify text content in DOM elements for testing scenarios
   - [Usage](./docs/replaceText.md#usage)
 - **[Wait for Page Idle](./docs/waitForPageIdle.md)** - Waiting for page stability and AJAX completion
   - [Configuration](./docs/waitForPageIdle.md#configuration) | [Usage](./docs/waitForPageIdle.md#usage)
+
+### 🌐 Working with HTTP requests
+- **[Request Assertions](./docs/requestAssertions.md)** - Common patterns for validating HTTP requests in tests
+- **[Wait for Intercept](./docs/waitForIntercept.md)** - Wait for specific HTTP requests during tests
+  - [Configuration](./docs/waitForIntercept.md#configuration) | [Usage](./docs/waitForIntercept.md#usage)
