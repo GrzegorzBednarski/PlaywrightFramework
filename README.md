@@ -89,6 +89,7 @@ PlaywrightFramework/
   - [Configuration](docs/intercepts.md#configuration) | [Usage](docs/intercepts.md#usage)
 
 ### 🛠️ Test Utilities
+- **[iFrames](./docs/iFrames.md)** - Working with embedded frames and nested browsing contexts
 - **[Replace Text](./docs/replaceText.md)** - Modify text content in DOM elements for testing scenarios
   - [Usage](./docs/replaceText.md#usage)
 - **[Wait for Page Idle](./docs/waitForPageIdle.md)** - Waiting for page stability and AJAX completion
