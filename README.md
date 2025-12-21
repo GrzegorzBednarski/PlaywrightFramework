@@ -89,6 +89,8 @@ PlaywrightFramework/
   - [Configuration](docs/intercepts.md#configuration) | [Usage](docs/intercepts.md#usage)
 
 ### 🛠️ Test Utilities
+- **[Assert No Console Errors](./docs/assertNoConsoleErrors.md)** - Validate that pages load without JavaScript console errors
+  - [Configuration](./docs/assertNoConsoleErrors.md#configuration) | [Usage](./docs/assertNoConsoleErrors.md#usage)
 - **[iFrames](./docs/iFrames.md)** - Working with embedded frames and nested browsing contexts
 - **[Replace Text](./docs/replaceText.md)** - Modify text content in DOM elements for testing scenarios
   - [Usage](./docs/replaceText.md#usage)
