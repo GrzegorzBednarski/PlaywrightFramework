@@ -31,6 +31,10 @@ PlaywrightFramework/
 │   └── ... (config files)
 ├── 📁 data/                       # Test data and constants
 │   └── intercepts.ts              # Shared URL patterns for request interception
+├── 📁 fixtures/                   # JSON fixtures used for mocking HTTP responses
+│   ├── 📁 intercepts/             # Fixtures for HTTP intercepts (used by replaceIntercept)
+│   │   └── ... (fixture files)
+│   └── ... (other fixtures)
 ├── 📁 .husky/                     # Husky Git hooks
 │   └── pre-commit                 # Runs lint-staged and other checks before commit
 ├── 📁 docs/                       # Documentation files (feature & configuration docs)
@@ -98,6 +102,8 @@ PlaywrightFramework/
   - [Configuration](./docs/waitForPageIdle.md#configuration) | [Usage](./docs/waitForPageIdle.md#usage)
 
 ### 🌐 Working with HTTP requests
+- **[Replace Intercept](./docs/replaceIntercept.md)** - Mock HTTP responses using JSON fixtures
+  - [Configuration](./docs/replaceIntercept.md#configuration) | [Usage](./docs/replaceIntercept.md#usage) | [Dynamic values](./docs/replaceIntercept.md#dynamic-values) | [Status code change](./docs/replaceIntercept.md#status-code-change)
 - **[Request Assertions](./docs/requestAssertions.md)** - Common patterns for validating HTTP requests in tests
 - **[Wait for Intercept](./docs/waitForIntercept.md)** - Wait for specific HTTP requests during tests
   - [Configuration](./docs/waitForIntercept.md#configuration) | [Usage](./docs/waitForIntercept.md#usage)
