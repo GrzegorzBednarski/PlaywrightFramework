@@ -30,8 +30,10 @@ PlaywrightFramework/
 ├── 📁 config/                     # Utils configuration files
 │   └── ... (config files)
 ├── 📁 data/                       # Test data and constants
+│   ├── cookies.ts                 # Central cookie definitions and scenarios (COOKIES, COOKIE_SCENARIOS)
 │   └── intercepts.ts              # Shared URL patterns for request interception
-├── 📁 fixtures/                   # JSON fixtures used for mocking HTTP responses
+├── 📁 fixtures/                   # JSON fixtures used for mocking HTTP responses and cookies
+│   ├── 📁 cookies/                # Cookie fixtures in JSON format used by checkCookies (fixtures/cookies/*.json)
 │   ├── 📁 intercepts/             # Fixtures for HTTP intercepts (used by replaceIntercept)
 │   │   └── ... (fixture files)
 │   └── ... (other fixtures)
@@ -88,9 +90,19 @@ PlaywrightFramework/
 
 ## Usage
 
+### 🍪 Cookie Management
+- **[Check Cookies](./docs/checkCookies.md)** - Assert cookies using JSON fixtures (exist / not exist)
+  - [Configuration](./docs/checkCookies.md#configuration) | [Usage](./docs/checkCookies.md#usage) | [Dynamic values](./docs/checkCookies.md#dynamic-values) | [Debug output](./docs/checkCookies.md#debug-output)
+- **[Set Cookies](./docs/setCookies.md)** - Inject selected cookies into the browser context
+  - [Configuration](./docs/setCookies.md#configuration) | [Usage](./docs/setCookies.md#usage)
+- **[Set Cookies Scenario](./docs/setCookiesScenario.md)** - Apply predefined cookie combinations by name
+  - [Configuration](./docs/setCookiesScenario.md#configuration) | [Usage](./docs/setCookiesScenario.md#usage)
+
 ### 📊 Data Management
-- **[Intercepts](docs/intercepts.md)** - Centralized URL patterns for HTTP request interception
-  - [Configuration](docs/intercepts.md#configuration) | [Usage](docs/intercepts.md#usage)
+- **[Cookies](./docs/cookies.md)** - Central configuration for predefined cookies and reusable cookie scenarios
+  - [Cookies configuration](./docs/cookies.md#cookies-configuration) | [Cookie scenarios configuration](./docs/cookies.md#cookie-scenarios-configuration)
+- **[Intercepts](./docs/intercepts.md)** - Centralized URL patterns for HTTP request interception
+  - [Configuration](./docs/intercepts.md#configuration) | [Usage](./docs/intercepts.md#usage)
 
 ### 🛠️ Test Utilities
 - **[Assert No Console Errors](./docs/assertNoConsoleErrors.md)** - Validate that pages load without JavaScript console errors
