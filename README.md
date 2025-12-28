@@ -25,6 +25,8 @@ npx playwright install
 
 ```
 PlaywrightFramework/
+├── 📁 .husky/                     # Husky Git hooks
+│   └── pre-commit                 # Runs lint-staged and other checks before commit
 ├── 📁 build/                      # Generated reports and artifacts (auto-created)
 │   └── ... (reports)
 ├── 📁 config/                     # Utils configuration files
@@ -37,15 +39,16 @@ PlaywrightFramework/
 │   ├── 📁 intercepts/             # Fixtures for HTTP intercepts (used by replaceIntercept)
 │   │   └── ... (fixture files)
 │   └── ... (other fixtures)
-├── 📁 .husky/                     # Husky Git hooks
-│   └── pre-commit                 # Runs lint-staged and other checks before commit
 ├── 📁 docs/                       # Documentation files (feature & configuration docs)
+│   ├── 📁 samples/                # Additional files used in docs (e.g. sample reports)
+│   │   └── ... (sample files)
 │   └── ... (doc files)
 ├── 📁 utils/                      # Utility functions and helpers
 │   └── ... (helper files)
 ├── .prettierrc                    # Prettier configuration
 ├── eslint.config.js               # ESLint configuration
 ├── global-setup.ts                # Pre-test setup (cleaning build folder)
+├── global-teardown.ts             # Post-test teardown (e.g. merge accessibility reports, generate PDFs)
 ├── playwright.config.ts           # Main Playwright configuration
 ├── README.md                      # Comprehensive documentation for all framework features
 ├── tsconfig.eslint.json           # TypeScript config used by ESLint
@@ -103,6 +106,10 @@ PlaywrightFramework/
   - [Cookies configuration](./docs/cookies.md#cookies-configuration) | [Cookie scenarios configuration](./docs/cookies.md#cookie-scenarios-configuration)
 - **[Intercepts](./docs/intercepts.md)** - Centralized URL patterns for HTTP request interception
   - [Configuration](./docs/intercepts.md#configuration) | [Usage](./docs/intercepts.md#usage)
+
+### 🧪 Testing Features
+- **[Accessibility](./docs/accessibility.md)** - Automated accessibility checks and audits
+  - [Configuration](./docs/accessibility.md#configuration) | [Usage](./docs/accessibility.md#usage) | [Reports](./docs/accessibility.md#reports)
 
 ### 🛠️ Test Utilities
 - **[Assert No Console Errors](./docs/assertNoConsoleErrors.md)** - Validate that pages load without JavaScript console errors

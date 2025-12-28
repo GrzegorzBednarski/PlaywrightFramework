@@ -4,6 +4,7 @@ export const buildDir = 'build';
 
 export default defineConfig({
   globalSetup: require.resolve('./global-setup'),
+  globalTeardown: require.resolve('./global-teardown'),
   outputDir: `${buildDir}/artifacts`,
   reporter: [
     ['./utils/cleanReporter.ts'],

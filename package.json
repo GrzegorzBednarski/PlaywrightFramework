@@ -1,10 +1,12 @@
 {
   "devDependencies": {
+    "@axe-core/playwright": "^4.11.0",
     "@playwright/test": "^1.57.0",
     "@types/fs-extra": "^11.0.4",
     "@types/node": "^25.0.2",
     "@typescript-eslint/eslint-plugin": "^8.48.1",
     "@typescript-eslint/parser": "^8.48.1",
+    "axe-core": "^4.11.0",
     "eslint": "^9.39.1",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import": "^2.32.0",
@@ -15,6 +17,7 @@
     "fs-extra": "^11.3.2",
     "husky": "^9.1.7",
     "lint-staged": "^16.2.7",
+    "md-to-pdf": "^5.2.4",
     "playwright": "^1.57.0",
     "prettier": "^3.7.4",
     "typescript": "^5.9.3"

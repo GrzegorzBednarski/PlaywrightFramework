@@ -1,0 +1,253 @@
+/* Accessibility Report PDF Styling - Ultra Minimalist Version */
+
+/* General page styling with reduced margins */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  line-height: 1.4;
+  color: #333;
+  max-width: 100%;
+  margin: 0;
+  padding: 15px;
+  font-size: 14px;
+}
+
+h1 {
+  color: #2c3e50;
+  border-bottom: 2px solid #e9ecef;
+  padding-bottom: 6px;
+  margin-bottom: 15px;
+  font-size: 1.8em;
+  font-weight: 600;
+}
+
+/* Style timestamp that appears after h1 in PDF */
+h1 + p {
+  font-size: 0.6em;
+  color: #6c757d;
+  font-style: italic;
+  font-weight: normal;
+  margin-top: -10px;
+  margin-bottom: 20px;
+  position: absolute;
+  top: 15px;
+  right: 20px;
+}
+
+h2 {
+  color: #495057;
+  border-bottom: 1px solid #e9ecef;
+  padding-bottom: 4px;
+  margin-top: 25px;
+  margin-bottom: 12px;
+  font-size: 1.3em;
+  font-weight: 500;
+}
+
+/* Restore blockquote styling for categories - simplified approach */
+blockquote {
+  background-color: #fffbf0 !important;
+  border-left: 4px solid #ffc107 !important;
+  padding: 12px !important;
+  margin: 15px 0 8px 0 !important;
+  border-radius: 4px !important;
+  page-break-before: always !important;
+  display: block !important;
+}
+
+/* First blockquote shouldn't break page */
+blockquote:first-of-type {
+  page-break-before: auto !important;
+}
+
+/* Force all blockquote content to be visible */
+blockquote,
+blockquote * {
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Style ALL h3 elements inside blockquote */
+blockquote h3,
+blockquote > h3 {
+  color: #000 !important;
+  margin: 0 0 5px 0 !important;
+  font-size: 1.1em !important;
+  font-weight: 600 !important;
+  background: none !important;
+  border: none !important;
+  padding: 0 !important;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Style ALL p elements inside blockquote */
+blockquote p,
+blockquote > p {
+  color: #000 !important;
+  text-align: left !important;
+  margin: 0 !important;
+  font-size: 14px !important;
+  background: none !important;
+  border: none !important;
+  padding: 0 !important;
+  display: block !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  line-height: 1.4 !important;
+}
+
+/* Extra compact table styling */
+table {
+  border-collapse: collapse;
+  width: 40%;
+  margin: 8px 0;
+  font-size: 10px;
+  border: 1px solid #dee2e6;
+}
+
+th, td {
+  border: 1px solid #dee2e6;
+  padding: 4px 8px;
+  text-align: left;
+}
+
+th {
+  background-color: #f8f9fa;
+  color: #495057;
+  font-weight: 600;
+  font-size: 9px;
+}
+
+td {
+  background-color: #fff;
+  font-size: 9px;
+}
+
+tr:nth-child(even) td {
+  background-color: #fdfdfd;
+}
+
+/* Solution section styling */
+p:has(strong:contains("How to fix:")) {
+  background: #f8f9fa;
+  padding: 10px;
+  border-radius: 4px;
+  border-left: 3px solid #6c757d;
+  margin: 10px 0;
+  font-size: 13px;
+}
+
+p:has(strong:contains("Tags:")) {
+  background: #f8f9fa;
+  padding: 8px;
+  border-radius: 4px;
+  border-left: 3px solid #6c757d;
+  margin: 8px 0;
+  font-size: 12px;
+}
+
+/* Compact pages section */
+p:has(strong:contains("Pages Affected")) {
+  background: #f8f9fa;
+  padding: 8px;
+  border-radius: 4px;
+  margin: 12px 0 6px 0;
+  font-weight: 600;
+  font-size: 13px;
+}
+
+/* Compact node sections */
+p:has(strong a) {
+  font-size: 12px;
+  margin: 6px 0 2px 0;
+  font-weight: 500;
+}
+
+/* Compact CSS selectors styling */
+ul {
+  margin: 4px 0 8px 0;
+  padding-left: 15px;
+}
+
+li {
+  margin: 2px 0;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  background: #f1f3f4;
+  color: #495057;
+  padding: 3px 6px;
+  border-radius: 3px;
+  font-size: 10px;
+  word-break: break-all;
+  list-style-type: none;
+}
+
+li::before {
+  content: "▪ ";
+  color: #6c757d;
+  font-weight: bold;
+  margin-right: 4px;
+}
+
+/* Links styling */
+a {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: 400;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Code styling */
+code {
+  background: #f1f3f4;
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+  font-size: 11px;
+  color: #495057;
+}
+
+/* Minimal horizontal rules */
+hr {
+  border: none;
+  height: 1px;
+  background: #e9ecef;
+  margin: 20px 0;
+}
+
+/* Remove last generated timestamp */
+p:last-child {
+  display: none;
+}
+
+/* Print-specific styles */
+@media print {
+  body {
+    font-size: 10px;
+    padding: 10px;
+  }
+
+  h1 {
+    font-size: 16px;
+  }
+
+  h2 {
+    font-size: 12px;
+  }
+
+  blockquote h3 {
+    font-size: 11px;
+  }
+
+  table {
+    font-size: 8px;
+  }
+
+  li {
+    font-size: 8px;
+  }
+}
