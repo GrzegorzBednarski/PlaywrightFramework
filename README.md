@@ -38,6 +38,8 @@ PlaywrightFramework/
 │   ├── 📁 cookies/                # Cookie fixtures in JSON format used by checkCookies (fixtures/cookies/*.json)
 │   ├── 📁 intercepts/             # Fixtures for HTTP intercepts (used by replaceIntercept)
 │   │   └── ... (fixture files)
+│   ├── 📁 analytics/              # Analytics fixtures (used by checkAnalyticsEvent)
+│   │   └── ... (fixture files)
 │   └── ... (other fixtures)
 ├── 📁 docs/                       # Documentation files (feature & configuration docs)
 │   ├── 📁 samples/                # Additional files used in docs (e.g. sample reports)
@@ -110,6 +112,8 @@ PlaywrightFramework/
 ### 🧪 Testing Features
 - **[Accessibility](./docs/accessibility.md)** - Automated accessibility checks and audits
   - [Configuration](./docs/accessibility.md#configuration) | [Usage](./docs/accessibility.md#usage) | [Reports](./docs/accessibility.md#reports)
+- **[Analytics](./docs/analytics.md)** - Capturing and asserting analytics events from data layers
+  - [Configuration](./docs/analytics.md#configuration) | [Usage](./docs/analytics.md#usage) | [Dynamic values](./docs/analytics.md#dynamic-values) | [Debug output](./docs/analytics.md#debug-output)
 
 ### 🛠️ Test Utilities
 - **[Assert No Console Errors](./docs/assertNoConsoleErrors.md)** - Validate that pages load without JavaScript console errors
