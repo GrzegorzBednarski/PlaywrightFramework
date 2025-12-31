@@ -1,0 +1,11 @@
+version: 2
+snapshot:
+  widths:
+    - 375
+    - 768
+    - 1024
+    - 1440
+  percy-css: |
+discovery:
+  disable-cache: true
+  network-idle-timeout: 250

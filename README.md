@@ -34,6 +34,10 @@ PlaywrightFramework/
 ├── 📁 data/                       # Test data and constants
 │   ├── cookies.ts                 # Central cookie definitions and scenarios (COOKIES, COOKIE_SCENARIOS)
 │   └── intercepts.ts              # Shared URL patterns for request interception
+├── 📁 docs/                       # Documentation files (feature & configuration docs)
+│   ├── 📁 samples/                # Additional files used in docs (e.g. sample reports)
+│   │   └── ... (sample files)
+│   └── ... (doc files)
 ├── 📁 fixtures/                   # JSON fixtures used for mocking HTTP responses and cookies
 │   ├── 📁 cookies/                # Cookie fixtures in JSON format used by checkCookies (fixtures/cookies/*.json)
 │   ├── 📁 intercepts/             # Fixtures for HTTP intercepts (used by replaceIntercept)
@@ -41,12 +45,9 @@ PlaywrightFramework/
 │   ├── 📁 analytics/              # Analytics fixtures (used by checkAnalyticsEvent)
 │   │   └── ... (fixture files)
 │   └── ... (other fixtures)
-├── 📁 docs/                       # Documentation files (feature & configuration docs)
-│   ├── 📁 samples/                # Additional files used in docs (e.g. sample reports)
-│   │   └── ... (sample files)
-│   └── ... (doc files)
 ├── 📁 utils/                      # Utility functions and helpers
 │   └── ... (helper files)
+├── .percy.yml                     # Percy visual testing configuration
 ├── .prettierrc                    # Prettier configuration
 ├── eslint.config.js               # ESLint configuration
 ├── global-setup.ts                # Pre-test setup (cleaning build folder)
@@ -114,6 +115,8 @@ PlaywrightFramework/
   - [Configuration](./docs/accessibility.md#configuration) | [Usage](./docs/accessibility.md#usage) | [Reports](./docs/accessibility.md#reports)
 - **[Analytics](./docs/analytics.md)** - Capturing and asserting analytics events from data layers
   - [Configuration](./docs/analytics.md#configuration) | [Usage](./docs/analytics.md#usage) | [Dynamic values](./docs/analytics.md#dynamic-values) | [Debug output](./docs/analytics.md#debug-output)
+- **[Visual Testing](docs/visualTesting.md)** - Visual regression testing with Percy and Playwright
+  - [Configuration](docs/visualTesting.md#configuration) | [Usage](docs/visualTesting.md#usage) | [Advanced usage](docs/visualTesting.md#advanced-usage) | [Viewing results](docs/visualTesting.md#viewing-results)
 
 ### 🛠️ Test Utilities
 - **[Assert No Console Errors](./docs/assertNoConsoleErrors.md)** - Validate that pages load without JavaScript console errors
