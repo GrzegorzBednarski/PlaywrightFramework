@@ -16,7 +16,7 @@ Function signature:
 - **`replaceIntercept(page, urlPattern, fixtureName, options?)`**
   - **`page`** – Playwright `Page`
   - **`urlPattern`** – wildcard string or `RegExp`
-  - **`fixtureName`** – JSON file name or relative path under `fixtures/intercepts/` (e.g. `trainingLibrary.json`)
+  - **`fixtureName`** – JSON file name or relative path under `fixtures/intercepts/` (e.g. `userList.json`)
   - **`options`** – optional configuration object
     - **`options.method`** – HTTP method to intercept (default: `GET`)
     - **`options.statusCode`** – HTTP status code to return (default: `200`)

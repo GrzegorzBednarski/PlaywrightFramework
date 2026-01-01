@@ -3,6 +3,17 @@ import * as path from 'path';
 import { AxeResults, Result } from 'axe-core';
 import { convertAccessibilityReportToPdf } from './mdToPdf';
 
+/**
+ * Sanitizes lenient JSON by escaping control characters in string literals
+ * so that it can be parsed by `JSON.parse`.
+ */
+function sanitizeLenientJson(input: string): string {
+  return input.replace(/[\u0000-\u001F\u007F-\u009F]/g, char => {
+    // Escape control characters with a backslash and the character code
+    return '\\u' + ('000' + char.charCodeAt(0).toString(16)).slice(-4);
+  });
+}
+
 interface ReportFields {
   impact?: boolean;
   id?: boolean;
@@ -49,6 +60,9 @@ export function generateAccessibilityReport(
   saveJsonReport(results.violations, defaultJsonFields, config.reportsOutputFolder, true, url);
 }
 
+/**
+ * Logs accessibility violations to the console using a filtered field set.
+ */
 function logToConsole(violations: Result[], options: ReportFields, url?: string): void {
   if (violations.length === 0) {
     return;
@@ -68,6 +82,9 @@ function logToConsole(violations: Result[], options: ReportFields, url?: string)
   console.table(filtered);
 }
 
+/**
+ * Saves a filtered JSON accessibility report to disk, optionally with a timestamp.
+ */
 function saveJsonReport(
   violations: Result[],
   fields: ReportFields,
@@ -100,7 +117,7 @@ function saveJsonReport(
 }
 
 /**
- * Escapes HTML tags in text to prevent rendering issues
+ * Escapes HTML tags in text to prevent rendering issues.
  */
 function escapeHtml(text: string): string {
   return text
@@ -110,6 +127,9 @@ function escapeHtml(text: string): string {
     .replace(/'/g, '&#39;');
 }
 
+/**
+ * Filters a single axe-core violation object to only include requested fields.
+ */
 function filterViolation(
   violation: Result,
   options: ReportFields,
@@ -157,6 +177,10 @@ export type StructuredViolation = {
   }[];
 };
 
+/**
+ * Normalizes and groups raw accessibility violations by rule and page.
+ * Used as an input for Markdown and JSON report generation.
+ */
 export function transformViolations(rawViolations: any[]): StructuredViolation[] {
   const grouped = new Map<string, StructuredViolation>();
 
@@ -193,6 +217,12 @@ export function transformViolations(rawViolations: any[]): StructuredViolation[]
   });
 }
 
+/**
+ * Generates a Markdown accessibility report from structured violations.
+ *
+ * @param structuredViolations Normalized violations (typically from transformViolations)
+ * @param outputFolder Target folder for the generated Markdown file
+ */
 export function generateMarkdownReport(
   structuredViolations: StructuredViolation[],
   outputFolder: string
@@ -281,6 +311,9 @@ export function generateMarkdownReport(
   fs.writeFileSync(filePath, markdown, 'utf-8');
 }
 
+/**
+ * Removes duplicated violations coming from multiple JSON reports.
+ */
 export function deduplicateViolations(violations: any[]): any[] {
   const seen = new Set<string>();
   const result: any[] = [];
@@ -304,6 +337,10 @@ export function deduplicateViolations(violations: any[]): any[] {
   return result;
 }
 
+/**
+ * Merges multiple accessibility JSON reports into a single summary,
+ * generates a combined Markdown and PDF report, and cleans up temporary files.
+ */
 export async function mergeAccessibilityReports(
   reportsDir: string,
   outputFile: string,

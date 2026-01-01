@@ -1,15 +1,26 @@
 import { Reporter, TestCase, TestResult, FullResult } from '@playwright/test/reporter';
 
+/**
+ * Custom Playwright reporter that prints a compact per-test line
+ * and a short summary of failed tests at the end of the run.
+ */
 class CleanReporter implements Reporter {
   private failedTests: { test: TestCase; result: TestResult }[] = [];
   private testIndex = 0;
 
+  /**
+   * Called once before all tests start. Logs total test and worker counts.
+   */
   onBegin(config: any, suite: any) {
     const testCount = suite.allTests().length;
     const workerCount = config.workers;
     console.log(`\nRunning ${testCount} tests using ${workerCount} workers\n`);
   }
 
+  /**
+   * Called after each test finishes. Logs a single-line status and
+   * collects failed tests for the final summary.
+   */
   onTestEnd(test: TestCase, result: TestResult) {
     this.testIndex++;
     const formattedTest = this.formatTestInfo(test);
@@ -29,6 +40,10 @@ class CleanReporter implements Reporter {
     }
   }
 
+  /**
+   * Called once after all tests complete. Prints failed test details
+   * and an aggregate summary.
+   */
   onEnd(_result: FullResult) {
     this.printFailedTestsDetails();
     this.printSummary();
@@ -42,6 +57,9 @@ class CleanReporter implements Reporter {
     process.stderr.write(chunk);
   }
 
+  /**
+   * Formats basic information about a test (project, file, title) for logging.
+   */
   private formatTestInfo(test: TestCase): string {
     const projectName = test.parent?.project()?.name || '';
     const fileName = this.extractFileName(test.location?.file);
@@ -50,6 +68,9 @@ class CleanReporter implements Reporter {
     return `[${projectName}] › ${fileName} › ${testTitle}`;
   }
 
+  /**
+   * Formats a full test location string including file, line and column.
+   */
   private formatTestLocation(test: TestCase): string {
     const projectName = test.parent?.project()?.name || '';
     const fileName = this.extractFileName(test.location?.file);
@@ -60,15 +81,24 @@ class CleanReporter implements Reporter {
     return `[${projectName}] › ${fileName}:${line}:${column} › ${testTitle}`;
   }
 
+  /**
+   * Extracts the filename from an absolute or relative path.
+   */
   private extractFileName(filePath?: string): string {
     if (!filePath) return 'Unknown File';
     return filePath.split(/[\\/]/).pop() || 'Unknown File';
   }
 
+  /**
+   * Formats test duration in seconds with a single decimal place.
+   */
   private formatDuration(duration: number): string {
     return `(${(duration / 1000).toFixed(1)}s)`;
   }
 
+  /**
+   * Prints a numbered list of failed tests with a short error message.
+   */
   private printFailedTestsDetails(): void {
     if (this.failedTests.length === 0) return;
 
@@ -85,6 +115,9 @@ class CleanReporter implements Reporter {
     });
   }
 
+  /**
+   * Prints a final summary line with passed/failed test counts.
+   */
   private printSummary(): void {
     const passed = this.testIndex - this.failedTests.length;
 
