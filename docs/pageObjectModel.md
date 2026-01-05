@@ -9,7 +9,7 @@ Guidelines for structuring page objects, components, and fixtures in this starte
 Typical setup for a new domain:
 
 1. **Create a base page** – shared navigation and common behaviour. See [Base page](#base-page).
-2. **Create concrete pages** – e.g. `HomePage`, `ContactUsPage`, each extending the base page. See [Pages](#pages).
+2. **Create concrete pages** – e.g. `HomePage`, `ContactUsPage`, `ProductPage`, each extending the base page. See [Pages](#pages).
 3. **Create components** – reusable UI pieces such as headers or dialogs. See [Components](#components).
 4. **Wire fixtures** – expose page objects (and optionally components) via Playwright fixtures. See [Fixtures](#fixtures).
 
@@ -30,6 +30,7 @@ Example structure (domain anonymised as `example`):
     - **`pages/`** – concrete pages
       - `home.page.ts`
       - `contactUs.page.ts`
+      - `product.page.ts`
     - **`pageFixture.ts`** – Playwright fixture exposing strongly typed page objects
 
 ## Base page
@@ -108,6 +109,54 @@ export class ContactUsPage extends BasePage {
     await expect(this.successMessage).toBeVisible();
   }
 }
+```
+
+### Dynamic URLs (e.g. product pages)
+
+For pages where part of the URL is dynamic (like product detail pages with an `id`), keep `pageUrl` as the base path and add a dedicated helper that accepts the dynamic part.
+
+Example (`pageObjects/example/pages/product.page.ts`):
+
+```ts
+import { BasePage } from '../base.page';
+import { expect } from '@playwright/test';
+
+export class ProductPage extends BasePage {
+  protected pageUrl = 'https://www.example.com/product_details';
+
+  /**
+   * Navigate to the product details page for a specific product ID.
+   *
+   * @param productId ID of the product to open (e.g. 3).
+   * @example
+   * await productPage.gotoProduct(3, false);
+   */
+  async gotoProduct(productId: number | string, autoAcceptCookies = true) {
+    const url = `${this.pageUrl}/${productId}`;
+
+    // Optionally reuse shared cookie/idle logic here if needed
+    // e.g. a shared helper from BasePage
+    await this.page.goto(url);
+  }
+
+  /**
+   * Assert that the current URL matches the expected product ID.
+   */
+  async expectOnProduct(productId: number | string) {
+    await expect(this.page).toHaveURL(`${this.pageUrl}/${productId}`);
+  }
+}
+```
+
+In tests you can keep the flow readable while still being explicit about the product ID:
+
+```ts
+import { test } from '../pageObjects/example/pageFixture';
+
+test('user views product details', async ({ productPage }) => {
+  await productPage.gotoProduct(3, false);
+  await productPage.expectOnProduct(3);
+});
 ```
 
 ## Components
