@@ -1,13 +1,30 @@
 export const COOKIES = {
   // Add your cookies here, e.g.:
-  // COOKIE_BANNER_ACCEPTED: {
-  //   name: 'cookie_banner_accepted',
-  //   value: 'true',
-  //   domain: 'example.com',
-  //   path: '/',
-  //   httpOnly: false,
-  //   secure: true,
-  // },
+  TEST_COOKIE_A: {
+    name: 'cookie_a',
+    value: 'true',
+    domain: '.automationexercise.com',
+    path: '/',
+    httpOnly: false,
+    secure: true,
+  },
+  TEST_COOKIE_B: {
+    name: 'cookie_b',
+    value: 'true',
+    domain: '.automationexercise.com',
+    path: '/',
+    httpOnly: false,
+    secure: true,
+  },
+  AE_CLOSE_COOKIE_PROMPT: {
+    name: 'FCCDCF',
+    value:
+      '%5Bnull%2Cnull%2Cnull%2C%5B%22CQdgMcAQdgMcAEsACBENCMFoAP_gAEPgABBoK1IB_C7EbCFCiDJ3IKMEMAhHABBAYsAwAAYBAwAADBIQIAQCgkEYBASAFCACCAAAKASBAAAgCAAAAUAAIAAFAABAAAwAIBAIIAAAgAAAAEAIAAAACIAAEQCAAAAEAEAAkAgAAAIASAAAAAAAAACBAAAAAAAAAAAAAAAABAAAAQAAQAAAAAAAiAAAAAAAABAIAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAABAAAAAAAQR2QD-F2I2EKFEGCuQUYIYBCuACAAxYBgAAwCBgAAGCQgQAgFJIIkCAEAIEAAEAAAQAgCAABQEBAAAIAAAAAqAACAABgAQCAQAIABAAAAgIAAAAAAEQAAIgEAAAAIAIABABAAAAQAkAAAAAAAAAECAAAAAAAAAAAAAAAAAAAAAEABgAAAAAABEAAAAAAAACAQIAAA%22%2C%222~61.89.122.161.184.196.230.314.442.445.494.550.576.827.1029.1033.1046.1047.1051.1097.1126.1166.1301.1342.1415.1725.1765.1942.1958.1987.2068.2072.2074.2107.2213.2219.2223.2224.2328.2331.2387.2416.2501.2567.2568.2575.2657.2686.2778.2869.2878.2908.2920.2963.3005.3023.3100.3126.3219.3234.3235.3253.3309.3731.6931.8931.13731.15731.33931~dv.%22%2C%220E4C03AB-4F4A-48D9-B198-D54D3753CE4C%22%5D%2Cnull%2Cnull%2C%5B%5B32%2C%22%5B%5C%226014a2a0-760a-420f-94a4-6b7de53d16c3%5C%22%2C%5B1767559032%2C849000000%5D%5D%22%5D%5D%5D',
+    domain: '.automationexercise.com',
+    path: '/',
+    httpOnly: false,
+    secure: false,
+  },
 };
 
 export const COOKIE_SCENARIOS: Record<string, Array<keyof typeof COOKIES>> = {

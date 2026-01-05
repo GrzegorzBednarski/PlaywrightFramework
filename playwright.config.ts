@@ -12,6 +12,7 @@ export default defineConfig({
     ['junit', { outputFile: `${buildDir}/junit/results.xml` }],
     ['json', { outputFile: `${buildDir}/json/results.json` }],
   ],
+  testDir: 'tests',
   use: {
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',

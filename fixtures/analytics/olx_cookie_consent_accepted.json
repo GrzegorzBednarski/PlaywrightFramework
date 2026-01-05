@@ -1,0 +1,11 @@
+{
+  "user_status": "unlogged",
+  "event_type": "click",
+  "action_type": "cookies_consent",
+  "touch_point_page": "listing_home",
+  "trackEvent": [
+    "cookies_consent"
+  ],
+  "nav_referrer": "",
+  "platform": "desktop"
+}

@@ -1,0 +1,10 @@
+{
+  "TEST_COOKIE_A": {
+    "name": "cookie_a",
+    "value": "true",
+    "domain": ".automationexercise.com",
+    "path": "/",
+    "httpOnly": false,
+    "secure": true
+  }
+}
