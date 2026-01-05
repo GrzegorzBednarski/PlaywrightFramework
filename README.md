@@ -39,12 +39,21 @@ PlaywrightFramework/
 │   │   └── ... (sample files)
 │   └── ... (doc files)
 ├── 📁 fixtures/                   # JSON fixtures used for mocking HTTP responses and cookies
+│   ├── 📁 analytics/              # Analytics fixtures (used by checkAnalyticsEvent)
+│   │   └── ... (fixture files)
 │   ├── 📁 cookies/                # Cookie fixtures in JSON format used by checkCookies (fixtures/cookies/*.json)
 │   ├── 📁 intercepts/             # Fixtures for HTTP intercepts (used by replaceIntercept)
 │   │   └── ... (fixture files)
-│   ├── 📁 analytics/              # Analytics fixtures (used by checkAnalyticsEvent)
-│   │   └── ... (fixture files)
 │   └── ... (other fixtures)
+├── 📁 pageObjects/                # Page Object Model structure grouped by domain
+│   ├── 📁 pageDomain/             # Example domain (e.g. example.com)
+│   │   ├── 📁 components/         # Reusable UI components for this domain
+│   │   │   └── ... (component files)
+│   │   ├── 📁 pages/              # Concrete pages (home, contact, cart, ...)
+│   │   │   └── ... (page files)
+│   │   ├── base.page.ts           # Base page with shared navigation and helpers
+│   │   └── pageFixture.ts         # Playwright fixtures exposing page objects
+│   └── ... (other domains)
 ├── 📁 utils/                      # Utility functions and helpers
 │   └── ... (helper files)
 ├── .percy.yml                     # Percy visual testing configuration
@@ -109,6 +118,10 @@ PlaywrightFramework/
   - [Cookies configuration](./docs/cookies.md#cookies-configuration) | [Cookie scenarios configuration](./docs/cookies.md#cookie-scenarios-configuration)
 - **[Intercepts](./docs/intercepts.md)** - Centralized URL patterns for HTTP request interception
   - [Configuration](./docs/intercepts.md#configuration) | [Usage](./docs/intercepts.md#usage)
+
+### 🧩 Page Object Model
+- **[Page Object Model](./docs/pageObjectModel.md)** - Structure and usage of pages, components, and fixtures
+  - [Configuration](./docs/pageObjectModel.md#configuration) | [Usage](./docs/pageObjectModel.md#usage) | [Advanced tips](./docs/pageObjectModel.md#advanced-tips)
 
 ### 🧪 Testing Features
 - **[Accessibility](./docs/accessibility.md)** - Automated accessibility checks and audits
