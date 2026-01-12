@@ -58,27 +58,25 @@ class CleanReporter implements Reporter {
   }
 
   /**
-   * Formats basic information about a test (project, file, title) for logging.
+   * Formats basic information about a test (file, title) for logging.
    */
   private formatTestInfo(test: TestCase): string {
-    const projectName = test.parent?.project()?.name || '';
     const fileName = this.extractFileName(test.location?.file);
     const testTitle = test.title || 'Unknown Test';
 
-    return `[${projectName}] › ${fileName} › ${testTitle}`;
+    return `${fileName} › ${testTitle}`;
   }
 
   /**
    * Formats a full test location string including file, line and column.
    */
   private formatTestLocation(test: TestCase): string {
-    const projectName = test.parent?.project()?.name || '';
     const fileName = this.extractFileName(test.location?.file);
     const line = test.location?.line || 0;
     const column = test.location?.column || 0;
     const testTitle = test.title || 'Unknown Test';
 
-    return `[${projectName}] › ${fileName}:${line}:${column} › ${testTitle}`;
+    return `${fileName}:${line}:${column} › ${testTitle}`;
   }
 
   /**

@@ -7,7 +7,7 @@ import { convertAccessibilityReportToPdf } from './mdToPdf';
  * Sanitizes lenient JSON by escaping control characters in string literals
  * so that it can be parsed by `JSON.parse`.
  */
-function sanitizeLenientJson(input: string): string {
+function _sanitizeLenientJson(input: string): string {
   return input.replace(/[\u0000-\u001F\u007F-\u009F]/g, char => {
     // Escape control characters with a backslash and the character code
     return '\\u' + ('000' + char.charCodeAt(0).toString(16)).slice(-4);

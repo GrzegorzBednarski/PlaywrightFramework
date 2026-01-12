@@ -21,12 +21,21 @@ npx playwright install
 
 - **[Playwright Documentation](https://playwright.dev/docs/intro)**
 
+## Start here
+
+If you want to run tests in this project, start with these three steps:
+
+1. **[Create environment files](./docs/environments.md)** – define per-environment settings in `.env.*` files under the `env/` directory.
+2. **[Configure test types and groups](./docs/testRunner.md#configuration)** – decide which tests belong to which logical groups.
+3. **[Run tests](./docs/testRunner.md#running-tests)** – execute tests for a given environment and test type/group using the custom runner.
+
 ## 📁 Framework Structure
 
 ```
 PlaywrightFramework/
 ├── 📁 .husky/                     # Husky Git hooks
 │   └── pre-commit                 # Runs lint-staged and other checks before commit
+├── .gitignore                     # Git ignore rules
 ├── 📁 build/                      # Generated reports and artifacts (auto-created)
 │   └── ... (reports)
 ├── 📁 config/                     # Utils configuration files
@@ -38,6 +47,8 @@ PlaywrightFramework/
 │   ├── 📁 samples/                # Additional files used in docs (e.g. sample reports)
 │   │   └── ... (sample files)
 │   └── ... (doc files)
+├── 📁 env/                        # Environment variable files for different environments
+│   └── ... (.env.*)
 ├── 📁 fixtures/                   # JSON fixtures used for mocking HTTP responses and cookies
 │   ├── 📁 analytics/              # Analytics fixtures (used by checkAnalyticsEvent)
 │   │   └── ... (fixture files)
@@ -80,14 +91,16 @@ PlaywrightFramework/
 ## Configuration
 
 ### 🔧 Core Configuration
-- **[Playwright Test Reporters](./docs/reporters.md)**
-    - **[Clean Reporter](./docs/reporters.md#clean-reporter)** - Custom console reporter with cleaner, compact output
-    - **[HTML Reporter](./docs/reporters.md#html-reporter)** - Interactive HTML report with traces and artifacts
-      - [Usage](./docs/reporters.md#usage)
-    - **[JSON Reporter](./docs/reporters.md#json-reporter)** - Machine-readable JSON for custom processing
-    - **[JUnit Reporter](./docs/reporters.md#junit-reporter)** - CI-friendly XML output for pipelines and dashboards
-    - **[Line Reporter](./docs/reporters.md#line-reporter)** - Minimal single-line per test, very low verbosity
-    - **[List Reporter](./docs/reporters.md#list-reporter)** - Grouped list-style console output
+- **[Dotenv](./docs/dotenv.md)** – Loading environment variables from `.env` files before tests
+  - [Configuration](./docs/dotenv.md#configuration) | [Usage](./docs/dotenv.md#usage)
+- **[Environments](./docs/environments.md)** – Environment setup, `.env` files and switching between environments
+  - [Configuration](./docs/environments.md#configuration) | [Usage](./docs/environments.md#usage) | [Secrets & sharing](./docs/environments.md#secrets-and-sharing)
+- **[Playwright configuration](./docs/playwrightConfiguration.md)** – Global Playwright configuration used by all tests
+  - [Configuration](./docs/playwrightConfiguration.md#configuration) | [Usage](./docs/playwrightConfiguration.md#usage)
+- **[Test Configuration](./docs/testConfiguration.md)** – Per-test configuration patterns
+  - [Execution modes](./docs/testConfiguration.md#execution-modes) | [Per-test timeouts](./docs/testConfiguration.md#per-test-timeouts) | [Retries](./docs/testConfiguration.md#retries-in-code) | [Focusing tests](./docs/testConfiguration.md#focusing-tests) | [Skipping tests](./docs/testConfiguration.md#skipping-tests) | [Test steps](./docs/testConfiguration.md#test-steps) | [Env vars in tests](./docs/testConfiguration.md#using-environment-variables-in-tests)
+- **[Test Runner](./docs/testRunner.md)** – Custom test runner entrypoint and CLI commands
+  - [Configuration](./docs/testRunner.md#configuration) | [Running tests](./docs/testRunner.md#running-tests) | [Helper commands](./docs/testRunner.md#helper-commands)
 
 ### 🎨 Code Quality & Formatting
 - **[ESLint](./docs/eslint.md)** - Code linting and static analysis
@@ -104,7 +117,6 @@ PlaywrightFramework/
   - [Configuration](./docs/lintStaged.md#configuration)
 
 ### 📝 Reporters
-**Playwright test reporters**
 - [Configuration](./docs/reporters.md#configuration)
   - **[Clean Reporter](./docs/reporters.md#clean-reporter)** - Custom console reporter with cleaner, compact output
   - **[HTML Reporter](./docs/reporters.md#html-reporter)** - Interactive HTML report with traces and artifacts
@@ -125,7 +137,7 @@ PlaywrightFramework/
 
 ### 📊 Data Management
 - **[Cookies](./docs/cookies.md)** - Central configuration for predefined cookies and reusable cookie scenarios
-  - [Cookies configuration](./docs/cookies.md#cookies-configuration) | [Cookie scenarios configuration](./docs/cookies.md#cookie-scenarios-configuration)
+  - [Cookies configuration](./docs/cookies.md#cookies-configuration) | [Dynamic domains](./docs/cookies.md#dynamic-cookie-domains) | [Cookie scenarios configuration](./docs/cookies.md#cookie-scenarios-configuration)
 - **[Intercepts](./docs/intercepts.md)** - Centralized URL patterns for HTTP request interception
   - [Configuration](./docs/intercepts.md#configuration) | [Usage](./docs/intercepts.md#usage)
 
@@ -139,7 +151,7 @@ PlaywrightFramework/
 - **[Analytics](./docs/analytics.md)** - Capturing and asserting analytics events from data layers
   - [Configuration](./docs/analytics.md#configuration) | [Usage](./docs/analytics.md#usage) | [Dynamic values](./docs/analytics.md#dynamic-values) | [Debug output](./docs/analytics.md#debug-output)
 - **[Visual Testing](docs/visualTesting.md)** - Visual regression testing with Percy and Playwright
-  - [Configuration](docs/visualTesting.md#configuration) | [Usage](docs/visualTesting.md#usage) | [Advanced usage](docs/visualTesting.md#advanced-usage) | [Viewing results](docs/visualTesting.md#viewing-results)
+  - [Configuration](docs/visualTesting.md#configuration) | [Environment variables](docs/visualTesting.md#environment-variables) | [Usage](docs/visualTesting.md#usage) | [Advanced usage](docs/visualTesting.md#advanced-usage) | [Viewing results](docs/visualTesting.md#viewing-results) 
 
 ### 🛠️ Test Utilities
 - **[Assert No Console Errors](./docs/assertNoConsoleErrors.md)** - Validate that pages load without JavaScript console errors

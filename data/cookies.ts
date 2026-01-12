@@ -1,5 +1,9 @@
+// const baseDomain = (process.env.BASE_URL || '')
+//   .replace(/^https?:\/\//, '')
+//   .replace(/\/.*$/, '');
+// Use baseDomain variable to set the domain dynamically, e.g.:
+// domain: `.${baseDomain}`,
 export const COOKIES = {
-  // Add your cookies here, e.g.:
   TEST_COOKIE_A: {
     name: 'cookie_a',
     value: 'true',

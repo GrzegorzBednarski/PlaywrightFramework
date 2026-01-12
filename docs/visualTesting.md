@@ -39,6 +39,17 @@ discovery:
 
 For full configuration options, see the official [Percy documentation](https://www.browserstack.com/docs/percy/references/config-options).
 
+### Environment variables
+
+Percy relies on a small set of environment variables:
+
+- **`PERCY_TOKEN`** – project access token used to authenticate with Percy.
+- **`PERCY_BRANCH`** – branch or pipeline name used to group visual builds.
+
+These values should be stored in `.env` files for each environment (for example in `.env.dev` or `.env.stg`).
+
+See **[Environments](./environments.md)** for an example `.env` file and more details on how environment files are structured.
+
 Function signature:
 
 - **`percySnapshot(page, name, options?)`**

@@ -9,6 +9,7 @@
     "@typescript-eslint/eslint-plugin": "^8.51.0",
     "@typescript-eslint/parser": "^8.51.0",
     "axe-core": "^4.11.0",
+    "dotenv": "^17.2.3",
     "eslint": "^9.39.2",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import": "^2.32.0",
@@ -22,13 +23,12 @@
     "md-to-pdf": "^5.2.4",
     "playwright": "^1.57.0",
     "prettier": "^3.7.4",
+    "ts-node": "^10.9.2",
     "typescript": "^5.9.3"
   },
   "scripts": {
     "prepare": "husky",
-    "test:eslint": "npx eslint . --ext .ts,.js --fix",
-    "test:prettier": "npx prettier --write '**/*.{js,ts}'",
-    "test:report": "npx playwright show-report build/html-report"
+    "test": "ts-node scripts/run.ts"
   },
   "lint-staged": {
     "**/*.{js,ts}": [
