@@ -1,0 +1,491 @@
+{
+  "metadata": {
+    "generatedOn": "2026-01-16T18:12:04.228Z",
+    "environment": "dev",
+    "usedDevices": [
+      "desktop",
+      "mobile",
+      "desktopWide",
+      "tablet"
+    ],
+    "numberOfRuns": 2,
+    "aggregationMethod": "median",
+    "categories": [
+      "performance",
+      "accessibility",
+      "bestPractices",
+      "seo"
+    ],
+    "skipAudits": [
+      "uses-http2"
+    ],
+    "extraLighthouseFlags": [],
+    "extraHeadersKeys": [],
+    "deviceDetails": [
+      {
+        "device": "desktop",
+        "config": {
+          "formFactor": "desktop",
+          "screenEmulation": {
+            "mobile": false,
+            "width": 1920,
+            "height": 1080,
+            "deviceScaleFactor": 1
+          }
+        }
+      },
+      {
+        "device": "mobile",
+        "config": {
+          "formFactor": "mobile",
+          "screenEmulation": {
+            "mobile": true,
+            "width": 375,
+            "height": 667,
+            "deviceScaleFactor": 2
+          }
+        }
+      },
+      {
+        "device": "desktopWide",
+        "config": {
+          "formFactor": "desktop",
+          "screenEmulation": {
+            "mobile": false,
+            "width": 2560,
+            "height": 1440,
+            "deviceScaleFactor": 1
+          }
+        }
+      },
+      {
+        "device": "tablet",
+        "config": {
+          "formFactor": "mobile",
+          "screenEmulation": {
+            "mobile": true,
+            "width": 768,
+            "height": 1024,
+            "deviceScaleFactor": 2
+          }
+        }
+      }
+    ]
+  },
+  "results": [
+    {
+      "name": "dynamicTablePage",
+      "url": "https://practice.expandtesting.com/dynamic-table",
+      "device": "desktop",
+      "runs": 2,
+      "aggregatedScores": {
+        "accessibility": 95,
+        "bestPractices": 59,
+        "performance": 46.5,
+        "seo": 100
+      },
+      "statistics": {
+        "performance": {
+          "min": 46,
+          "max": 47,
+          "average": 46.5,
+          "median": 46.5,
+          "standardDeviation": 0.5
+        },
+        "accessibility": {
+          "min": 95,
+          "max": 95,
+          "average": 95,
+          "median": 95,
+          "standardDeviation": 0
+        },
+        "bestPractices": {
+          "min": 59,
+          "max": 59,
+          "average": 59,
+          "median": 59,
+          "standardDeviation": 0
+        },
+        "seo": {
+          "min": 100,
+          "max": 100,
+          "average": 100,
+          "median": 100,
+          "standardDeviation": 0
+        }
+      },
+      "config": {
+        "effective": {
+          "devices": [
+            "desktop",
+            "mobile"
+          ],
+          "logs": false,
+          "numberOfRuns": 2,
+          "onlyCategories": [
+            "performance",
+            "accessibility",
+            "bestPractices",
+            "seo"
+          ],
+          "skipAudits": [
+            "uses-http2"
+          ],
+          "extraLighthouseFlags": [],
+          "extraHeadersKeys": [],
+          "chrome": {
+            "headless": true,
+            "flags": "hidden"
+          }
+        },
+        "overrides": {}
+      }
+    },
+    {
+      "name": "dynamicTablePage",
+      "url": "https://practice.expandtesting.com/dynamic-table",
+      "device": "mobile",
+      "runs": 2,
+      "aggregatedScores": {
+        "accessibility": 95,
+        "bestPractices": 57,
+        "performance": 35,
+        "seo": 100
+      },
+      "statistics": {
+        "performance": {
+          "min": 30,
+          "max": 40,
+          "average": 35,
+          "median": 35,
+          "standardDeviation": 5
+        },
+        "accessibility": {
+          "min": 95,
+          "max": 95,
+          "average": 95,
+          "median": 95,
+          "standardDeviation": 0
+        },
+        "bestPractices": {
+          "min": 57,
+          "max": 57,
+          "average": 57,
+          "median": 57,
+          "standardDeviation": 0
+        },
+        "seo": {
+          "min": 100,
+          "max": 100,
+          "average": 100,
+          "median": 100,
+          "standardDeviation": 0
+        }
+      },
+      "config": {
+        "effective": {
+          "devices": [
+            "desktop",
+            "mobile"
+          ],
+          "logs": false,
+          "numberOfRuns": 2,
+          "onlyCategories": [
+            "performance",
+            "accessibility",
+            "bestPractices",
+            "seo"
+          ],
+          "skipAudits": [
+            "uses-http2"
+          ],
+          "extraLighthouseFlags": [],
+          "extraHeadersKeys": [],
+          "chrome": {
+            "headless": true,
+            "flags": "hidden"
+          }
+        },
+        "overrides": {}
+      }
+    },
+    {
+      "name": "inputsPage",
+      "url": "https://practice.expandtesting.com/inputs",
+      "device": "desktop",
+      "runs": 2,
+      "aggregatedScores": {
+        "accessibility": 95,
+        "bestPractices": 59,
+        "performance": 28.5,
+        "seo": 100
+      },
+      "statistics": {
+        "performance": {
+          "min": 27,
+          "max": 30,
+          "average": 28.5,
+          "median": 28.5,
+          "standardDeviation": 1.5
+        },
+        "accessibility": {
+          "min": 95,
+          "max": 95,
+          "average": 95,
+          "median": 95,
+          "standardDeviation": 0
+        },
+        "bestPractices": {
+          "min": 59,
+          "max": 59,
+          "average": 59,
+          "median": 59,
+          "standardDeviation": 0
+        },
+        "seo": {
+          "min": 100,
+          "max": 100,
+          "average": 100,
+          "median": 100,
+          "standardDeviation": 0
+        }
+      },
+      "config": {
+        "effective": {
+          "devices": [
+            "desktop",
+            "mobile"
+          ],
+          "logs": false,
+          "numberOfRuns": 2,
+          "onlyCategories": [
+            "performance",
+            "accessibility",
+            "bestPractices",
+            "seo"
+          ],
+          "skipAudits": [
+            "uses-http2"
+          ],
+          "extraLighthouseFlags": [],
+          "extraHeadersKeys": [],
+          "chrome": {
+            "headless": true,
+            "flags": "hidden"
+          }
+        },
+        "overrides": {}
+      }
+    },
+    {
+      "name": "inputsPage",
+      "url": "https://practice.expandtesting.com/inputs",
+      "device": "mobile",
+      "runs": 2,
+      "aggregatedScores": {
+        "accessibility": 95,
+        "bestPractices": 57,
+        "performance": 41.5,
+        "seo": 100
+      },
+      "statistics": {
+        "performance": {
+          "min": 36,
+          "max": 47,
+          "average": 41.5,
+          "median": 41.5,
+          "standardDeviation": 5.5
+        },
+        "accessibility": {
+          "min": 95,
+          "max": 95,
+          "average": 95,
+          "median": 95,
+          "standardDeviation": 0
+        },
+        "bestPractices": {
+          "min": 57,
+          "max": 57,
+          "average": 57,
+          "median": 57,
+          "standardDeviation": 0
+        },
+        "seo": {
+          "min": 100,
+          "max": 100,
+          "average": 100,
+          "median": 100,
+          "standardDeviation": 0
+        }
+      },
+      "config": {
+        "effective": {
+          "devices": [
+            "desktop",
+            "mobile"
+          ],
+          "logs": false,
+          "numberOfRuns": 2,
+          "onlyCategories": [
+            "performance",
+            "accessibility",
+            "bestPractices",
+            "seo"
+          ],
+          "skipAudits": [
+            "uses-http2"
+          ],
+          "extraLighthouseFlags": [],
+          "extraHeadersKeys": [],
+          "chrome": {
+            "headless": true,
+            "flags": "hidden"
+          }
+        },
+        "overrides": {}
+      }
+    },
+    {
+      "name": "homePage",
+      "url": "https://www.example.com?dev/",
+      "device": "desktopWide",
+      "runs": 1,
+      "aggregatedScores": {
+        "performance": 100,
+        "seo": 80
+      },
+      "statistics": {
+        "performance": {
+          "min": 100,
+          "max": 100,
+          "average": 100,
+          "median": 100,
+          "standardDeviation": 0
+        },
+        "seo": {
+          "min": 80,
+          "max": 80,
+          "average": 80,
+          "median": 80,
+          "standardDeviation": 0
+        }
+      },
+      "config": {
+        "effective": {
+          "devices": [
+            "desktopWide",
+            "tablet"
+          ],
+          "logs": false,
+          "numberOfRuns": 1,
+          "onlyCategories": [
+            "performance",
+            "seo"
+          ],
+          "skipAudits": [
+            "uses-http2",
+            "is-on-https"
+          ],
+          "extraLighthouseFlags": "hidden",
+          "extraHeadersKeys": "hidden",
+          "chrome": {
+            "headless": true,
+            "flags": "hidden"
+          }
+        },
+        "overrides": {
+          "devices": [
+            "desktopWide",
+            "tablet"
+          ],
+          "numberOfRuns": 1,
+          "onlyCategories": [
+            "performance",
+            "seo"
+          ],
+          "skipAudits": [
+            "uses-http2",
+            "is-on-https"
+          ],
+          "extraLighthouseFlags": "hidden",
+          "extraHeadersKeys": "hidden",
+          "chrome": {
+            "headless": true,
+            "flags": "hidden"
+          }
+        }
+      }
+    },
+    {
+      "name": "homePage",
+      "url": "https://www.example.com?dev/",
+      "device": "tablet",
+      "runs": 1,
+      "aggregatedScores": {
+        "performance": 100,
+        "seo": 80
+      },
+      "statistics": {
+        "performance": {
+          "min": 100,
+          "max": 100,
+          "average": 100,
+          "median": 100,
+          "standardDeviation": 0
+        },
+        "seo": {
+          "min": 80,
+          "max": 80,
+          "average": 80,
+          "median": 80,
+          "standardDeviation": 0
+        }
+      },
+      "config": {
+        "effective": {
+          "devices": [
+            "desktopWide",
+            "tablet"
+          ],
+          "logs": false,
+          "numberOfRuns": 1,
+          "onlyCategories": [
+            "performance",
+            "seo"
+          ],
+          "skipAudits": [
+            "uses-http2",
+            "is-on-https"
+          ],
+          "extraLighthouseFlags": "hidden",
+          "extraHeadersKeys": "hidden",
+          "chrome": {
+            "headless": true,
+            "flags": "hidden"
+          }
+        },
+        "overrides": {
+          "devices": [
+            "desktopWide",
+            "tablet"
+          ],
+          "numberOfRuns": 1,
+          "onlyCategories": [
+            "performance",
+            "seo"
+          ],
+          "skipAudits": [
+            "uses-http2",
+            "is-on-https"
+          ],
+          "extraLighthouseFlags": "hidden",
+          "extraHeadersKeys": "hidden",
+          "chrome": {
+            "headless": true,
+            "flags": "hidden"
+          }
+        }
+      }
+    }
+  ]
+}

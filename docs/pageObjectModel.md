@@ -111,51 +111,94 @@ export class ContactUsPage extends BasePage {
 }
 ```
 
-### Dynamic URLs (e.g. product pages)
+### Handling Dynamic URLs (Universal Approach)
 
-For pages where part of the URL is dynamic (like product detail pages with an `id`), keep `pageUrl` as the base path and add a dedicated helper that accepts the dynamic part.
+Instead of creating custom navigation methods for each page (e.g. `gotoProduct(id)`), you can implement a universal mechanism in `BasePage` that handles dynamic URL patterns using placeholders.
 
-Example (`pageObjects/example/pages/product.page.ts`):
+**1. Enhance `BasePage`**
+
+Add a `urlPattern` property and generic `gotoDynamic` / `getDynamicUrl` methods to your base class.
 
 ```ts
-import { BasePage } from '../base.page';
-import { expect } from '@playwright/test';
+export abstract class BasePage {
+  protected abstract pageUrl: string;
+  /** Optional pattern for dynamic URLs, e.g. "https://example.com/product/{id}" */
+  protected urlPattern?: string;
 
-export class ProductPage extends BasePage {
-  protected pageUrl = 'https://www.example.com/product_details';
+  // ... constructor ...
 
   /**
-   * Navigate to the product details page for a specific product ID.
-   *
-   * @param productId ID of the product to open (e.g. 3).
-   * @example
-   * await productPage.gotoProduct(3, false);
+   * Generic method to resolve dynamic URLs by replacing placeholders.
+   * @param params Object with values to replace in urlPattern (e.g. { id: 123 })
    */
-  async gotoProduct(productId: number | string, autoAcceptCookies = true) {
-    const url = `${this.pageUrl}/${productId}`;
-
-    // Optionally reuse shared cookie/idle logic here if needed
-    // e.g. a shared helper from BasePage
-    await this.page.goto(url);
+  getDynamicUrl(params: Record<string, string | number>): string {
+    if (!this.urlPattern) {
+      throw new Error(`urlPattern is not defined for ${this.constructor.name}`);
+    }
+    let url = this.urlPattern;
+    for (const [key, value] of Object.entries(params)) {
+      url = url.replace(`{${key}}`, encodeURIComponent(String(value)));
+    }
+    return url;
   }
 
   /**
-   * Assert that the current URL matches the expected product ID.
+   * Navigate to a dynamic page using named parameters.
    */
-  async expectOnProduct(productId: number | string) {
-    await expect(this.page).toHaveURL(`${this.pageUrl}/${productId}`);
+  async gotoDynamicPage(params: Record<string, string | number>, autoAcceptCookies = true) {
+    const url = this.getDynamicUrl(params);
+
+    if (autoAcceptCookies) {
+      // await this.cookieDisclaimer.acceptByCookie(); // Optional: Re-use your cookie logic
+    }
+    
+    await this.page.goto(url);
+    await waitForPageIdle(this.page);
   }
 }
 ```
 
-In tests you can keep the flow readable while still being explicit about the product ID:
+**2. Define patterns in concrete pages**
+
+It is recommended to use `{id}` as the standard placeholder name for the main resource identifier. This makes tests consistent across different pages.
+
+Example 1: **Product Page** (using `{id}`)
 
 ```ts
-import { test } from '../pageObjects/example/pageFixture';
+export class ProductPage extends BasePage {
+  protected pageUrl = 'https://www.example.com/products/';
+  // Define pattern with standard {id} placeholder
+  protected urlPattern = 'https://www.example.com/products/{id}';
+}
+```
 
-test('user views product details', async ({ productPage }) => {
-  await productPage.gotoProduct(3, false);
-  await productPage.expectOnProduct(3);
+Example 2: **User Profile Page** (using `{id}` in a complex URL)
+
+```ts
+export class UserProfilePage extends BasePage {
+  protected pageUrl = 'https://www.example.com/users/';
+  // You can map {id} to any part of the URL structure
+  protected urlPattern = 'https://www.example.com/users/userId={id}/profile';
+}
+```
+
+*Note: If a page requires multiple parameters (e.g. `/users/{userId}/orders/{orderId}`), you can defined multiple placeholders in `urlPattern`.*
+
+**3. Usage in Tests**
+
+Use the universal `gotoDynamicPage` method. Thanks to the consistent `{id}` naming, you don't need to commit specific parameter names to memory.
+
+```ts
+test('navigates to dynamic pages', async ({ productPage, userProfilePage }) => {
+  // Navigate to Product using numeric ID
+  await productPage.gotoDynamicPage({ id: 101 });
+  
+  // Navigate to User Profile using string ID (e.g. UUID or hash)
+  await userProfilePage.gotoDynamicPage({ id: '123buyuynui13287js' });
+
+  // Verification
+  const expectedUrl = userProfilePage.getDynamicUrl({ id: '123buyuynui13287js' });
+  await expect(page).toHaveURL(expectedUrl);
 });
 ```
 

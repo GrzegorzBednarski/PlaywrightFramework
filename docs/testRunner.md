@@ -82,6 +82,12 @@ npm run test dev grep:smoke
 # Run visual tests (Percy integration requires PERCY_* variables in .env)
 npm run test dev visual
 
+# Run Lighthouse performance test (threshold-based)
+npm run test dev performancetest
+
+# Run Lighthouse performance monitoring (median aggregation)
+npm run test dev performancemonitoring
+
 # Open Playwright Test UI for functional tests
 npm run test dev functional ui
 ```

@@ -9,7 +9,7 @@ export interface AnalysisEntry {
 /**
  * Resolve raw CLI arguments into a normalized environment and mode.
  *
- * - Normalizes argument casing and analyzes types (env, testCategory, command, ui).
+ * - Normalizes argument casing and analyzes types (env, testCategory, command, ui, performanceMode).
  * - Validates that arguments are unique and known (otherwise prints usage and exits).
  * - Returns an object containing the resolved `env` and `mode` for the runner.
  *
@@ -65,6 +65,7 @@ export function resolveArgs(...rawArgs: string[]) {
   }
 
   const env = analysis.find((a: AnalysisEntry) => a.type === 'environment')?.value;
+  const performanceMode = analysis.find((a: AnalysisEntry) => a.type === 'performanceMode')?.value;
   const testCategory = analysis.find((a: AnalysisEntry) =>
     a.type.startsWith('testCategory<')
   )?.value;
@@ -83,6 +84,20 @@ export function resolveArgs(...rawArgs: string[]) {
 
   if (command) return { env: 'none', mode: command };
 
+  if (performanceMode) {
+    if (!env) {
+      printInvalidUsage(
+        analysis,
+        availableEnvs,
+        categories.testTypes,
+        categories.testGroups,
+        categories.grepGroups
+      );
+      process.exit(1);
+    }
+    return { env, mode: performanceMode };
+  }
+
   if (!env || !testCategory) {
     printInvalidUsage(
       analysis,
@@ -98,7 +113,7 @@ export function resolveArgs(...rawArgs: string[]) {
 }
 
 /**
- * Analyze and classify CLI arguments into known types (env, testCategory, command, ui).
+ * Analyze and classify CLI arguments into known types (env, testCategory, command, ui, performanceMode).
  *
  * @param args CLI arguments to analyze.
  * @param envs Available environments.
@@ -112,7 +127,7 @@ function analyzeArguments(
   categories: { testTypes: string[]; testGroups: string[]; grepGroups: string[] },
   commands: string[]
 ): AnalysisEntry[] {
-  const seen = { env: false, testCategory: false, command: false };
+  const seen = { env: false, testCategory: false, command: false, performanceMode: false };
 
   return args.map((arg: string): AnalysisEntry => {
     if (arg === 'ui') return { value: arg, type: 'ui' };
@@ -121,6 +136,12 @@ function analyzeArguments(
       if (seen.env) return { value: arg, type: 'environment (duplicate)' };
       seen.env = true;
       return { value: arg, type: 'environment' };
+    }
+
+    if (arg === 'performancetest' || arg === 'performancemonitoring') {
+      if (seen.performanceMode) return { value: arg, type: 'performanceMode (duplicate)' };
+      seen.performanceMode = true;
+      return { value: arg, type: 'performanceMode' };
     }
 
     if (categories.testTypes.includes(arg)) {

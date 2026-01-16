@@ -10,7 +10,7 @@ import { routeMode } from './route';
  * - Parses CLI arguments (environment, test category, command).
  * - Validates that the requested environment exists.
  * - Initializes dotenv for the selected environment.
- * - Routes execution to the appropriate mode handler (tests, UI, eslint, prettier, report).
+ * - Routes execution to the appropriate mode handler (tests, UI, performance, eslint, prettier, report).
  *
  * @param args Raw CLI arguments passed after the npm script (e.g. ['dev', 'functional']).
  */

@@ -1,0 +1,70 @@
+body {
+  font-family: Arial, sans-serif;
+  font-size: 12px;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-bottom: 20px;
+  font-size: 12px;
+  page-break-inside: avoid;
+}
+
+th, td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  /* text-align: left; Removed to allow overrides */
+}
+
+/* Force center alignment for columns starting from 3rd, specifically for Performance Test reports */
+/* Note: Since we use generic CSS for both reports, and monitoring report also has data from 3rd column,
+   this rule is safe enough. Monitoring has URL in col 3, which will be centered. */
+th:nth-child(n+3),
+td:nth-child(n+3) {
+  text-align: center;
+}
+
+/* Ensure first two columns stay left aligned */
+th:nth-child(1), td:nth-child(1),
+th:nth-child(2), td:nth-child(2) {
+  text-align: left;
+}
+
+th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+h1, h2, h3 {
+  color: #333;
+}
+
+h1 {
+  font-size: 18px; /* Reduced from 20px */
+}
+
+h2 {
+  font-size: 14px; /* Reduced from 16px */
+  page-break-after: avoid;
+}
+
+h3 {
+  font-size: 12px; /* Reduced from 14px */
+  page-break-after: avoid;
+}
+
+a {
+  color: #0066cc;
+  text-decoration: none;
+}
+
+ul {
+  padding-left: 20px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+li {
+  margin-bottom: 2px;
+}

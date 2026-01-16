@@ -35,6 +35,8 @@ export function printInvalidUsage(
   console.error('\nCommands:');
   console.error('  - npm run test <environment> <testCategory> ui');
   console.error('  - npm run test <environment> ui');
+  console.error('  - npm run test <environment> performanceMonitoring');
+  console.error('  - npm run test <environment> performanceTest');
   console.error('  - npm run test eslint');
   console.error('  - npm run test prettier');
   console.error('  - npm run test report');
@@ -91,6 +93,8 @@ export function printInvalidUsage(
       '  npm run test dev all ui\n' +
       '  npm run test dev grep:smoke\n' +
       '  npm run test dev ui\n' +
+      '  npm run test dev performanceMonitoring\n' +
+      '  npm run test dev performanceTest\n' +
       '  npm run test report\n'
   );
 }

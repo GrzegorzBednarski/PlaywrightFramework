@@ -88,6 +88,6 @@ Accessibility scan results are exported to **`build/accessibility-reports/`**:
 
 Sample reports:
 
-- [Sample JSON report](./samples/accessibility-report.json)
-- [Sample Markdown report](./samples/accessibility-report.md)
-- [Sample PDF report](./samples/accessibility-report.pdf)
+- [Sample JSON report](samples/accessibility-reports/accessibility-report.json)
+- [Sample Markdown report](samples/accessibility-reports/accessibility-report.md)
+- [Sample PDF report](samples/accessibility-reports/accessibility-report.pdf)

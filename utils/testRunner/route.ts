@@ -7,16 +7,18 @@ import {
 } from './playwright';
 import { openReport, runEslint, runPrettier } from './commands';
 import { testRunnerConfig } from '../../config/testRunnerConfig';
+import { runPerformanceMonitoring, runPerformanceTest } from './performance';
 
 /**
  * Route the resolved mode to the appropriate handler.
  *
  * - Handles UI, eslint, prettier, report, visual test runs.
+ * - Handles performance modes: `performanceTest` and `performanceMonitoring`.
  * - Dispatches to test types, test groups, and grep groups based on testRunnerConfig.
  * - Logs an error if the mode is unknown.
  *
  * @param env Resolved environment name (e.g. 'dev', 'qa').
- * @param mode Resolved mode (test type, group, grep:<group>, or command like 'eslint').
+ * @param mode Resolved mode (test type, group, grep:<group>, performance mode, or command like 'eslint').
  */
 export function routeMode(env: string, mode: string) {
   if (mode === 'ui') {
@@ -30,6 +32,16 @@ export function routeMode(env: string, mode: string) {
 
   if (mode === 'visual') {
     runVisualTests(env);
+    return;
+  }
+
+  if (mode === 'performancetest') {
+    runPerformanceTest(env);
+    return;
+  }
+
+  if (mode === 'performancemonitoring') {
+    runPerformanceMonitoring(env);
     return;
   }
 

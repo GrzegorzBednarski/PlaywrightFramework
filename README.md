@@ -97,9 +97,9 @@ PlaywrightFramework/
   - [Configuration](./docs/environments.md#configuration) | [Usage](./docs/environments.md#usage) | [Secrets & sharing](./docs/environments.md#secrets-and-sharing)
 - **[Playwright configuration](./docs/playwrightConfiguration.md)** – Global Playwright configuration used by all tests
   - [Configuration](./docs/playwrightConfiguration.md#configuration) | [Usage](./docs/playwrightConfiguration.md#usage)
-- **[Test Configuration](./docs/testConfiguration.md)** – Per-test configuration patterns
+- **[Test configuration](./docs/testConfiguration.md)** – Per-test configuration patterns
   - [Execution modes](./docs/testConfiguration.md#execution-modes) | [Per-test timeouts](./docs/testConfiguration.md#per-test-timeouts) | [Retries](./docs/testConfiguration.md#retries-in-code) | [Focusing tests](./docs/testConfiguration.md#focusing-tests) | [Skipping tests](./docs/testConfiguration.md#skipping-tests) | [Test steps](./docs/testConfiguration.md#test-steps) | [Env vars in tests](./docs/testConfiguration.md#using-environment-variables-in-tests)
-- **[Test Runner](./docs/testRunner.md)** – Custom test runner entrypoint and CLI commands
+- **[Test runner](./docs/testRunner.md)** – Custom test runner entrypoint and CLI commands
   - [Configuration](./docs/testRunner.md#configuration) | [Running tests](./docs/testRunner.md#running-tests) | [Helper commands](./docs/testRunner.md#helper-commands)
 
 ### 🎨 Code Quality & Formatting
@@ -138,6 +138,8 @@ PlaywrightFramework/
 ### 📊 Data Management
 - **[Cookies](./docs/cookies.md)** - Central configuration for predefined cookies and reusable cookie scenarios
   - [Cookies configuration](./docs/cookies.md#cookies-configuration) | [Dynamic domains](./docs/cookies.md#dynamic-cookie-domains) | [Cookie scenarios configuration](./docs/cookies.md#cookie-scenarios-configuration)
+- **[Data](./docs/data.md)** - Central place for shared test data (users, products, etc.)
+  - [Configuration](./docs/data.md#configuration) | [Usage](./docs/data.md#usage)
 - **[Intercepts](./docs/intercepts.md)** - Centralized URL patterns for HTTP request interception
   - [Configuration](./docs/intercepts.md#configuration) | [Usage](./docs/intercepts.md#usage)
 
@@ -150,6 +152,10 @@ PlaywrightFramework/
   - [Configuration](./docs/accessibility.md#configuration) | [Usage](./docs/accessibility.md#usage) | [Reports](./docs/accessibility.md#reports)
 - **[Analytics](./docs/analytics.md)** - Capturing and asserting analytics events from data layers
   - [Configuration](./docs/analytics.md#configuration) | [Usage](./docs/analytics.md#usage) | [Dynamic values](./docs/analytics.md#dynamic-values) | [Debug output](./docs/analytics.md#debug-output)
+- **[Performance Monitoring](./docs/performanceMonitoring.md)** - Run Lighthouse multiple times and aggregate results (median)
+  - [Configuration](./docs/performanceMonitoring.md#configuration) | [Usage](./docs/performanceMonitoring.md#usage) | [Reports](./docs/performanceMonitoring.md#reports)
+- **[Performance Test](./docs/performanceTest.md)** - Run Lighthouse and validate results against thresholds
+  - [Configuration](./docs/performanceTest.md#configuration) | [Usage](./docs/performanceTest.md#usage) | [Reports](./docs/performanceTest.md#reports)
 - **[Visual Testing](docs/visualTesting.md)** - Visual regression testing with Percy and Playwright
   - [Configuration](docs/visualTesting.md#configuration) | [Environment variables](docs/visualTesting.md#environment-variables) | [Usage](docs/visualTesting.md#usage) | [Advanced usage](docs/visualTesting.md#advanced-usage) | [Viewing results](docs/visualTesting.md#viewing-results) 
 
