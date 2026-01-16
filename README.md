@@ -2,6 +2,10 @@
 
 Playwright framework with pre-configured plugins and best practices to get you started quickly.
 
+## Author
+
+Grzegorz Bednarski (grzegorz.bednarski1985@gmail.com)
+
 ## Prerequisites
 
 - **[Node.js](https://nodejs.org/en)** (tested on 22.18.0)
@@ -157,7 +161,7 @@ PlaywrightFramework/
 - **[Performance Test](./docs/performanceTest.md)** - Run Lighthouse and validate results against thresholds
   - [Configuration](./docs/performanceTest.md#configuration) | [Usage](./docs/performanceTest.md#usage) | [Reports](./docs/performanceTest.md#reports)
 - **[Visual Testing](docs/visualTesting.md)** - Visual regression testing with Percy and Playwright
-  - [Configuration](docs/visualTesting.md#configuration) | [Environment variables](docs/visualTesting.md#environment-variables) | [Usage](docs/visualTesting.md#usage) | [Advanced usage](docs/visualTesting.md#advanced-usage) | [Viewing results](docs/visualTesting.md#viewing-results) 
+  - [Configuration](docs/visualTesting.md#configuration) | [Environment variables](docs/visualTesting.md#environment-variables) | [Usage](docs/visualTesting.md#usage) | [Advanced usage](docs/visualTesting.md#advanced-usage) | [Viewing results](docs/visualTesting.md#viewing-results)
 
 ### 🛠️ Test Utilities
 - **[Assert No Console Errors](./docs/assertNoConsoleErrors.md)** - Validate that pages load without JavaScript console errors
@@ -174,3 +178,4 @@ PlaywrightFramework/
 - **[Request Assertions](./docs/requestAssertions.md)** - Common patterns for validating HTTP requests in tests
 - **[Wait for Intercept](./docs/waitForIntercept.md)** - Wait for specific HTTP requests during tests
   - [Configuration](./docs/waitForIntercept.md#configuration) | [Usage](./docs/waitForIntercept.md#usage)
+
