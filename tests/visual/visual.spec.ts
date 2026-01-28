@@ -1,7 +1,7 @@
-import { test } from '../../pageObjects/automationExcercise/pageFixture';
+import { test } from '../../pageObjects/theInternet/pageFixture';
 import percySnapshot from '@percy/playwright';
 
-test('cart visual snapshot', async ({ cartPage, page }) => {
-  await cartPage.goto();
-  await percySnapshot(page, 'Cart');
+test('homePage visual snapshot', async ({ homePage, page }) => {
+  await homePage.goto();
+  await percySnapshot(page, 'HomePage');
 });

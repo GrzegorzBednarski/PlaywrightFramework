@@ -29,5 +29,5 @@ export default defineConfig({
     video: 'retain-on-failure',
   },
   // Limit workers in CI to X, use Y locally
-  workers: process.env.CI ? 2 : 4,
+  workers: process.env.CI ? 2 : 6,
 });

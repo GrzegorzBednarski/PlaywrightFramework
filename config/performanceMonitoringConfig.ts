@@ -55,12 +55,12 @@ export const performanceMonitoringConfig = {
    */
   urlsToMonitor: [
     {
-      name: 'dynamicTablePage',
-      path: 'https://practice.expandtesting.com/dynamic-table',
+      name: 'checkboxesPage',
+      path: '/checkboxes',
     },
     {
       name: 'inputsPage',
-      path: 'https://practice.expandtesting.com/inputs',
+      path: '/inputs',
     },
     {
       name: 'homePage',

@@ -1,8 +1,23 @@
-import { test } from '../../pageObjects/automationExcercise/pageFixture';
-import { expect } from '@playwright/test';
+import { test, session, expect } from '../../pageObjects/theInternet/pageFixture';
 import { assertNoConsoleErrors } from '../../utils/assertNoConsoleErrors';
 import { setCookies } from '../../utils/setCookies';
 import { checkCookies } from '../../utils/checkCookies';
+import { useBasicAuth } from '../../utils/basicAuth';
+
+test('basic auth: should access protected page (ADMIN)', async ({ basicAuthPage, page }) => {
+  await useBasicAuth(page, 'ADMIN');
+  await basicAuthPage.goto();
+  await basicAuthPage.assertBasicAuthSucceeded();
+});
+
+test('basic auth: should access protected page (GLOBAL credentials)', async ({
+  basicAuthPage,
+  page,
+}) => {
+  await useBasicAuth(page);
+  await basicAuthPage.goto();
+  await basicAuthPage.assertBasicAuthSucceeded();
+});
 
 test('[sanity] homepage cookies behaviour', async ({ homePage, page }) => {
   await setCookies(page, ['TEST_COOKIE_A']);
@@ -11,31 +26,56 @@ test('[sanity] homepage cookies behaviour', async ({ homePage, page }) => {
   await checkCookies(page, 'test_cookie_b.json', undefined, false);
 });
 
-test('[prod]homepage should have no console errors', async ({ homePage, page }) => {
+test('homepage should have no console errors', async ({ homePage, page }) => {
   await assertNoConsoleErrors(page, homePage.getPageUrl(), {
     ignoredPatternsOverride: {
-      "Mixed Content: The page at 'https://www.automationexercise.com/' was loaded over HTTPS, but requested an insecure stylesheet 'http://fonts.googleapis.com/css?family=Roboto:400,300,400italic,500,700,100'.": true,
-      "Mixed Content: The page at 'https://www.automationexercise.com/' was loaded over HTTPS, but requested an insecure stylesheet 'http://fonts.googleapis.com/css?family=Open+Sans:400,800,300,600,700'.": true,
-      "Mixed Content: The page at 'https://www.automationexercise.com/' was loaded over HTTPS, but requested an insecure stylesheet 'http://fonts.googleapis.com/css?family=Abel'.": true,
+      'net::ERR_NAME_NOT_RESOLVED': true,
     },
   });
 });
 
-test('should close cookie prompt on homepage', async ({ homePage }) => {
-  await homePage.goto(false);
-  await homePage.cookieDisclaimer.clickAcceptCookiesButton();
-  await expect(homePage.cookieDisclaimer.dialog).not.toBeVisible();
-});
-
-test('[sanity] should subscribe user to newsletter on homepage', async ({ homePage }) => {
+test('[sanity] homepage footer should show Powered by link', async ({ homePage }) => {
   await homePage.goto();
-  await expect(homePage.footer.successAlert).not.toBeVisible();
-  await homePage.footer.subscribeEmail('test.user+newsletter@example.com');
-  await expect(homePage.footer.successAlert).toBeVisible();
+  await homePage.footer.assertPoweredByLink();
 });
 
 test('[deprecated] example test that should be skipped', async () => {
   throw new Error(
     'This [deprecated] example test is not intended to be executed. If you see this, check whether "[deprecated]" is added to grep-exclude in config/testRunnerConfig.ts.'
   );
+});
+
+test.describe('login', () => {
+  test('manual login via loginComponent.login(userKey)', async ({ loginPage, securePage }) => {
+    await loginPage.goto();
+    await expect(loginPage.submitButton).toBeVisible();
+
+    await loginPage.login('TOM');
+    await expect(loginPage.submitButton).not.toBeVisible();
+    await securePage.assertUserLoggedIn();
+  });
+
+  test('unauthenticated user should not see secure area text on /secure', async ({
+    securePage,
+    loginPage,
+  }) => {
+    await securePage.goto();
+    await expect(securePage.logoutButton).not.toBeVisible();
+    await expect(loginPage.submitButton).toBeVisible();
+  });
+
+  test.describe('session', () => {
+    session('TOM');
+
+    test('session meta should be persisted and reusable', async ({ sessionMeta }) => {
+      expect(sessionMeta!.userKey).toBe('TOM');
+    });
+
+    for (const run of [1, 2, 3]) {
+      test(`session: access secure page (run ${run})`, async ({ securePage }) => {
+        await securePage.goto();
+        await securePage.assertUserLoggedIn();
+      });
+    }
+  });
 });

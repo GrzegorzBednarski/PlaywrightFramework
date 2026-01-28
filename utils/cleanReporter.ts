@@ -7,11 +7,13 @@ import { Reporter, TestCase, TestResult, FullResult } from '@playwright/test/rep
 class CleanReporter implements Reporter {
   private failedTests: { test: TestCase; result: TestResult }[] = [];
   private testIndex = 0;
+  private runStartMs = 0;
 
   /**
    * Called once before all tests start. Logs total test and worker counts.
    */
   onBegin(config: any, suite: any) {
+    this.runStartMs = Date.now();
     const testCount = suite.allTests().length;
     const workerCount = config.workers;
     console.log(`\nRunning ${testCount} tests using ${workerCount} workers\n`);
@@ -47,6 +49,9 @@ class CleanReporter implements Reporter {
   onEnd(_result: FullResult) {
     this.printFailedTestsDetails();
     this.printSummary();
+
+    const totalDurationMs = this.runStartMs ? Date.now() - this.runStartMs : 0;
+    console.log(`  Total time: ${this.formatTotalDuration(totalDurationMs)}`);
   }
 
   onStdOut?(chunk: string | Buffer, _test?: TestCase, _result?: TestResult): void {
@@ -55,6 +60,21 @@ class CleanReporter implements Reporter {
 
   onStdErr?(chunk: string | Buffer, _test?: TestCase, _result?: TestResult): void {
     process.stderr.write(chunk);
+  }
+
+  /**
+   * Formats total run duration to a compact human-readable string.
+   */
+  private formatTotalDuration(durationMs: number): string {
+    const totalSeconds = Math.max(0, Math.floor(durationMs / 1000));
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = totalSeconds % 60;
+    const tenths = Math.floor((durationMs % 1000) / 100);
+
+    if (minutes > 0) {
+      return `${minutes}m ${seconds}.${tenths}s`;
+    }
+    return `${seconds}.${tenths}s`;
   }
 
   /**

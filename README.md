@@ -67,6 +67,7 @@ PlaywrightFramework/
 │   │   │   └── ... (component files)
 │   │   ├── 📁 pages/              # Concrete pages (home, contact, cart, ...)
 │   │   │   └── ... (page files)
+│   │   ├── app.page.ts            # (Optional) AppPage extending BasePage with shared layout (header/footer, logged-in menu / user indicator, ...)
 │   │   ├── base.page.ts           # Base page with shared navigation and helpers
 │   │   └── pageFixture.ts         # Playwright fixtures exposing page objects
 │   └── ... (other domains)
@@ -131,6 +132,18 @@ PlaywrightFramework/
 
 ## Usage
 
+### 🔐 Authentication & Sessions
+
+- **[Sessions](./docs/sessionManagement/sessions.md)** - Reusable authenticated browser state stored on disk.
+  - [Configuration](./docs/sessionManagement/sessions.md#configuration) | [Usage](./docs/sessionManagement/sessions.md#usage) | [Multiple login configs](./docs/sessionManagement/sessions.md#24-multiple-login-configs-optional)
+  - **[Basic Auth](./docs/sessionManagement/basicAuth.md)** - Basic HTTP auth helper + naming conventions.
+    - [Configuration](./docs/sessionManagement/basicAuth.md#configuration) | [Usage](./docs/sessionManagement/basicAuth.md#usage) | [Automation](./docs/pageObjectModel/advancedPatterns.md#basic-auth-automation)
+  - **[Login flow](./docs/sessionManagement/loginFlow.md)** - Examples of implementing `loginFlow` (POM login, Basic Auth, meta).
+    - [POM login](./docs/sessionManagement/loginFlow.md#ui-login-via-pom-helper-recommended) | [Manual login](./docs/sessionManagement/loginFlow.md#ui-login-without-pom-not-recommended) | [Basic Auth](./docs/sessionManagement/loginFlow.md#basic-auth)
+  - **[Request auth helpers](./docs/sessionManagement/requestAuth.md)** - Helpers like `extractBearerAuthHeader(...)`.
+  - **[Session meta](./docs/sessionManagement/meta.md)** - Saving and using `sessionMeta` in tests.
+    - [Authorization header](./docs/sessionManagement/meta.md#bearer-token-authorization-header) | [API key/custom header](./docs/sessionManagement/meta.md#api-key--custom-header) | [Custom value](./docs/sessionManagement/meta.md#custom-value-dynamic)
+
 ### 🍪 Cookie Management
 - **[Check Cookies](./docs/checkCookies.md)** - Assert cookies using JSON fixtures (exist / not exist)
   - [Configuration](./docs/checkCookies.md#configuration) | [Usage](./docs/checkCookies.md#usage) | [Dynamic values](./docs/checkCookies.md#dynamic-values) | [Debug output](./docs/checkCookies.md#debug-output)
@@ -148,8 +161,21 @@ PlaywrightFramework/
   - [Configuration](./docs/intercepts.md#configuration) | [Usage](./docs/intercepts.md#usage)
 
 ### 🧩 Page Object Model
-- **[Page Object Model](./docs/pageObjectModel.md)** - Structure and usage of pages, components, and fixtures
-  - [Configuration](./docs/pageObjectModel.md#configuration) | [Usage](./docs/pageObjectModel.md#usage) | [Advanced tips](./docs/pageObjectModel.md#advanced-tips)
+- **[Page Object Model](./docs/pageObjectModel/index.md)** - Entry point (overview, quick start, and structure)
+  - **[Base pages](./docs/pageObjectModel/basePage.md)** - shared helpers and navigation
+    - [Configuration](./docs/pageObjectModel/basePage.md#configuration) | [Usage](./docs/pageObjectModel/basePage.md#usage)
+  - **[AppPage](./docs/pageObjectModel/appPage.md)** - shared logged-in layout layer (optional)
+    - [Configuration](./docs/pageObjectModel/appPage.md#configuration) | [Usage](./docs/pageObjectModel/appPage.md#usage)
+  - **[Components](./docs/pageObjectModel/components.md)** - reusable UI fragments (cookie prompt, header, footer)
+    - [Configuration](./docs/pageObjectModel/components.md#configuration) | [Usage](./docs/pageObjectModel/components.md#usage)
+  - **[Pages](./docs/pageObjectModel/pages.md)** - concrete pages (static & dynamic)
+    - [Configuration](./docs/pageObjectModel/pages.md#configuration) | [Usage](./docs/pageObjectModel/pages.md#usage)
+    - [Static pages](./docs/pageObjectModel/pages.md#static-pages-require) | [Dynamic pages](./docs/pageObjectModel/pages.md#dynamic-pages-require)
+  - **[Fixtures](./docs/pageObjectModel/fixtures.md)** - expose pages to tests + sessions integration
+    - [Configuration](./docs/pageObjectModel/fixtures.md#configuration) | [Usage](./docs/pageObjectModel/fixtures.md#usage)
+  - **[Advanced patterns](./docs/pageObjectModel/advancedPatterns.md)** - larger-project patterns and automation
+    - [Auto cookie handling](./docs/pageObjectModel/advancedPatterns.md#automatic-cookie-handling-in-goto) | [Auto login](./docs/pageObjectModel/advancedPatterns.md#automatic-login-in-goto) | [Cookie injection](./docs/pageObjectModel/advancedPatterns.md#automatic-cookie-injection-in-goto)
+    - [Different login flow](./docs/pageObjectModel/advancedPatterns.md#choosing-a-different-login-flow-sessionloginkey) | [Basic Auth automation](./docs/pageObjectModel/advancedPatterns.md#basic-auth-automation) | [Multiple fixtures/domains](./docs/pageObjectModel/advancedPatterns.md#multiple-fixtures--multiple-domains)
 
 ### 🧪 Testing Features
 - **[Accessibility](./docs/accessibility.md)** - Automated accessibility checks and audits
@@ -178,4 +204,3 @@ PlaywrightFramework/
 - **[Request Assertions](./docs/requestAssertions.md)** - Common patterns for validating HTTP requests in tests
 - **[Wait for Intercept](./docs/waitForIntercept.md)** - Wait for specific HTTP requests during tests
   - [Configuration](./docs/waitForIntercept.md#configuration) | [Usage](./docs/waitForIntercept.md#usage)
-

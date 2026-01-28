@@ -1,14 +1,8 @@
-import { test } from '../../pageObjects/olx/pageFixture';
+import { test } from '@playwright/test';
 import { checkAnalyticsEvent, initAnalyticsSpy } from '../../utils/analytics';
 
-test('olx cookie consent analytics - accepted', async ({ homePage, page }) => {
+test('google analytics landing page served', async ({ page }) => {
   await initAnalyticsSpy(page);
-  await homePage.goto();
-  await checkAnalyticsEvent(page, 'olx_cookie_consent_accepted.json');
-});
-
-test('olx homepage analytics - banner viewed', async ({ homePage, page }) => {
-  await initAnalyticsSpy(page);
-  await homePage.goto();
-  await checkAnalyticsEvent(page, 'olx_homepage_banner_viewed.json');
+  await page.goto('https://developers.google.com/analytics');
+  await checkAnalyticsEvent(page, 'google_analytics_landingPage_served.json');
 });

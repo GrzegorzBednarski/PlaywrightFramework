@@ -22,11 +22,11 @@ export const performanceTestConfig = {
 
   /** Global thresholds (0-100) for Lighthouse categories */
   thresholds: {
-    performance: 50,
     accessibility: 80,
-    bestPractices: 40,
-    seo: 90,
+    bestPractices: 90,
+    performance: 60,
     pwa: 50,
+    seo: 90,
   },
 
   /** Audits to skip during Lighthouse runs (example: 'uses-http2') */
@@ -59,12 +59,12 @@ export const performanceTestConfig = {
    */
   urlsToTest: [
     {
-      name: 'dynamicTablePage',
-      path: 'https://practice.expandtesting.com/dynamic-table',
+      name: 'checkboxesPage',
+      path: '/checkboxes',
     },
     {
       name: 'inputsPage',
-      path: 'https://practice.expandtesting.com/inputs',
+      path: '/inputs',
     },
     {
       name: 'homePage',

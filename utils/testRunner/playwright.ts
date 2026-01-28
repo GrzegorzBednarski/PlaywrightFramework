@@ -1,7 +1,97 @@
 import * as fs from 'fs';
 import * as path from 'path';
-import { execSync } from 'child_process';
+import { spawnSync } from 'child_process';
 import { testRunnerConfig } from '../../config/testRunnerConfig';
+
+const BUILD_DIR = 'build';
+const ERROR_LOG_RELATIVE_PATH = `${BUILD_DIR}\\error.log`;
+const ANSI_ESCAPE_REGEX = /\u001b\[[0-9;]*[A-Za-z]/g;
+
+/**
+ * Ensures the build directory exists and returns its absolute path.
+ */
+function ensureBuildDir(): string {
+  const dir = path.resolve(process.cwd(), BUILD_DIR);
+  fs.mkdirSync(dir, { recursive: true });
+  return dir;
+}
+
+/**
+ * Strips ANSI color/control codes from Playwright output.
+ */
+function stripAnsi(text: string): string {
+  return text.replace(ANSI_ESCAPE_REGEX, '').trim();
+}
+
+/**
+ * Runs a shell command and exits the process if it fails.
+ *
+ * On failure it writes a simplified error output to `build/error.log`.
+ *
+ * @param command - Shell command to execute.
+ * @param failureTitle - Message displayed in the console header on failure.
+ */
+function runCommandOrExit(command: string, failureTitle: string) {
+  const res = spawnSync(command, {
+    shell: true,
+    encoding: 'utf8',
+    stdio: 'inherit',
+  });
+
+  /** Writes best-effort diagnostics to build/error.log (used for non-zero exit codes). */
+  const writeErrorLog = () => {
+    try {
+      const logDir = ensureBuildDir();
+      const logPath = path.join(logDir, 'error.log');
+
+      const diagCommand = `${command} --reporter=line --workers=1`;
+      const diag = spawnSync(diagCommand, {
+        shell: true,
+        encoding: 'utf8',
+        stdio: ['ignore', 'pipe', 'pipe'],
+      });
+
+      let bestErrorText = `${diag.stderr || ''}\n${diag.stdout || ''}`.trim();
+      if (!bestErrorText && diag.error) {
+        bestErrorText = (diag.error.stack || diag.error.message).trim();
+      }
+      if (!bestErrorText) bestErrorText = failureTitle;
+
+      bestErrorText = stripAnsi(bestErrorText);
+
+      const body = `${bestErrorText}\n`;
+      fs.writeFileSync(logPath, body, 'utf8');
+      console.error(`More details saved to: ${ERROR_LOG_RELATIVE_PATH}\n`);
+    } catch (e) {
+      console.error('Failed to write error.log');
+      console.error(e);
+    }
+  };
+
+  if (res.status !== null && res.status !== 0) {
+    console.error('==================================================================');
+    console.error(failureTitle);
+    console.error('==================================================================');
+    writeErrorLog();
+    process.exit(res.status);
+  }
+
+  if (res.status === null && res.signal) {
+    console.error('==================================================================');
+    console.error(failureTitle);
+    console.error('==================================================================');
+    writeErrorLog();
+    process.exit(1);
+  }
+
+  if (res.error) {
+    console.error('==================================================================');
+    console.error(failureTitle);
+    console.error('==================================================================');
+    writeErrorLog();
+    process.exit(1);
+  }
+}
 
 /**
  * Escape a string so it can be safely used inside a regular expression.
@@ -67,14 +157,7 @@ export function runPlaywrightTests(env: string, testType: string) {
   console.log(`Folders: ${folders.join(', ')}`);
   console.log('==================================================================\n');
 
-  try {
-    execSync(command, { stdio: 'inherit' });
-  } catch {
-    console.error('==================================================================');
-    console.error('Playwright test execution failed.');
-    console.error('==================================================================');
-    process.exit(1);
-  }
+  runCommandOrExit(command, 'Playwright test execution failed.');
 }
 
 /**
@@ -134,14 +217,7 @@ export function runTestGroup(env: string, group: string) {
   console.log(`Folders: ${allFolders.join(', ')}`);
   console.log('==================================================================\n');
 
-  try {
-    execSync(command, { stdio: 'inherit' });
-  } catch {
-    console.error('==================================================================');
-    console.error(`Playwright test group "${group}" failed.`);
-    console.error('==================================================================');
-    process.exit(1);
-  }
+  runCommandOrExit(command, `Playwright test group "${group}" failed.`);
 }
 
 /**
@@ -199,14 +275,7 @@ export function runGrep(env: string, grepMode: string) {
   console.log(`Regex: ${rawRegex}`);
   console.log('==================================================================\n');
 
-  try {
-    execSync(command, { stdio: 'inherit' });
-  } catch {
-    console.error('==================================================================');
-    console.error('Playwright grep execution failed.');
-    console.error('==================================================================');
-    process.exit(1);
-  }
+  runCommandOrExit(command, 'Playwright grep execution failed.');
 }
 
 /**
@@ -267,14 +336,7 @@ export function runVisualTests(env: string) {
   console.log(`Percy branch: ${process.env.PERCY_BRANCH}`);
   console.log('==================================================================\n');
 
-  try {
-    execSync(command, { stdio: 'inherit' });
-  } catch {
-    console.error('==================================================================');
-    console.error('Percy visual test execution failed.');
-    console.error('==================================================================');
-    process.exit(1);
-  }
+  runCommandOrExit(command, 'Percy visual test execution failed.');
 }
 
 /**
@@ -288,12 +350,5 @@ export function openPlaywrightUI(env: string) {
   console.log(`Environment: ${env}`);
   console.log('==================================================================\n');
 
-  try {
-    execSync('npx playwright test --ui', { stdio: 'inherit' });
-  } catch {
-    console.error('==================================================================');
-    console.error('Failed to open Playwright UI.');
-    console.error('==================================================================');
-    process.exit(1);
-  }
+  runCommandOrExit('npx playwright test --ui', 'Failed to open Playwright UI.');
 }

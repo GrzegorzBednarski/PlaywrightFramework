@@ -21,29 +21,46 @@ Each file contains key–value pairs used by Playwright configuration and tests.
 
 To introduce a new environment, create a new file (for example `.env.myenv`) in the `env/` directory, copy values from the example file and adjust them for the new environment.
 
-Below is a simplified example based on the existing `env/.env.example` file:
+Below is an example based on the existing `env/.env.example` file:
 
 ```dotenv
-# Playwright
-BASE_URL=https://www.example.com
-ACTION_TIMEOUT=15000
-EXPECT_TIMEOUT=8000
-NAVIGATION_TIMEOUT=20000
-TEST_TIMEOUT=45000
-RETRIES=1
+# Playwright config
+# ========================================================
+BASE_URL="https://the-internet.herokuapp.com"
+ACTION_TIMEOUT="15000"
+EXPECT_TIMEOUT="8000"
+NAVIGATION_TIMEOUT="20000"
+TEST_TIMEOUT="45000"
+RETRIES="1"
 
-# Visual testing (Percy)
-PERCY_TOKEN=your_percy_token
-PERCY_BRANCH=example-branch
+# Visual test (Percy)
+# ========================================================
+PERCY_TOKEN="web_ba8f3c1d7e5a4f2b9c0d1e2f3a4b5c6d7e8f9a0b1c2d3e4f5a6b7c8d9e0f1a2b"
+PERCY_BRANCH="example"
 
 # API keys
-API_KEY_PUBLIC=pk_test_1234567890abcdef
+# ========================================================
+API_KEY_PUBLIC="pk_test_1234567890abcdef"
 
-# Credentials (examples only)
-ADMIN_USERNAME=admin@example.com
-ADMIN_PASSWORD=admin.super-secret
-USER1_USERNAME=user1@example.com
-USER1_PASSWORD=user1.super-secret
+# Basic Auth
+# ========================================================
+
+# Global Basic Auth
+BASICAUTH_USERNAME="admin"
+BASICAUTH_PASSWORD="admin"
+
+# Sample Basic Auth for Admin user
+ADMIN_BASICAUTH_USERNAME="admin"
+ADMIN_BASICAUTH_PASSWORD="admin.super-secret"
+
+# Credentials
+# ========================================================
+ADMIN_USERNAME="admin@example.com"
+ADMIN_PASSWORD="admin.super-secret"
+STANDARD_USER_USERNAME="standard_user"
+STANDARD_USER_PASSWORD="secret_sauce"
+VISUAL_USER_USERNAME="visual_user"
+VISUAL_USER_PASSWORD="secret_sauce"
 ```
 
 Typical variables include:
@@ -52,10 +69,40 @@ Typical variables include:
 - **Timeouts and retries** – `ACTION_TIMEOUT`, `NAVIGATION_TIMEOUT`, `TEST_TIMEOUT`, `EXPECT_TIMEOUT`, `RETRIES`.
 - **Visual testing** – `PERCY_TOKEN`, `PERCY_BRANCH`.
 - **API keys** – for example `API_KEY_PUBLIC` used by tests.
-- **Credentials** – sample usernames and passwords used in tests.
+- **Credentials** – usernames and passwords used in tests.
 
 Playwright configuration provides default values for timeouts and retries, while `BASE_URL` and selected time-related settings are usually set explicitly in `.env` files.
 See **[Playwright configuration](./playwrightConfiguration.md)** for more information on how these values are read from `process.env`.
+
+### Credentials naming convention
+
+User credentials are resolved from `.env` using the convention:
+
+- `<USER_KEY>_USERNAME`
+- `<USER_KEY>_PASSWORD`
+
+Example:
+
+- `ADMIN_USERNAME` / `ADMIN_PASSWORD`
+- `STANDARD_USER_USERNAME` / `STANDARD_USER_PASSWORD`
+
+`<USER_KEY>` is typically the same value you use in tests/fixtures (e.g. `userKey: 'ADMIN'`).
+
+### Basic Auth naming convention
+
+The framework supports HTTP Basic Auth via env variables.
+
+You can define it in two ways:
+
+1. **Global Basic Auth** (applies when you call `useBasicAuth(page)` without a user key):
+
+- `BASICAUTH_USERNAME`
+- `BASICAUTH_PASSWORD`
+
+2. **Per-user Basic Auth** (use when you call `useBasicAuth(page, 'ADMIN')`):
+
+- `<USER_KEY>_BASICAUTH_USERNAME`
+- `<USER_KEY>_BASICAUTH_PASSWORD`
 
 ## Usage
 
