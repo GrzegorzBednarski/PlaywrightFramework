@@ -1,10 +1,33 @@
-# PlaywrightStarterKit
+# Playwright Simplified
 
-Playwright framework with pre-configured plugins and best practices to get you started quickly.
+A practical Playwright starter framework that helps you ship reliable UI and API tests faster.
+
+It comes with a clean structure, sensible defaults, and a set of utilities you can reuse across projects:
+- Custom test runner (environments, test groups, grep groups)
+- Session management (reusable authenticated state)
+- API tool + fixtures (requests + assertions)
+- Built-in reporters (HTML/JSON/JUnit) and code quality tooling (ESLint/Prettier)
+
+Key capabilities (optional modules/features you can enable per project):
+- Accessibility testing (axe)
+- Analytics event assertions
+- Client-side performance testing & monitoring (Lighthouse)
+- Cookie scenarios (set, validate, and reuse)
+- HTTP request assertions & API auth helpers
+- Multi-environment support (dotenv + `.env.*`)
+- Network mocking & intercept helpers (fixtures + replace/wait for intercept)
+- Session-based authentication (reusable authenticated state + configurable login flows)
+- Stability helpers for flaky tests (wait for page idle)
+- UI quality guardrails (assert no console errors)
+- Visual regression testing (Percy)
 
 ## Author
 
-Grzegorz Bednarski (grzegorz.bednarski1985@gmail.com)
+Grzegorz Bednarski ([it.grzegorz.bednarski@gmail.com](mailto:it.grzegorz.bednarski@gmail.com))
+
+## License
+
+This project is licensed under the MIT License. See [`LICENSE`](./LICENSE).
 
 ## Prerequisites
 
