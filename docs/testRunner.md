@@ -25,6 +25,7 @@ export const testRunnerConfig = {
     accessibility: ['tests/accessibility'],
     analytics: ['tests/analytics'],
     functional: ['tests/functional'],
+    quality: ['tests/quality'],
     visual: ['tests/visual'],
   },
 
@@ -33,7 +34,7 @@ export const testRunnerConfig = {
   // ---------------------------------------------------------------------------
 
   testGroups: {
-    all: ['accessibility', 'analytics', 'functional'],
+    all: ['accessibility', 'analytics', 'api', 'functional', 'quality'],
     critical: ['analytics', 'functional'],
   },
 

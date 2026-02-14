@@ -1,10 +1,7 @@
-import * as path from 'path';
-import accessibilityConfig from '../PlaywrightFramework/config/accessibilityConfig';
-import { mergeAccessibilityReports } from './utils/accessibilityReport';
-
-const reportsDir = path.resolve(accessibilityConfig.reportsOutputFolder);
-const outputFile = path.join(reportsDir, 'accessibility-report.json');
+import { mergeAccessibilityReports } from './utils/accessibility/accessibilityReport';
+import { mergeLinkCheckReports } from './utils/linkCheck/linkCheckReport';
 
 export default async function globalTeardown() {
-  await mergeAccessibilityReports(reportsDir, outputFile, true);
+  await mergeAccessibilityReports();
+  await mergeLinkCheckReports();
 }

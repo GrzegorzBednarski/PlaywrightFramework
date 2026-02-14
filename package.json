@@ -22,6 +22,7 @@
     "fs-extra": "^11.3.3",
     "husky": "^9.1.7",
     "lighthouse": "^12.8.2",
+    "linkinator": "^7.5.3",
     "lint-staged": "^16.2.7",
     "md-to-pdf": "^5.2.4",
     "playwright": "^1.57.0",

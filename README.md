@@ -3,17 +3,20 @@
 A practical Playwright starter framework that helps you ship reliable UI and API tests faster.
 
 It comes with a clean structure, sensible defaults, and a set of utilities you can reuse across projects:
+
 - Custom test runner (environments, test groups, grep groups)
 - Session management (reusable authenticated state)
 - API tool + fixtures (requests + assertions)
 - Built-in reporters (HTML/JSON/JUnit) and code quality tooling (ESLint/Prettier)
 
 Key capabilities (optional modules/features you can enable per project):
+
 - Accessibility testing (axe)
 - Analytics event assertions
 - Client-side performance testing & monitoring (Lighthouse)
 - Cookie scenarios (set, validate, and reuse)
 - HTTP request assertions & API auth helpers
+- Link checking (Linkinator)
 - Multi-environment support (dotenv + `.env.*`)
 - Network mocking & intercept helpers (fixtures + replace/wait for intercept)
 - Session-based authentication (reusable authenticated state + configurable login flows)
@@ -39,6 +42,7 @@ This project is licensed under the MIT License. See [`LICENSE`](./LICENSE).
 💡 If you change the Playwright version (newer or older), run `npx playwright uninstall --all` first to remove old browser binaries
 
 Run the following commands in your console:
+
 ```sh
 npm ci
 npx playwright install
@@ -126,6 +130,7 @@ PlaywrightFramework/
 ## Configuration
 
 ### 🔧 Core Configuration
+
 - **[Dotenv](./docs/dotenv.md)** – Loading environment variables from `.env` files before tests
   - [Configuration](./docs/dotenv.md#configuration) | [Usage](./docs/dotenv.md#usage)
 - **[Environments](./docs/environments.md)** – Environment setup, `.env` files and switching between environments
@@ -138,6 +143,7 @@ PlaywrightFramework/
   - [Configuration](./docs/testRunner.md#configuration) | [Running tests](./docs/testRunner.md#running-tests) | [Helper commands](./docs/testRunner.md#helper-commands)
 
 ### 🎨 Code Quality & Formatting
+
 - **[ESLint](./docs/eslint.md)** - Code linting and static analysis
   - [Configuration](./docs/eslint.md#configuration) | [Usage](./docs/eslint.md#usage)
 - **[Prettier](./docs/prettier.md)** - Code formatting and style enforcement
@@ -146,12 +152,14 @@ PlaywrightFramework/
   - [Configuration](./docs/typescript.md#configuration)
 
 ### 🔗 Git Automation
+
 - **[Husky](./docs/husky.md)** - Git hooks management and pre-commit automation
   - [Configuration](./docs/husky.md#configuration)
 - **[Lint-staged](./docs/lintStaged.md)** - Run quality checks on pre-commit files.
   - [Configuration](./docs/lintStaged.md#configuration)
 
 ### 📝 Reporters
+
 - [Configuration](./docs/reporters.md#configuration)
   - **[Clean Reporter](./docs/reporters.md#clean-reporter)** - Custom console reporter with cleaner, compact output
   - **[HTML Reporter](./docs/reporters.md#html-reporter)** - Interactive HTML report with traces and artifacts
@@ -163,6 +171,7 @@ PlaywrightFramework/
 ## Usage
 
 ### 🔁 API requests (API tool)
+
 - **[API](./docs/api/api.md)** - Quick start + how to configure the API tool.
   - [Configuration](./docs/api/api.md#configuration) | [Minimal usage](./docs/api/api.md#minimal-usage)
 - **[Fixtures](./docs/api/apiFixtures.md)** - How to use JSON fixtures + placeholders.
@@ -186,6 +195,7 @@ PlaywrightFramework/
     - [Authorization header](./docs/sessionManagement/meta.md#bearer-token-authorization-header) | [API key/custom header](./docs/sessionManagement/meta.md#api-key--custom-header) | [Custom value](./docs/sessionManagement/meta.md#custom-value-dynamic)
 
 ### 🍪 Cookie Management
+
 - **[Check Cookies](./docs/checkCookies.md)** - Assert cookies using JSON fixtures (exist / not exist)
   - [Configuration](./docs/checkCookies.md#configuration) | [Usage](./docs/checkCookies.md#usage) | [Dynamic values](./docs/checkCookies.md#dynamic-values) | [Debug output](./docs/checkCookies.md#debug-output)
 - **[Set Cookies](./docs/setCookies.md)** - Inject selected cookies into the browser context
@@ -194,6 +204,7 @@ PlaywrightFramework/
   - [Configuration](./docs/setCookiesScenario.md#configuration) | [Usage](./docs/setCookiesScenario.md#usage)
 
 ### 📊 Data Management
+
 - **[Cookies](./docs/cookies.md)** - Central configuration for predefined cookies and reusable cookie scenarios
   - [Cookies configuration](./docs/cookies.md#cookies-configuration) | [Dynamic domains](./docs/cookies.md#dynamic-cookie-domains) | [Cookie scenarios configuration](./docs/cookies.md#cookie-scenarios-configuration)
 - **[Data](./docs/data.md)** - Central place for shared test data (users, products, etc.)
@@ -202,6 +213,7 @@ PlaywrightFramework/
   - [Configuration](./docs/intercepts.md#configuration) | [Usage](./docs/intercepts.md#usage)
 
 ### 🧩 Page Object Model
+
 - **[Page Object Model](./docs/pageObjectModel/index.md)** - Entry point (overview, quick start, and structure)
   - **[baseTest](./docs/baseTest.md)** - shared test entrypoint (sessions + API)
   - **[Base pages](./docs/pageObjectModel/basePage.md)** - shared helpers and navigation
@@ -221,6 +233,7 @@ PlaywrightFramework/
     - [No POM (baseTest)](./docs/pageObjectModel/advancedPatterns.md#writing-tests-without-a-domain-pom-basetest)
 
 ### 🧪 Testing Features
+
 - **[Accessibility](./docs/accessibility.md)** - Automated accessibility checks and audits
   - [Configuration](./docs/accessibility.md#configuration) | [Usage](./docs/accessibility.md#usage) | [Reports](./docs/accessibility.md#reports)
 - **[Analytics](./docs/analytics.md)** - Capturing and asserting analytics events from data layers
@@ -233,8 +246,11 @@ PlaywrightFramework/
   - [Configuration](docs/visualTesting.md#configuration) | [Environment variables](docs/visualTesting.md#environment-variables) | [Usage](docs/visualTesting.md#usage) | [Advanced usage](docs/visualTesting.md#advanced-usage) | [Viewing results](docs/visualTesting.md#viewing-results)
 
 ### 🛠️ Test Utilities
+
 - **[Assert No Console Errors](./docs/assertNoConsoleErrors.md)** - Validate that pages load without JavaScript console errors
   - [Configuration](./docs/assertNoConsoleErrors.md#configuration) | [Usage](./docs/assertNoConsoleErrors.md#usage)
+- **[Link Check](./docs/linkCheck.md)** - Validate that pages have no broken links (Linkinator)
+  - [Configuration](./docs/linkCheck.md#configuration) | [Usage](./docs/linkCheck.md#usage) | [Reports](./docs/linkCheck.md#reports)
 - **[iFrames](./docs/iFrames.md)** - Working with embedded frames and nested browsing contexts
 - **[Replace Text](./docs/replaceText.md)** - Modify text content in DOM elements for testing scenarios
   - [Usage](./docs/replaceText.md#usage)
@@ -242,6 +258,7 @@ PlaywrightFramework/
   - [Configuration](./docs/waitForPageIdle.md#configuration) | [Usage](./docs/waitForPageIdle.md#usage)
 
 ### 🌐 Working with HTTP requests
+
 - **[Replace Intercept](./docs/replaceIntercept.md)** - Mock HTTP responses using JSON fixtures
   - [Configuration](./docs/replaceIntercept.md#configuration) | [Usage](./docs/replaceIntercept.md#usage) | [Dynamic values](./docs/replaceIntercept.md#dynamic-values) | [Status code change](./docs/replaceIntercept.md#status-code-change)
 - **[Request Assertions](./docs/requestAssertions.md)** - Common patterns for validating HTTP requests in tests

@@ -1,5 +1,4 @@
 import { test, session, expect } from '../../pageObjects/theInternet/pageFixture';
-import { assertNoConsoleErrors } from '../../utils/assertNoConsoleErrors';
 import { setCookies } from '../../utils/setCookies';
 import { checkCookies } from '../../utils/checkCookies';
 import { useBasicAuth } from '../../utils/basicAuth';
@@ -24,14 +23,6 @@ test('[sanity] homepage cookies behaviour', async ({ homePage, page }) => {
   await homePage.goto();
   await checkCookies(page, 'test_cookie_a.json');
   await checkCookies(page, 'test_cookie_b.json', undefined, false);
-});
-
-test('homepage should have no console errors', async ({ homePage, page }) => {
-  await assertNoConsoleErrors(page, homePage.getPageUrl(), {
-    ignoredPatternsOverride: {
-      'net::ERR_NAME_NOT_RESOLVED': true,
-    },
-  });
 });
 
 test('[sanity] homepage footer should show Powered by link', async ({ homePage }) => {

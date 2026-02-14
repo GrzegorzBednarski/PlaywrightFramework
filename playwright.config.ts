@@ -25,7 +25,7 @@ export default defineConfig({
     baseURL: process.env.BASE_URL,
     navigationTimeout: Number(process.env.NAVIGATION_TIMEOUT) || 15000,
     screenshot: 'only-on-failure',
-    trace: 'on-first-retry',
+    trace: 'off',
     video: 'retain-on-failure',
   },
   // Limit workers in CI to X, use Y locally

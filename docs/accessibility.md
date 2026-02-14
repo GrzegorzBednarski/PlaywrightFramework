@@ -82,7 +82,7 @@ This project uses **`axe-core`** to run automated accessibility tests. The helpe
 
 ```ts
 import { test } from '@playwright/test';
-import runAccessibilityScan from '../../utils/accessibility';
+import runAccessibilityScan from '../../utils/accessibility/accessibility';
 
 test('Homepage accessibility', async ({ page }) => {
   await page.goto('/');
@@ -102,7 +102,7 @@ test('Careers page accessibility', async ({ page }) => {
     ignoredRules: {
       'landmark-banner-is-top-level': true,
     },
-    excludeElements: ['.popup-modal', '#advertisement']
+    excludeElements: ['.popup-modal', '#advertisement'],
   });
 });
 ```

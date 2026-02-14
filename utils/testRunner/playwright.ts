@@ -19,44 +19,33 @@ function runCommandOrExit(command: string, failureTitle: string) {
     stdio: 'inherit',
   });
 
-  /** Writes best-effort diagnostics to build/error.log (used for non-zero exit codes). */
-  const writePlaywrightDiagErrorLog = () => {
-    try {
-      const diagCommand = `${command} --reporter=line --workers=1`;
-      const diag = spawnSync(diagCommand, {
-        shell: true,
-        encoding: 'utf8',
-        stdio: ['ignore', 'pipe', 'pipe'],
-      });
-
-      let bestErrorText = `${diag.stderr || ''}\n${diag.stdout || ''}`.trim();
-      if (!bestErrorText && diag.error) {
-        bestErrorText = (diag.error.stack || diag.error.message).trim();
-      }
-      if (!bestErrorText) bestErrorText = failureTitle;
-
-      writeErrorLog(bestErrorText);
-    } catch (e) {
-      printStyledFailure('Failed to write build/error.log.', e);
-    }
-  };
-
-  if (res.status !== null && res.status !== 0) {
-    printStyledFailure(failureTitle);
-    writePlaywrightDiagErrorLog();
-    process.exit(res.status);
-  }
-
-  if (res.status === null && res.signal) {
-    printStyledFailure(failureTitle);
-    writePlaywrightDiagErrorLog();
-    process.exit(1);
-  }
-
+  // If the process could not be started (e.g. missing executable), treat as runner error.
   if (res.error) {
     printStyledFailure(failureTitle, res.error);
-    writePlaywrightDiagErrorLog();
+    try {
+      writeErrorLog(res.error.stack || res.error.message || String(res.error));
+    } catch {
+      // ignore
+    }
     process.exit(1);
+  }
+
+  // If the process was terminated by a signal, treat as runner error.
+  if (res.status === null && res.signal) {
+    printStyledFailure(failureTitle);
+    try {
+      writeErrorLog(`Process terminated by signal: ${res.signal}`);
+    } catch {
+      // ignore
+    }
+    process.exit(1);
+  }
+
+  // Normal process exit:
+  // - status === 0: success
+  // - status !== 0: Playwright ran but tests failed (do NOT wrap as runner startup error)
+  if (res.status !== null && res.status !== 0) {
+    process.exit(res.status);
   }
 }
 

@@ -1,6 +1,6 @@
 import { Page, expect, test as pwt } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
-import accessibilityConfig from '../config/accessibilityConfig';
+import accessibilityConfig from '../../config/accessibilityConfig';
 import { generateAccessibilityReport } from './accessibilityReport';
 import { AxeResults } from 'axe-core';
 

@@ -1,4 +1,4 @@
-import runAccessibilityScan from '../../utils/accessibility';
+import runAccessibilityScan from '../../utils/accessibility/accessibility';
 import { test } from '@playwright/test';
 
 test.describe('accessibility scan', () => {

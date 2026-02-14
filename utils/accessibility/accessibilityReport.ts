@@ -1,18 +1,8 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import { AxeResults, Result } from 'axe-core';
-import { convertAccessibilityReportToPdf } from './mdToPdf';
-
-/**
- * Sanitizes lenient JSON by escaping control characters in string literals
- * so that it can be parsed by `JSON.parse`.
- */
-function _sanitizeLenientJson(input: string): string {
-  return input.replace(/[\u0000-\u001F\u007F-\u009F]/g, char => {
-    // Escape control characters with a backslash and the character code
-    return '\\u' + ('000' + char.charCodeAt(0).toString(16)).slice(-4);
-  });
-}
+import { convertAccessibilityReportToPdf } from '../mdToPdf';
+import accessibilityConfig from '../../config/accessibilityConfig';
 
 interface ReportFields {
   impact?: boolean;
@@ -38,27 +28,6 @@ type FilteredViolation = {
   nodes?: number | string[];
   url?: string;
 };
-
-export function generateAccessibilityReport(
-  results: AxeResults,
-  config: AccessibilityConfig,
-  url?: string
-): void {
-  if (config.reportConsole) {
-    logToConsole(results.violations, config.reportConsole, url);
-  }
-
-  const defaultJsonFields: ReportFields = {
-    impact: true,
-    id: true,
-    description: true,
-    help: true,
-    helpUrl: true,
-    nodes: true,
-  };
-
-  saveJsonReport(results.violations, defaultJsonFields, config.reportsOutputFolder, true, url);
-}
 
 /**
  * Logs accessibility violations to the console using a filtered field set.
@@ -340,8 +309,12 @@ export function deduplicateViolations(violations: any[]): any[] {
 /**
  * Merges multiple accessibility JSON reports into a single summary,
  * generates a combined Markdown and PDF report, and cleans up temporary files.
+ *
+ * @param reportsDir Directory containing per-page accessibility JSON files.
+ * @param outputFile Output JSON file path (merged report).
+ * @param includeTimestamp Whether to include timestamp in the merged JSON.
  */
-export async function mergeAccessibilityReports(
+export async function mergeAccessibilityReportsFromDir(
   reportsDir: string,
   outputFile: string,
   includeTimestamp?: boolean
@@ -398,4 +371,39 @@ export async function mergeAccessibilityReports(
       console.warn(`Error removing temporary file ${file}:`, err);
     }
   }
+}
+
+/**
+ * Convenience wrapper: merges accessibility reports using project config defaults.
+ *
+ * Uses:
+ * - reportsDir: accessibilityConfig.reportsOutputFolder
+ * - outputFile: <reportsDir>/accessibility-report.json
+ * - includeTimestamp: true
+ */
+export async function mergeAccessibilityReports(): Promise<void> {
+  const reportsDir = path.resolve(accessibilityConfig.reportsOutputFolder);
+  const outputFile = path.join(reportsDir, 'accessibility-report.json');
+  await mergeAccessibilityReportsFromDir(reportsDir, outputFile, true);
+}
+
+export function generateAccessibilityReport(
+  results: AxeResults,
+  config: AccessibilityConfig,
+  url?: string
+): void {
+  if (config.reportConsole) {
+    logToConsole(results.violations, config.reportConsole, url);
+  }
+
+  const defaultJsonFields: ReportFields = {
+    impact: true,
+    id: true,
+    description: true,
+    help: true,
+    helpUrl: true,
+    nodes: true,
+  };
+
+  saveJsonReport(results.violations, defaultJsonFields, config.reportsOutputFolder, true, url);
 }

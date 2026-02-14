@@ -88,7 +88,7 @@ export async function convertAccessibilityReportToPdf(
     ? path.join(outputDir, 'accessibility-report.pdf')
     : markdownPath.replace(/\.md$/, '.pdf');
 
-  const cssPath = path.join(__dirname, 'accessibility-report.css');
+  const cssPath = path.join(__dirname, 'accessibility', 'accessibility-report.css');
 
   const options: MdToPdfOptions = {
     outputPath,
