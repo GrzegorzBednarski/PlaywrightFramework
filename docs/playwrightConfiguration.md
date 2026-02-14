@@ -6,6 +6,8 @@
 
 Global Playwright configuration controls how all tests run in this project (such as timeouts, retries, base URL, reporters and shared options).
 
+---
+
 ## Configuration
 
 The main configuration is defined in `playwright.config.ts` using `defineConfig` from `@playwright/test`.
@@ -52,6 +54,8 @@ Typical patterns used in `playwright.config.ts` are:
 
 These values are usually provided via `.env` files for each environment.
 See **[Environments](./environments.md)** for an example of configuring per-environment values.
+
+---
 
 ## Usage
 

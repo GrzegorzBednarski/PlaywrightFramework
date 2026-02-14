@@ -1,5 +1,5 @@
-import { test } from '../../pageObjects/automationExcercise/pageFixture';
 import runAccessibilityScan from '../../utils/accessibility';
+import { test } from '@playwright/test';
 
 test.describe('accessibility scan', () => {
   test('should have no accessibility violations on example.com', async ({ page }) => {

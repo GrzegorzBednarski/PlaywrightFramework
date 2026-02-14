@@ -7,6 +7,8 @@
 
 Base pages centralize shared helpers so page classes stay small and consistent.
 
+---
+
 ## Configuration
 
 This file should centralize shared helpers so page classes stay small and consistent.
@@ -134,6 +136,8 @@ export abstract class BasePage {
   }
 }
 ```
+
+---
 
 ## Usage
 

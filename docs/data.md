@@ -2,7 +2,11 @@
 
 ← [Back to main documentation](../README.md)
 
+## Overview
+
 Central place for shared test data (users, products, etc.) to keep specs clean and avoid duplicated hardcoded values (IDs, emails, SKUs).
+
+---
 
 ## Configuration
 
@@ -71,6 +75,8 @@ const env = process.env.ENV as EnvKey;
 
 export const data = byEnv[env];
 ```
+
+---
 
 ## Usage
 

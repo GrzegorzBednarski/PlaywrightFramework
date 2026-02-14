@@ -9,6 +9,8 @@
 
 Use it when most pages share the same layout or when the layout changes after login (for example: a logged-in header, logged-in menu / user menu, different navigation).
 
+---
+
 ## When to use AppPage
 
 Typical sign you need `AppPage`:
@@ -16,6 +18,8 @@ Typical sign you need `AppPage`:
 - you have a *login wall* (some pages are public, others require login)
 - public pages do NOT show the same header/menu as logged-in pages
 - you want shared logged-in UI (e.g. user menu) available on all authenticated pages
+
+---
 
 ## Configuration
 
@@ -95,6 +99,7 @@ export abstract class AppPage extends BasePage {
 
 > Tip: keep only logged-in layout in `AppPage`. Components that exist on all pages (like a cookie prompt) should live in `BasePage`.
 
+---
 
 ## Usage
 

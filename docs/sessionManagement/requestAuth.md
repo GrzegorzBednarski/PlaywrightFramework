@@ -7,6 +7,8 @@
 
 Helpers for extracting auth-related values from intercepted requests.
 
+---
+
 ## extractBearerAuthHeader
 
 Gets the `Authorization` header value in `Bearer ...` format from an intercepted request.

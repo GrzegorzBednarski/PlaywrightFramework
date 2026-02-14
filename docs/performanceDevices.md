@@ -2,6 +2,8 @@
 
 ← [Back to main documentation](../README.md)
 
+## Overview
+
 Device presets for performance tests.
 
 Use these keys to control device emulation (screen size, scale factor, form factor) in:
@@ -9,6 +11,8 @@ Use these keys to control device emulation (screen size, scale factor, form fact
 - **[Performance Monitoring](./performanceMonitoring.md)**
 
 Performance tools are built on top of **[Lighthouse](https://developer.chrome.com/docs/lighthouse/overview/)**.
+
+---
 
 ## Configuration
 
@@ -63,6 +67,8 @@ export const performanceDevicesConfig = {
   },
 } as const;
 ```
+
+---
 
 ## Usage
 

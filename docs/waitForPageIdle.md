@@ -2,7 +2,11 @@
 
 ← [Back to main documentation](../README.md)
 
+## Overview
+
 `waitForPageIdle` is a small helper that waits until the page is "quiet" from a network perspective before you interact with the UI (useful for dynamic pages, SPAs, lazy-loaded content, etc.).
+
+---
 
 ## Configuration
 
@@ -19,6 +23,8 @@ Manual monitoring:
 - Listens to `page.on('request')` and `page.on('response')`
 - Tracks the timestamp of the last network activity
 - Finishes when `idleThreshold` ms pass without any request/response (or when `maxWaitTime` is reached)
+
+---
 
 ## Usage
 
@@ -38,6 +44,8 @@ test('should interact with dynamically loaded content', async ({ page }) => {
 Behavior:
 - By default, uses **manual network monitoring** (based on configuration)
 - Optionally can first try Playwright's `page.waitForLoadState('networkidle')` and fall back to manual monitoring
+
+---
 
 ## When to use
 

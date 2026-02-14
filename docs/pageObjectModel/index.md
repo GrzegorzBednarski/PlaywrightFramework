@@ -3,11 +3,20 @@
 ← [Back to main documentation](../../README.md)
 ↑ [Back to Page Object Model](./index.md)
 
-Short, practical guidelines for structuring page objects, components, and fixtures.
-
 ## Overview
 
 In this framework we keep tests simple by exposing ready-to-use Page Objects via fixtures.
+
+---
+
+## No POM (optional)
+
+If you want to write tests **without** creating a domain POM, use `baseTest` directly.
+
+- **[baseTest](../baseTest.md)** (sessions + API)
+- **[Advanced patterns: No POM](./advancedPatterns.md#writing-tests-without-a-domain-pom-basetest)**
+
+---
 
 ## Quick start (what to create)
 
@@ -21,6 +30,8 @@ Typical setup for a new domain:
    Most pages typically extend `AppPage`, while `LoginPage` often extends only `BasePage`.
 5. **Wire [fixtures](./fixtures.md)** - make tests easier by automating POM creation (so you don't have to create page objects in tests) and by providing hooks for automation like login, cookie injection, basic auth, etc.
 6. **(Optional) [Advanced patterns](./advancedPatterns.md)** - if you need multiple fixtures, different layouts, or more complex structure.
+
+---
 
 ## Structure
 

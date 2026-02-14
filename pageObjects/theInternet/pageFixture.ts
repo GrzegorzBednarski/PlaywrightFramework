@@ -1,6 +1,5 @@
-import { test as base } from '@playwright/test';
-import { createSessionFixtures, type SessionFixtureOptions } from '../../utils/sessionFixtures';
-import type { UserSessionData } from '../../utils/sessionManager';
+import { test as baseTest, expect, session, apiProfile } from '../../utils/baseTest';
+import type { Page } from '@playwright/test';
 import { BasicAuthPage } from './pages/basicAuth.page';
 import { HomePage } from './pages/home.page';
 import { LoginPage } from './pages/login.page';
@@ -11,8 +10,6 @@ import { SecurePage } from './pages/secure.page';
 // ---------------------------------------------------------------------------
 
 type Fixtures = {
-  sessionData: UserSessionData | undefined;
-  sessionMeta: Record<string, string> | undefined;
   basicAuthPage: BasicAuthPage;
   homePage: HomePage;
   loginPage: LoginPage;
@@ -20,31 +17,23 @@ type Fixtures = {
 };
 
 // ---------------------------------------------------------------------------
-// Sessions (optional)
+// Tests
 // ---------------------------------------------------------------------------
 
-type Options = SessionFixtureOptions;
-
-// ---------------------------------------------------------------------------
-// Advanced configuration (typically you don't need to change this section)
-// ---------------------------------------------------------------------------
-
-const baseTest = base.extend<Fixtures & Options>({
-  ...createSessionFixtures({ defaultSessionLoginKey: 'default' }),
-
+const test = baseTest.extend<Fixtures>({
   // ---------------------------------------------------------------------------
   // POM fixtures (add new pages/components here)
   // ---------------------------------------------------------------------------
-  basicAuthPage: async ({ page }, use) => {
+  basicAuthPage: async ({ page }: { page: Page }, use: (v: BasicAuthPage) => Promise<void>) => {
     await use(new BasicAuthPage(page));
   },
-  homePage: async ({ page }, use) => {
+  homePage: async ({ page }: { page: Page }, use: (v: HomePage) => Promise<void>) => {
     await use(new HomePage(page));
   },
-  loginPage: async ({ page }, use) => {
+  loginPage: async ({ page }: { page: Page }, use: (v: LoginPage) => Promise<void>) => {
     await use(new LoginPage(page));
   },
-  securePage: async ({ page }, use) => {
+  securePage: async ({ page }: { page: Page }, use: (v: SecurePage) => Promise<void>) => {
     await use(new SecurePage(page));
   },
 });
@@ -53,15 +42,4 @@ const baseTest = base.extend<Fixtures & Options>({
 // Exports
 // ---------------------------------------------------------------------------
 
-export type SessionOptions = { sessionLoginKey?: string };
-
-export const test = baseTest;
-export { expect } from '@playwright/test';
-
-/**
- * Set session for the current test/describe scope.
- * Must be called at the top-level or inside `test.describe`, NOT inside a `test(...)` body.
- */
-export function session(userKey: string, opts?: SessionOptions) {
-  baseTest.use({ userKey, sessionLoginKey: opts?.sessionLoginKey });
-}
+export { test, expect, session, apiProfile };

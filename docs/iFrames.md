@@ -2,7 +2,13 @@
 
 ← [Back to main documentation](../README.md)
 
-In Playwright, you can interact with elements inside iframes using the `frameLocator` API. This allows you to easily locate and interact with elements within nested browsing contexts.
+## Overview
+
+In Playwright, you can interact with elements inside iframes using the `frameLocator` API. This lets you locate and work with elements inside nested browsing contexts (iframes) without switching the whole page context manually.
+
+---
+
+## Usage
 
 Sample usage:
 

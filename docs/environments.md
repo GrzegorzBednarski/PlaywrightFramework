@@ -6,6 +6,8 @@
 
 Environment files are used to store secrets (for example API keys or user credentials) and per-environment settings that apply when tests run.
 
+---
+
 ## Configuration
 
 Environment-specific variables are stored in files named `.env.<environment>` under the `env/` directory.
@@ -104,11 +106,15 @@ You can define it in two ways:
 - `<USER_KEY>_BASICAUTH_USERNAME`
 - `<USER_KEY>_BASICAUTH_PASSWORD`
 
+---
+
 ## Usage
 
 The custom test runner derives the environment name from CLI arguments (for example `dev`, `qa`, `stg`), sets the `ENV` variable and loads the matching `.env` file before delegating to Playwright.
 
 For more details and concrete CLI examples, see the **Running tests** section in **[Test Runner](./testRunner.md#running-tests)**.
+
+---
 
 ## Secrets and sharing
 

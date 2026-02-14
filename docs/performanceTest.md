@@ -2,11 +2,15 @@
 
 ← [Back to main documentation](../README.md)
 
+## Overview
+
 Run Lighthouse against a list of URLs and validate results against configured thresholds.
 
 Performance tools are built on top of **[Lighthouse](https://developer.chrome.com/docs/lighthouse/overview/)**.
 
 Lighthouse CLI docs are available **[here](https://github.com/GoogleChrome/lighthouse#using-the-node-cli)**.
+
+---
 
 ## Configuration
 
@@ -28,12 +32,22 @@ export const performanceTestConfig = {
     pwa: 50,
   },
   skipAudits: ['uses-http2'],
+
+  // ---------------------------------------------------------------------------
+  // Advanced configuration (typically you don't need to change this section)
+  // ---------------------------------------------------------------------------
+
   chrome: {
     headless: true,
     flags: ['--no-sandbox', '--disable-gpu', '--disable-dev-shm-usage'],
   },
   extraHeaders: {},
   extraLighthouseFlags: [],
+
+  // ---------------------------------------------------------------------------
+  // URLs to test
+  // ---------------------------------------------------------------------------
+
   urlsToTest: [
     {
       name: 'dynamicTablePage',
@@ -80,6 +94,8 @@ Options:
 - `extraLighthouseFlags` - Extra Lighthouse CLI flags (advanced)
 - `urlsToTest` - URLs to test (supports per-URL overrides)
 
+---
+
 ## URL formats
 
 In `urlsToTest[].path` you can use:
@@ -91,6 +107,8 @@ Dynamic URL using `data` (matches **[Data](./data.md)** docs):
 - `const product_2 = data.products.product_2;`
 - `path: `/products/${product_2.id}/details``
 
+---
+
 ## Usage
 
 See **[Test Runner](./testRunner.md#running-tests)**.
@@ -100,6 +118,8 @@ Example:
 ```bash
 npm run test dev performancetest
 ```
+
+---
 
 ## Reports
 

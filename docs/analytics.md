@@ -2,7 +2,11 @@
 
 ← [Back to main documentation](../README.md)
 
+## Overview
+
 Utility for capturing and asserting analytics events (Adobe / GTM dataLayer) in Playwright tests.
+
+---
 
 ## Configuration
 
@@ -13,7 +17,23 @@ This file controls how analytics events are logged to the console when you use `
 
 ```ts
 export const analyticsConfig = {
+  // ---------------------------------------------------------------------------
+  // Debug logging
+  // ---------------------------------------------------------------------------
+
   debugAnalytics: 'ifFail',
+
+  // ---------------------------------------------------------------------------
+  // Debug filtering
+  // ---------------------------------------------------------------------------
+
+  // Filter for logging analytics events in debug output.
+  // Can be:
+  // - ['']              -> no filtering, all events are logged
+  // - ['key']           -> event contains property 'key' with any value OR any value equals 'key'
+  // - ['value']         -> any property in the event has value 'value'
+  // - ['key:value']     -> event contains property 'key' with value 'value'
+  // - ['key1', 'key2:value2', 'value3']  -> ALL conditions in the list must be satisfied (logical AND)
   filterKey: [''],
 } as const;
 ```
@@ -60,6 +80,8 @@ await checkAnalyticsEvent(page, 'acceptAllCookiesButtonClick.json');
 2. Wait until a captured event **deeply matches** the fixture (only fixture keys must be present and equal).
 3. If no matching event appears before timeout, fail the step and include the expected pattern and the captured events in the error message.
 
+---
+
 ## Usage
 
 The analytics helper exposes two main functions from **`utils/analytics.ts`**:
@@ -85,6 +107,8 @@ test('Homepage view triggers correct analytics event', async ({ page }) => {
   await checkAnalyticsEvent(page, 'acceptAllCookiesButtonClick.json');
 });
 ```
+
+---
 
 ## Dynamic values
 
@@ -119,6 +143,8 @@ In this example:
 - Fixture `searchEvent.json` is loaded.
 - Placeholder `%SEARCH_TERM%` is replaced with `playwright testing` **before** matching.
 - Any other fields defined in the fixture (e.g. `language`) must also match the captured event.
+
+---
 
 ## Debug output
 

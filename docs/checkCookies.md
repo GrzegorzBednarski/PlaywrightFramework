@@ -2,7 +2,11 @@
 
 ← [Back to main documentation](../README.md)
 
+## Overview
+
 Utility for asserting browser cookies against JSON fixtures.
+
+---
 
 ## Configuration
 
@@ -25,6 +29,8 @@ Example fixture:
 }
 ```
 
+---
+
 ## Usage
 
 ```ts
@@ -36,6 +42,8 @@ await checkCookies(page, 'cookie_banner_accepted.json');
 // Negative check – cookie must NOT exist
 await checkCookies(page, 'remember_me_enabled.json', undefined, false);
 ```
+
+---
 
 ## Dynamic values
 
@@ -59,6 +67,8 @@ await checkCookies(page, 'remember_me_enabled.json', {
   '%SESSION_ID%': 'abc-123',
 });
 ```
+
+---
 
 ## Debug output
 

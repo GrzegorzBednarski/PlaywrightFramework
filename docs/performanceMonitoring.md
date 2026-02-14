@@ -2,11 +2,15 @@
 
 ← [Back to main documentation](../README.md)
 
+## Overview
+
 Run Lighthouse multiple times per URL and aggregate results (median).
 
 Performance tools are built on top of **[Lighthouse](https://developer.chrome.com/docs/lighthouse/overview/)**.
 
 Lighthouse CLI docs are available **[here](https://github.com/GoogleChrome/lighthouse#using-the-node-cli)**.
+
+---
 
 ## Configuration
 
@@ -22,6 +26,11 @@ export const performanceMonitoringConfig = {
   numberOfRuns: 2,
   onlyCategories: ['performance', 'accessibility', 'bestPractices', 'seo'],
   skipAudits: ['uses-http2'],
+
+  // ---------------------------------------------------------------------------
+  // Advanced configuration (typically you don't need to change this section)
+  // ---------------------------------------------------------------------------
+
   chrome: {
     headless: true,
     flags: ['--no-sandbox', '--disable-gpu', '--disable-dev-shm-usage'],
@@ -30,6 +39,11 @@ export const performanceMonitoringConfig = {
     // Example: Cookie: 'OptanonAlertBoxClosed=1',
   },
   extraLighthouseFlags: [],
+
+  // ---------------------------------------------------------------------------
+  // URLs to monitor
+  // ---------------------------------------------------------------------------
+
   urlsToMonitor: [
     {
       name: 'dynamicTablePage',
@@ -81,6 +95,8 @@ Options:
 - `extraLighthouseFlags` - Extra Lighthouse CLI flags (advanced)
 - `urlsToMonitor` - URLs to monitor (supports per-URL overrides)
 
+---
+
 ## URL formats
 
 In `urlsToMonitor[].path` you can use:
@@ -92,6 +108,8 @@ Dynamic URL using `data` (matches **[Data](./data.md)** docs):
 - `const product_2 = data.products.product_2;`
 - `path: `/products/${product_2.id}/details``
 
+---
+
 ## Usage
 
 See **[Test Runner](./testRunner.md#running-tests)**.
@@ -101,6 +119,8 @@ Example:
 ```bash
 npm run test dev performancemonitoring
 ```
+
+---
 
 ## Reports
 

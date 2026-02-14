@@ -12,6 +12,8 @@ How it works (high level):
 - When multiple workers need the same session, a lock file (`build/sessions/<SESSION_LOGIN_KEY>__<USER_KEY>.lock`) ensures only one worker creates it.
 - If the session file exists, it is reused; otherwise the first worker creates it while others wait.
 
+---
+
 ## Configuration
 
 ### 1) Provide credentials
@@ -127,7 +129,7 @@ If you need more than one login flow, create additional files following: `config
 
 If you have multiple login configs (for example `default` and `second`), you typically pick the default one in your domain fixture.
 
-See: **[POM fixtures - Sessions (optional)](../pageObjectModel/fixtures.md#sessions-optional)**.
+See: **[POM fixtures - Sessions (optional)](../pageObjectModel/fixtures.md#overriding-default-session--api-config-optional)**.
 
 If you call `session('USER_KEY')` without `sessionLoginKey`, the fixture default is used.
 
@@ -140,6 +142,8 @@ session('ADMIN', { sessionLoginKey: 'second' });
 ```
 
 This also affects the session file name on disk, so `default__ADMIN` and `second__ADMIN` are stored separately.
+
+---
 
 ## Usage
 

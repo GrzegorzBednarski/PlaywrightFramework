@@ -2,9 +2,13 @@
 
 ← [Back to main documentation](../README.md)
 
+## Overview
+
 Guidelines and examples for asserting HTTP requests in Playwright tests.
 
 In examples below requests are captured using **[waitForIntercept](./waitForIntercept.md)**.
+
+---
 
 ## Requests
 

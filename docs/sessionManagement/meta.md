@@ -13,6 +13,8 @@ You typically save meta values in your `config/sessionLogin.<key>.ts` (inside `l
 If your domain uses POM fixtures, meta is exposed to tests as `sessionMeta`.
 See: **[POM fixtures - Sessions (optional)](../pageObjectModel/fixtures.md#sessions-optional)**.
 
+---
+
 ## Bearer token (Authorization header)
 
 See: **[Request auth helpers](./requestAuth.md)**.
@@ -50,6 +52,8 @@ test('can use authHeader from session meta', async ({ sessionMeta }) => {
 });
 ```
 
+---
+
 ## API key / custom header
 
 ### Configuration
@@ -82,6 +86,8 @@ test('can use x-functions-key from session meta', async ({ sessionMeta }) => {
   // ...use xFunctionsKey in API calls...
 });
 ```
+
+---
 
 ## Custom value (dynamic)
 
@@ -122,6 +128,8 @@ test('can use customValue from session meta', async ({ sessionMeta }) => {
   // ...use customValue in API calls or URLs...
 });
 ```
+
+---
 
 ## Do I need to change fixtures?
 

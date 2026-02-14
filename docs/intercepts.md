@@ -2,7 +2,11 @@
 
 ← [Back to main documentation](../README.md)
 
+## Overview
+
 Centralized configuration for HTTP intercept URL patterns used across tests.
+
+---
 
 ## Configuration
 
@@ -27,6 +31,8 @@ Naming conventions:
 - **`UPPER_SNAKE_CASE keys`** – e.g. `USER_LOGIN`, `API_SEARCH` for readability and reuse
 - **`Group patterns logically`** – by feature/domain, and reflect URL structure.  \
   e.g.: `PRIVATE_USERS_USERID_PROFILE: '*/private/users/*/profile'`
+
+---
 
 ## Usage
 

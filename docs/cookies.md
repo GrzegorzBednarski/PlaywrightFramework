@@ -2,7 +2,11 @@
 
 ← [Back to main documentation](../README.md)
 
+## Overview
+
 Central place for configuring predefined cookies and cookie scenarios used in tests.
+
+---
 
 ## Cookies configuration
 
@@ -50,6 +54,8 @@ If your environments use different hostnames, you can derive the cookie domain f
 ```
 
 This allows the same cookie definitions to work across environments (dev, qa, stg) as long as `BASE_URL` is set correctly in your `.env` files.
+
+---
 
 ## Cookie scenarios configuration
 

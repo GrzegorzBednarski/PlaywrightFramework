@@ -2,7 +2,11 @@
 
 ← [Back to main documentation](../README.md)
 
+## Overview
+
 Utility for asserting that a page loads without unexpected JavaScript console errors.
+
+---
 
 ## Configuration
 
@@ -40,6 +44,8 @@ Function signature:
   - **`page`** – Playwright `Page` instance
   - **`url`** – absolute URL to navigate to
   - **`options.ignoredPatternsOverride`** (optional) – `Record<string, boolean>` merged with config patterns
+
+---
 
 ## Usage
 

@@ -1,5 +1,5 @@
 import type { Browser, BrowserContext, Page } from '@playwright/test';
-import { getSession, type UserSessionData } from './sessionManager';
+import { getSession, type UserSessionData } from './index';
 
 export type SessionFixtureOptions = {
   /**
@@ -106,3 +106,6 @@ export function createSessionFixtures(opts?: { defaultSessionLoginKey?: string }
     },
   };
 }
+
+// Mark export as used when loaded/spread dynamically.
+void createSessionFixtures;

@@ -2,7 +2,11 @@
 
 ← [Back to main documentation](../README.md)
 
+## Overview
+
 Utility for running automated accessibility scans with project-wide configuration and reporting, built on top of **[axe-core](https://www.deque.com/axe/core-documentation/)**.
+
+---
 
 ## Configuration
 
@@ -20,18 +24,37 @@ Configuration for accessibility testing is defined in **`config/accessibilityCon
 
 ```ts
 const accessibilityConfig = {
+  // ---------------------------------------------------------------------------
+  // axe-core tags
+  // ---------------------------------------------------------------------------
+
   tags: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa'],
+
+  // ---------------------------------------------------------------------------
+  // Rule exceptions
+  // ---------------------------------------------------------------------------
+
   ignoredRules: {
     'color-contrast': false,
   },
+
+  // ---------------------------------------------------------------------------
+  // Global exclusions
+  // ---------------------------------------------------------------------------
+
   excludeElements: [
     // CSS selectors to exclude from accessibility scans
     'input',
     'iframe',
     '[data-testid="cookie-banner"]',
     '.advertisement',
-    '#chat-widget'
+    '#chat-widget',
   ],
+
+  // ---------------------------------------------------------------------------
+  // Console report
+  // ---------------------------------------------------------------------------
+
   reportConsole: {
     impact: true,
     id: true,
@@ -40,10 +63,16 @@ const accessibilityConfig = {
     helpUrl: false,
     nodes: true,
   },
+
+  // ---------------------------------------------------------------------------
+  // Output
+  // ---------------------------------------------------------------------------
+
   reportsOutputFolder: `${buildDir}/accessibility-reports`,
 };
 ```
 
+---
 
 ## Usage
 
@@ -77,6 +106,8 @@ test('Careers page accessibility', async ({ page }) => {
   });
 });
 ```
+
+---
 
 ## Reports
 

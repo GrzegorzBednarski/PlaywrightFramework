@@ -14,6 +14,8 @@ Keep selectors in your POM and call them from `loginFlow`.
 
 For how to select which login config is used (`sessionLoginKey`), see: **[Sessions](./sessions.md)**.
 
+---
+
 ## UI login via POM helper (recommended)
 
 Prefer calling a POM method (LoginPage/LoginComponent), so your loginFlow stays readable and reusable.
@@ -68,6 +70,8 @@ export const sessionLoginConfig = {
 };
 ```
 
+---
+
 ## UI login without POM (not recommended)
 
 You can log in directly in `loginFlow` without using POM.
@@ -96,6 +100,8 @@ export const sessionLoginConfig = {
   // ...other code...
 };
 ```
+
+---
 
 ## Basic Auth
 

@@ -6,6 +6,8 @@
 
 Utility for running visual regression tests with [Percy](https://percy.io) on top of Playwright snapshots.
 
+---
+
 ## Configuration
 
 Percy is configured via a `.percy.yml` file in the project root. This file defines default viewport widths and global settings used for all snapshots.
@@ -71,6 +73,8 @@ await percySnapshot(page, 'Product page - desktop only', {
 });
 ```
 
+---
+
 ## Usage
 
 ### Basic usage
@@ -110,6 +114,8 @@ Visual tests are located in the `tests/visual/` directory.
    ```bash
    npx percy exec -- npx playwright test tests/visual
    ```
+
+---
 
 ## Advanced usage
 
@@ -189,6 +195,8 @@ await percySnapshot(page, 'Page with ignored elements', {
   `,
 });
 ```
+
+---
 
 ## Viewing Results
 

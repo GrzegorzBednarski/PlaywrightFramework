@@ -7,6 +7,8 @@
 
 Pages are concrete page objects that extend your `BasePage` (or `AppPage`).
 
+---
+
 ## Configuration
 
 Pages typically extend `BasePage` (or `AppPage` if the page is behind a login wall).
@@ -170,6 +172,8 @@ Examples of patterns:
   // Use it in a test as:
   // await userOrderDetailsPage.gotoDynamicPage({ userId: 10, orderId: 'ord_500A' });
   ```
+
+---
 
 ## Usage
 

@@ -2,11 +2,17 @@
 
 ← [Back to main documentation](../README.md)
 
+## Overview
+
 Husky is used to manage Git hooks and automate tasks like linting and formatting before commits. It helps enforce code quality by running tools such as **[lint-staged](./lintStaged.md)** automatically.
+
+---
 
 ## Setup
 
 After cloning the repository and running `npm install` or `npm ci`, Husky will be set up automatically (thanks to the `prepare` script in `package.json`). No additional manual steps are required for contributors.
+
+---
 
 ## Configuration
 
@@ -40,6 +46,8 @@ done
 
 This configuration runs **[lint-staged](./lintStaged.md)** in each specified package directory before every commit, ensuring code quality across all parts of the monorepo.
 
+---
+
 ## Customization
 
 You can add more hooks or customize existing ones by editing or adding scripts in the `.husky/` directory.
@@ -48,6 +56,8 @@ You can add more hooks or customize existing ones by editing or adding scripts i
 - **`pre-commit`** - runs before commit (currently configured with lint-staged)
 - **`pre-push`** - runs before push
 - **`commit-msg`** - validates commit messages
+
+---
 
 ## Integration with Lint-staged
 

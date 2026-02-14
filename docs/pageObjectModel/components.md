@@ -7,6 +7,8 @@
 
 Components model reusable UI fragments (header, footer, login container, cookie banner, etc.).
 
+---
+
 ## Configuration
 Create a component file in `pageObjects/${domain}/components/${name}.component.ts` e.g. `cookiePrompt.component.ts`
 
@@ -81,6 +83,8 @@ export abstract class BasePage {
   }
 }
 ```
+
+---
 
 ## Usage
 

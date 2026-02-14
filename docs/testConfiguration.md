@@ -6,6 +6,8 @@
 
 Examples of configuring Playwright tests directly in test files (execution mode, per-test timeouts, retries).
 
+---
+
 ## Execution modes
 
 Run tests in a describe block **serially** instead of in parallel:
@@ -32,6 +34,8 @@ Restore the default **parallel** mode explicitly if needed:
 test.describe.configure({ mode: 'parallel' });
 ```
 
+---
+
 ## Per-test timeouts
 
 Set a custom timeout for a single test:
@@ -55,6 +59,8 @@ test.describe.configure({
 });
 ```
 
+---
+
 ## Retries in code
 
 Configure retries for a group of tests in code:
@@ -77,6 +83,8 @@ Retries can be combined with environment-based configuration (for example using 
 
 For global timeouts and retries applied to the whole project, see **[Playwright configuration](./playwrightConfiguration.md)**.
 
+---
+
 ## Focusing tests
 
 Run only a specific test or describe block while developing or debugging:
@@ -94,6 +102,8 @@ test.describe.only('focused suite', () => {
   });
 });
 ```
+
+---
 
 ## Skipping tests
 
@@ -120,6 +130,8 @@ test('feature only for local runs', async ({ page }) => {
 test.fixme(true, 'Known issue to be fixed later');
 ```
 
+---
+
 ## Test steps
 
 Group parts of a test into named steps to improve readability and reporting:
@@ -137,6 +149,8 @@ test('test with steps', async ({ page }) => {
   });
 });
 ```
+
+---
 
 ## Using environment variables in tests
 

@@ -2,7 +2,11 @@
 
 ← [Back to main documentation](../README.md)
 
+## Overview
+
 Utility for converting Markdown files to PDF documents (used e.g. for accessibility reports).
+
+---
 
 ## Configuration
 
@@ -23,6 +27,8 @@ Utility for converting Markdown files to PDF documents (used e.g. for accessibil
 - **`headerTemplate`** *(optional)* – HTML template for the header (requires `displayHeaderFooter`)
 - **`footerTemplate`** *(optional)* – HTML template for the footer (requires `displayHeaderFooter`)
 
+---
+
 ## Usage
 
 ```typescript
@@ -34,6 +40,8 @@ const pdfPath = await convertMarkdownToPdf('./docs/example.md');
 // Markdown accessibility report -> PDF (preconfigured styling)
 const accessibilityPdfPath = await convertAccessibilityReportToPdf('./build/reports/example.md');
 ```
+
+---
 
 ## Advanced usage
 

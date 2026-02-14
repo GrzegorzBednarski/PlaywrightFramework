@@ -6,6 +6,8 @@
 
 The `replaceText` utility helps when you need to quickly substitute text in many dynamic UI elements during tests (e.g., changing prices, dates, labels). It targets textContent directly, making it handy for spans/divs and similar nodes.
 
+---
+
 ## Usage
 
 ```typescript
@@ -22,6 +24,8 @@ test('Replace text in elements', async ({ page }) => {
   await replaceText(page, titleLocator, 'Updated Title');
 });
 ```
+
+---
 
 ## Parameters
 

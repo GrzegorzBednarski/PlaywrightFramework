@@ -2,7 +2,11 @@
 
 ← [Back to main documentation](../README.md)
 
+## Overview
+
 ESLint is used for static code analysis and enforcing code quality. It helps catch potential bugs, enforce coding standards, and maintain consistent code style across the project.
+
+---
 
 ## Configuration
 
@@ -89,6 +93,8 @@ module.exports = [
 - **`eslint-plugin-prettier`** - Integration with **[Prettier](./prettier.md)**
 - **`eslint-plugin-unused-imports`** - Detects and removes unused imports/vars
 
+---
+
 ## Usage
 
 To manually run ESLint and automatically fix issues, use:
@@ -96,6 +102,8 @@ To manually run ESLint and automatically fix issues, use:
 ```sh
 npm run test:eslint
 ```
+
+---
 
 ## Integration with other tools
 

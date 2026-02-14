@@ -2,7 +2,11 @@
 
 ← [Back to main documentation](../README.md)
 
+## Overview
+
 Helper for applying predefined cookie scenarios from `COOKIE_SCENARIOS` – a scenario injects a named set of cookies in one call.
+
+---
 
 ## Configuration
 
@@ -14,6 +18,8 @@ Function signature:
 - **`setCookiesScenario(page, scenarioKey)`**
   - **`page`** – Playwright `Page`
   - **`scenarioKey`** – key from `COOKIE_SCENARIOS` (e.g. `'privacyMinimal'`)
+
+---
 
 ## Usage
 

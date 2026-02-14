@@ -7,6 +7,8 @@
 
 Common patterns for larger projects.
 
+---
+
 ## Automatic cookie handling in `goto()`
 
 Sometimes a cookie prompt blocks the page right after navigation.
@@ -63,6 +65,8 @@ await somePage.goto();
 await somePage.goto({ autoAcceptCookies: false });
 ```
 
+---
+
 ## Automatic login in `goto()`
 
 For many projects it is convenient to say: “go to page, and if userKey is provided, ensure we are logged in first”.
@@ -118,6 +122,8 @@ await somePage.goto();
 await somePage.goto({ userKey: 'ADMIN' });
 ```
 
+---
+
 ## Automatic cookie injection in `goto()`
 
 If your application uses a cookie to hide a banner (or to set a state), you can inject it during `goto()`.
@@ -164,6 +170,8 @@ await somePage.goto();
 await somePage.goto({ injectCookies: false });
 ```
 
+---
+
 ## Choosing a different login flow (sessionLoginKey)
 
 When you maintain multiple `sessionLogin.*.ts` configs (different domains or different login mechanics),
@@ -200,6 +208,51 @@ test('uses SECOND login flow for session creation', async ({ homePage }) => {
   await homePage.goto();
 });
 ```
+
+---
+
+## Choosing a different API config (apiConfigKey)
+
+When you maintain multiple `apiConfig.*.ts` configs (different domains, auth schemes, or headers),
+you can choose which one is used by the `api` fixture.
+
+### Configuration
+
+**Files:**
+- `config/apiConfig.default.ts` (default flow)
+- `config/apiConfig.dummyjson.guest.ts` (example: public API)
+- `config/apiConfig.dummyjson.authorized.ts` (example: auth from session meta)
+
+Your domain fixture can set the default config:
+
+**File:** `pageObjects/${domain}/pageFixture.ts`
+
+```ts
+import { test as baseTest } from '../../utils/baseTest';
+
+export const test = baseTest.extend<Fixtures>({
+  apiConfigKey: 'dummyjson.guest',
+
+  // ...pages...
+});
+```
+
+### Usage
+
+Override per describe/test file (rare case):
+
+```ts
+import { test, apiProfile } from '../../pageObjects/${domain}/pageFixture';
+
+apiProfile({ apiConfigKey: 'dummyjson.authorized' });
+
+test('uses AUTHORIZED api config', async ({ api }) => {
+  const res = await api.get('/auth/me');
+  await res.expectStatus(200);
+});
+```
+
+---
 
 ## Basic Auth automation
 
@@ -250,6 +303,8 @@ export const sessionLoginConfig = {
 
 > Tip: if the whole domain is behind one Basic Auth, prefer the global fixture approach.
 
+---
+
 ## Multiple fixtures / multiple domains
 
 When you test multiple domains, keep separate folders under `pageObjects/`.
@@ -296,5 +351,24 @@ import { test, expect } from '../../pageObjects/products/pageFixture';
 test('products test', async ({ singleProductPage, page }) => {
   await singleProductPage.gotoDynamicPage({ Id: '2' });
   await expect(page).toHaveURL(singleProductPage.getDynamicPageUrl({ Id: '2' }));
+});
+```
+
+---
+
+## Writing tests without a domain POM (baseTest)
+
+If you don't have (or don't want) a domain POM yet, you can still write tests using `baseTest` directly.
+
+See: **[baseTest](../baseTest.md)**.
+
+### Usage
+
+```ts
+import { test } from '../../utils/baseTest';
+
+test('example without POM', async ({ api }) => {
+  const res = await api.get('/products/1');
+  await res.expectStatus(200);
 });
 ```

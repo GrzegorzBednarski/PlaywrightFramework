@@ -2,7 +2,11 @@
 
 ← [Back to main documentation](../README.md)
 
+## Overview
+
 Utility for injecting predefined cookies into Playwright tests.
+
+---
 
 ## Configuration
 
@@ -14,6 +18,8 @@ Function signature:
 - **`setCookies(page, cookieKeys)`**
   - **`page`** – Playwright `Page`
   - **`cookieKeys`** – array of keys from `COOKIES` (e.g. `['COOKIE_BANNER_ACCEPTED']`)
+
+---
 
 ## Usage
 

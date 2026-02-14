@@ -2,7 +2,11 @@
 
 ← [Back to main documentation](../README.md)
 
+## Overview
+
 Utility for waiting on specific HTTP requests and returning the matched `Request`.
+
+---
 
 ## Configuration
 
@@ -17,6 +21,8 @@ Function signature:
   - **`options`** – optional configuration object
     - **`options.timeout`** – timeout in milliseconds passed to `page.waitForRequest`
     - **Default timeout** – if `options.timeout` is not provided, Playwright uses its default request timeout from your Playwright configuration (the same default used by `page.waitForRequest`)
+
+---
 
 ## Usage
 

@@ -2,7 +2,11 @@
 
 ← [Back to main documentation](../README.md)
 
+## Overview
+
 Prettier is a code formatter tool that ensures consistent code formatting across the project.
+
+---
 
 ## Configuration
 
@@ -35,6 +39,8 @@ Prettier configuration is located in the `.prettierrc` file. You can adjust thes
 - **`tabWidth`**: Sets indentation to 2 spaces
 - **`trailingComma`**: Adds trailing commas where valid in ES5 (objects, arrays)
 - **`useTabs`**: Uses spaces for indentation instead of tabs
+
+---
 
 ## Usage
 

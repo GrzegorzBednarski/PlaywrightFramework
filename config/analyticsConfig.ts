@@ -1,5 +1,14 @@
 export const analyticsConfig = {
+  // ---------------------------------------------------------------------------
+  // Debug logging
+  // ---------------------------------------------------------------------------
+
   debugAnalytics: 'ifFail' as 'always' | 'ifFail' | 'never',
+
+  // ---------------------------------------------------------------------------
+  // Debug filtering
+  // ---------------------------------------------------------------------------
+
   // Filter for logging analytics events in debug output.
   // Can be:
   // - ['']              -> no filtering, all events are logged

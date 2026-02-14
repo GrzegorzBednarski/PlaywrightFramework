@@ -2,7 +2,11 @@
 
 ← [Back to main documentation](../README.md)
 
+## Overview
+
 This project uses TypeScript for writing tests and configuration files. TypeScript provides static typing and improved code quality.
+
+---
 
 ## Configuration
 
@@ -42,6 +46,8 @@ TypeScript configuration is located in the `tsconfig.json` file. You can adjust 
 - Keep `exclude` minimal and focused on generated or external content. If you accidentally exclude source folders (e.g., `tests/`), TypeScript won’t type-check those files.
 - Prefer excluding top-level output dirs rather than broad patterns that may hide real source files.
 - If you use a separate tsconfig for tooling (e.g., codegen), you can tailor `exclude` per tsconfig.
+
+---
 
 ## Usage
 

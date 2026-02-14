@@ -6,6 +6,8 @@
 
 Custom CLI wrapper around Playwright that handles environment selection, loading `.env` files, and running different groups of tests or helper commands from a single entrypoint.
 
+---
+
 ## Configuration
 
 Runner configuration lives in `config/testRunnerConfig.ts` and related helper files under `utils/testRunner/`.
@@ -14,22 +16,39 @@ A simplified version of `testRunnerConfig` looks like this:
 
 ```ts
 export const testRunnerConfig = {
+  // ---------------------------------------------------------------------------
+  // Test types (maps "type" to folders)
+  // ---------------------------------------------------------------------------
+
   testTypes: {
+    api: ['tests/api'],
     accessibility: ['tests/accessibility'],
     analytics: ['tests/analytics'],
     functional: ['tests/functional'],
     visual: ['tests/visual'],
   },
 
+  // ---------------------------------------------------------------------------
+  // Test groups (named sets of test types)
+  // ---------------------------------------------------------------------------
+
   testGroups: {
     all: ['accessibility', 'analytics', 'functional'],
     critical: ['analytics', 'functional'],
   },
 
+  // ---------------------------------------------------------------------------
+  // Grep shortcuts
+  // ---------------------------------------------------------------------------
+
   grepGroups: {
     sanity: '[sanity]',
     smoke: '[smoke]',
   },
+
+  // ---------------------------------------------------------------------------
+  // Global excludes
+  // ---------------------------------------------------------------------------
 
   grepExclude: ['[deprecated]', '[prod]'],
 };
@@ -43,6 +62,8 @@ Key fields:
 - **`grepExclude`** – patterns that should be excluded from runs.
 
 The runner uses these definitions to map CLI arguments to Playwright options and decide which tests to run.
+
+---
 
 ## Usage
 

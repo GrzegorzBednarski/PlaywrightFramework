@@ -32,6 +32,7 @@ If you want to run tests in this project, start with these three steps:
 1. **[Create environment files](./docs/environments.md)** – define per-environment settings in `.env.*` files under the `env/` directory.
 2. **[Configure test types and groups](./docs/testRunner.md#configuration)** – decide which tests belong to which logical groups.
 3. **[Run tests](./docs/testRunner.md#running-tests)** – execute tests for a given environment and test type/group using the custom runner.
+4. **[baseTest](./docs/baseTest.md)** – shared test entrypoint (sessions + API). Helpful when writing tests without a domain POM.
 
 ## 📁 Framework Structure
 
@@ -56,6 +57,8 @@ PlaywrightFramework/
 ├── 📁 fixtures/                   # JSON fixtures used for mocking HTTP responses and cookies
 │   ├── 📁 analytics/              # Analytics fixtures (used by checkAnalyticsEvent)
 │   │   └── ... (fixture files)
+│   ├── 📁 api/                    # API fixtures (request bodies, expected JSON)
+│   │   └── ... (fixture files)
 │   ├── 📁 cookies/                # Cookie fixtures in JSON format used by checkCookies (fixtures/cookies/*.json)
 │   │   └── ... (fixture files)
 │   ├── 📁 intercepts/             # Fixtures for HTTP intercepts (used by replaceIntercept)
@@ -75,6 +78,8 @@ PlaywrightFramework/
 │   ├── 📁 accessibility/          # Accessibility tests
 │   │   └── ... (spec files)
 │   ├── 📁 analytics/              # Analytics tests
+│   │   └── ... (spec files)
+│   ├── 📁 api/                    # API tests
 │   │   └── ... (spec files)
 │   ├── 📁 functional/             # Functional/e2e tests
 │   │   └── ... (spec files)
@@ -132,6 +137,17 @@ PlaywrightFramework/
 
 ## Usage
 
+### 🔁 API requests (API tool)
+- **[API](./docs/api/api.md)** - Quick start + how to configure the API tool.
+  - [Configuration](./docs/api/api.md#configuration) | [Minimal usage](./docs/api/api.md#minimal-usage)
+- **[Fixtures](./docs/api/apiFixtures.md)** - How to use JSON fixtures + placeholders.
+  - [Body fixtures](./docs/api/apiFixtures.md#body-fixtures) | [Placeholder replacements](./docs/api/apiFixtures.md#placeholder-replacements) | [Expected-response fixtures](./docs/api/apiFixtures.md#expected-response-fixtures)
+- **[Sending requests](./docs/api/apiRequests.md)** - How to send requests (methods, headers, body).
+  - [Supported methods](./docs/api/apiRequests.md#supported-methods) | [Request options](./docs/api/apiRequests.md#request-options-common) | [Fixtures + replacements](./docs/api/apiRequests.md#fixtures--replacements)
+- **[Response assertions](./docs/api/apiAssertions.md)** - Ready-to-use assertions for API responses.
+  - [Status](./docs/api/apiAssertions.md#status) | [JSON keys](./docs/api/apiAssertions.md#json-keys) | [JSON matches](./docs/api/apiAssertions.md#json-matches--not-matches) | [Arrays](./docs/api/apiAssertions.md#arrays)
+  - [Body contains](./docs/api/apiAssertions.md#body-contains--not-contains) | [JSON fixtures](./docs/api/apiAssertions.md#json-fixture-assertions)
+
 ### 🔐 Authentication & Sessions
 
 - **[Sessions](./docs/sessionManagement/sessions.md)** - Reusable authenticated browser state stored on disk.
@@ -162,6 +178,7 @@ PlaywrightFramework/
 
 ### 🧩 Page Object Model
 - **[Page Object Model](./docs/pageObjectModel/index.md)** - Entry point (overview, quick start, and structure)
+  - **[baseTest](./docs/baseTest.md)** - shared test entrypoint (sessions + API)
   - **[Base pages](./docs/pageObjectModel/basePage.md)** - shared helpers and navigation
     - [Configuration](./docs/pageObjectModel/basePage.md#configuration) | [Usage](./docs/pageObjectModel/basePage.md#usage)
   - **[AppPage](./docs/pageObjectModel/appPage.md)** - shared logged-in layout layer (optional)
@@ -175,7 +192,8 @@ PlaywrightFramework/
     - [Configuration](./docs/pageObjectModel/fixtures.md#configuration) | [Usage](./docs/pageObjectModel/fixtures.md#usage)
   - **[Advanced patterns](./docs/pageObjectModel/advancedPatterns.md)** - larger-project patterns and automation
     - [Auto cookie handling](./docs/pageObjectModel/advancedPatterns.md#automatic-cookie-handling-in-goto) | [Auto login](./docs/pageObjectModel/advancedPatterns.md#automatic-login-in-goto) | [Cookie injection](./docs/pageObjectModel/advancedPatterns.md#automatic-cookie-injection-in-goto)
-    - [Different login flow](./docs/pageObjectModel/advancedPatterns.md#choosing-a-different-login-flow-sessionloginkey) | [Basic Auth automation](./docs/pageObjectModel/advancedPatterns.md#basic-auth-automation) | [Multiple fixtures/domains](./docs/pageObjectModel/advancedPatterns.md#multiple-fixtures--multiple-domains)
+    - [Different login flow](./docs/pageObjectModel/advancedPatterns.md#choosing-a-different-login-flow-sessionloginkey) | [Different API config](./docs/pageObjectModel/advancedPatterns.md#choosing-a-different-api-config-apiconfigkey) | [Basic Auth automation](./docs/pageObjectModel/advancedPatterns.md#basic-auth-automation) | [Multiple fixtures/domains](./docs/pageObjectModel/advancedPatterns.md#multiple-fixtures--multiple-domains)
+    - [No POM (baseTest)](./docs/pageObjectModel/advancedPatterns.md#writing-tests-without-a-domain-pom-basetest)
 
 ### 🧪 Testing Features
 - **[Accessibility](./docs/accessibility.md)** - Automated accessibility checks and audits

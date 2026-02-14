@@ -2,9 +2,13 @@
 
 ← [Back to main documentation](../README.md)
 
+## Overview
+
 This project uses multiple reporters to present and persist test results. They are configured in `playwright.config.ts` under the `reporter` section.
 
 Note: This page describes Playwright test result reporters (run-level status and outputs), not feature-specific reporters for domains like Accessibility or Performance.
+
+---
 
 ## Configuration
 
@@ -35,11 +39,15 @@ Notes:
 - Enable only the reporters you need to keep console output readable.
 - The `build` folder is cleaned before each run by `global-setup.ts` to ensure fresh artifacts.
 
+---
+
 ## Clean Reporter
 
 A custom reporter that cleans and formats console output to be more readable in CI and local runs. It reduces noise, aligns messages, and emphasizes failures.
 
 - Location: `./utils/cleanReporter.ts`
+
+---
 
 ## HTML Reporter
 
@@ -69,6 +77,8 @@ Script is configured in package.json:
 }
 ```
 
+---
+
 ## JSON Reporter
 
 Outputs a machine-readable JSON report with all test results and metadata.
@@ -76,12 +86,16 @@ Outputs a machine-readable JSON report with all test results and metadata.
 - Output file: `build/json/results.json`
 - Use cases: Custom processing, dashboards, or data pipelines.
 
+---
+
 ## JUnit Reporter
 
 Produces a JUnit-compatible XML file suitable for CI integrations (Jenkins, GitHub Actions, Azure DevOps, etc.).
 
 - Output file: `build/junit/results.xml`
 - Use cases: CI test summary, trend charts, gates.
+
+---
 
 ## Line Reporter
 
@@ -94,6 +108,8 @@ Example output:
 ✗ [EXAMPLE] tests/analytics/analytics.spec.ts:6:5 › [smoke] should track analytics event after accepting all cookies (15.9s)
 ✓ [EXAMPLE] tests/accessibility/accessibility.spec.ts:12:3 › [sanity] page has no serious violations (1.1s)
 ```
+
+---
 
 ## List Reporter
 

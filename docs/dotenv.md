@@ -10,6 +10,8 @@ It is used by the custom test runner to:
 - select the correct `.env` file based on the `ENV` value,
 - add or override selected `process.env` values used in `playwright.config.ts` and tests.
 
+---
+
 ## Configuration
 
 `config/dotenvConfig.ts` exposes a simple configuration object used by `initializeDotenv`:
@@ -31,6 +33,8 @@ See **[Environments](./environments.md)** for the structure of these files and a
 
 Playwright configuration defines default timeouts, retries and `baseURL` and can then be overridden by values from `process.env`.
 See **[Playwright configuration](./playwrightConfiguration.md)** for more information on how env values are used there.
+
+---
 
 ## Usage
 

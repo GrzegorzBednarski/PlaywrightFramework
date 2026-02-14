@@ -7,10 +7,14 @@
 
 Use HTTP Basic Authentication via the `useBasicAuth` helper.
 
+---
+
 ## Configuration
 
 Basic Auth credentials are read from `.env`.
 See: **[Environments](../environments.md#basic-auth-naming-convention)**.
+
+---
 
 ## Usage
 
@@ -33,6 +37,8 @@ import { useBasicAuth } from '../../utils/basicAuth';
 
 await useBasicAuth(page, 'ADMIN');
 ```
+
+---
 
 ## Advanced patterns
 

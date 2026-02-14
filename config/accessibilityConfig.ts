@@ -1,6 +1,10 @@
 import { buildDir } from '../../PlaywrightStarterKit/global-setup';
 
 const accessibilityConfig = {
+  // ---------------------------------------------------------------------------
+  // axe-core tags
+  // ---------------------------------------------------------------------------
+
   // WCAG / Section 508 tags used by axe-core
   tags: [
     'wcag2a',
@@ -13,11 +17,23 @@ const accessibilityConfig = {
     'best-practice',
   ],
 
+  // ---------------------------------------------------------------------------
+  // Rule exceptions
+  // ---------------------------------------------------------------------------
+
   ignoredRules: {
     'color-contrast': true, // Reported in [ABC-345] (temporary ignore until fix)
   },
 
+  // ---------------------------------------------------------------------------
+  // Global exclusions
+  // ---------------------------------------------------------------------------
+
   excludeElements: ['.cookie-banner'], // Optional global element exclusions
+
+  // ---------------------------------------------------------------------------
+  // Console report
+  // ---------------------------------------------------------------------------
 
   reportConsole: {
     impact: true,
@@ -27,6 +43,10 @@ const accessibilityConfig = {
     helpUrl: false,
     nodes: true,
   },
+
+  // ---------------------------------------------------------------------------
+  // Output
+  // ---------------------------------------------------------------------------
 
   reportsOutputFolder: `${buildDir}/accessibility-reports`,
 };

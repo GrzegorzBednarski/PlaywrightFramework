@@ -2,7 +2,11 @@
 
 ← [Back to main documentation](../README.md)
 
+## Overview
+
 Utility for intercepting HTTP requests and responding with data loaded from JSON fixtures.
+
+---
 
 ## Configuration
 
@@ -21,6 +25,8 @@ Function signature:
     - **`options.method`** – HTTP method to intercept (default: `GET`)
     - **`options.statusCode`** – HTTP status code to return (default: `200`)
     - **`options.replacements`** – placeholder–value pairs for dynamic string replacement inside the fixture
+
+---
 
 ## Fixture files
 
@@ -45,6 +51,8 @@ Example fixture in `fixtures/intercepts/userList.json`:
 ```
 
 Placeholders like `%TODAY_DATE%` can also be used if you want to combine fixtures with dynamic values (see examples below).
+
+---
 
 ## Usage
 

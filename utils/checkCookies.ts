@@ -35,17 +35,32 @@ export async function checkCookies(
 
     const formattedCookies = actualCookies.map(c => `- ${c.name}: ${JSON.stringify(c)}`).join('\n');
 
+    const logDebug = (lines: string[]) => {
+      if (!checkCookieConfig.debugCookies) return;
+
+      console.log(`[Cookies] ${stepLabel}`);
+      for (const line of lines) console.log(line);
+    };
+
+    const expectedBlock =
+      `===== [Cookies] Expected (from fixture ${fixtureName}) =====\n` +
+      `${JSON.stringify(expected, null, 2)}`;
+
+    const currentBlock =
+      `===== [Cookies] Current cookies =====\n` + (formattedCookies || '<no cookies>');
+
     if (!shouldExist) {
       if (actual) {
-        if (checkCookieConfig.debugCookies) {
-          console.log(
-            `${stepLabel}\n` +
-              `Expected pattern (from fixture ${fixtureName}): ${JSON.stringify(expected, null, 2)}\n` +
-              `Current cookies:\n${formattedCookies}\n` +
-              `Result: ❌ Cookie "${expected.name}" WAS FOUND but should NOT exist.\n` +
-              `Actual value: ${JSON.stringify(actual, null, 2)}`
-          );
-        }
+        logDebug([
+          expectedBlock,
+          currentBlock,
+          `===== [Cookies] Result =====\n❌ Cookie "${expected.name}" WAS FOUND but should NOT exist.\nActual value:\n${JSON.stringify(
+            actual,
+            null,
+            2
+          )}`,
+        ]);
+
         throw new Error(
           `❌ Cookie "${expected.name}" was found in browser context, but it should NOT exist.\n` +
             `Fixture: ${fixtureName}\n` +
@@ -53,26 +68,21 @@ export async function checkCookies(
         );
       }
 
-      if (checkCookieConfig.debugCookies) {
-        console.log(
-          `${stepLabel}\n` +
-            `Expected pattern (from fixture ${fixtureName}): ${JSON.stringify(expected, null, 2)}\n` +
-            `Current cookies:\n${formattedCookies}\n` +
-            `Result: ✅ Cookie "${expected.name}" is not present in browser context as expected.`
-        );
-      }
+      logDebug([
+        expectedBlock,
+        currentBlock,
+        `===== [Cookies] Result =====\n✅ Cookie "${expected.name}" is not present in browser context as expected.`,
+      ]);
       return;
     }
 
     if (!actual) {
-      if (checkCookieConfig.debugCookies) {
-        console.log(
-          `${stepLabel}\n` +
-            `Expected pattern (from fixture ${fixtureName}): ${JSON.stringify(expected, null, 2)}\n` +
-            `Current cookies:\n${formattedCookies}\n` +
-            `Result: ❌ Cookie "${expected.name}" NOT FOUND but it SHOULD exist.`
-        );
-      }
+      logDebug([
+        expectedBlock,
+        currentBlock,
+        `===== [Cookies] Result =====\n❌ Cookie "${expected.name}" NOT FOUND but it SHOULD exist.`,
+      ]);
+
       throw new Error(
         `❌ Cookie "${expected.name}" not found in browser context.\n` +
           `Fixture: ${fixtureName}\n` +
@@ -81,15 +91,15 @@ export async function checkCookies(
       );
     }
 
-    if (checkCookieConfig.debugCookies) {
-      console.log(
-        `${stepLabel}\n` +
-          `Expected pattern (from fixture ${fixtureName}): ${JSON.stringify(expected, null, 2)}\n` +
-          `Current cookies:\n${formattedCookies}\n` +
-          `Result: ✅ Cookie "${expected.name}" found.\n` +
-          `Actual value: ${JSON.stringify(actual, null, 2)}`
-      );
-    }
+    logDebug([
+      expectedBlock,
+      currentBlock,
+      `===== [Cookies] Result =====\n✅ Cookie "${expected.name}" found.\nActual value:\n${JSON.stringify(
+        actual,
+        null,
+        2
+      )}`,
+    ]);
 
     for (const key in expected) {
       expect(actual?.[key as keyof typeof actual]).toBe(expected[key]);
