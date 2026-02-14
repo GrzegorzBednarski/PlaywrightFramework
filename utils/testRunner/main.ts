@@ -3,6 +3,7 @@ import { validateEnvironmentExists } from './env';
 import { initializeDotenv } from '../dotenv';
 import { dotenvConfig } from '../../config/dotenvConfig';
 import { routeMode } from './route';
+import { installGlobalErrorHandlers } from './errorHandling';
 
 /**
  * Entry point for the custom test runner.
@@ -15,6 +16,8 @@ import { routeMode } from './route';
  * @param args Raw CLI arguments passed after the npm script (e.g. ['dev', 'functional']).
  */
 export function runTestRunner(args: string[]) {
+  installGlobalErrorHandlers();
+
   const { env, mode } = resolveArgs(...args);
 
   const isCommand = mode === 'eslint' || mode === 'prettier' || mode === 'report';

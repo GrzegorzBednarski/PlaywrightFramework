@@ -1,6 +1,6 @@
 import { test, apiProfile, session } from '../../utils/baseTest';
 
-test.describe('DummyJSON API (docs examples)', () => {
+test.describe('DummyJSON API', () => {
   apiProfile({ apiConfigKey: 'dummyjson.guest' });
 
   test('GET product (status + keys + matches)', async ({ api }) => {

@@ -1,4 +1,4 @@
-export const performanceTestConfig = {
+﻿export const performanceTestConfig = {
   /**
    * Hide sensitive data in reports.
    *

@@ -1,6 +1,7 @@
 import { execSync } from 'child_process';
 import * as path from 'path';
 import * as fs from 'fs';
+import { printStyledFailure } from './errorHandling';
 
 /**
  * Open the latest Playwright HTML report in the browser.
@@ -13,28 +14,25 @@ export function openReport() {
   const htmlReporter = pwConfig.reporter.find((r: any) => Array.isArray(r) && r[0] === 'html');
 
   if (!htmlReporter) {
-    console.error('==================================================================');
-    console.error('HTML reporter not found in Playwright config.');
-    console.error('==================================================================');
+    printStyledFailure('HTML reporter not found in Playwright config.');
+    process.exitCode = 1;
     return;
   }
 
   const outputFolder = htmlReporter[1]?.outputFolder;
   if (!outputFolder) {
-    console.error('==================================================================');
-    console.error('HTML reporter outputFolder not defined in Playwright config.');
-    console.error('==================================================================');
+    printStyledFailure('HTML reporter outputFolder not defined in Playwright config.');
+    process.exitCode = 1;
     return;
   }
 
   const reportPath = path.resolve(process.cwd(), outputFolder);
 
   if (!fs.existsSync(reportPath)) {
-    console.error('==================================================================');
-    console.error('No Playwright HTML report found.');
-    console.error('You need to run tests first to generate a report.');
-    console.error(`Expected location: ${outputFolder}`);
-    console.error('==================================================================');
+    printStyledFailure(
+      `No Playwright HTML report found. \nYou need to run tests first. \nExpected location: ${outputFolder}`
+    );
+    process.exitCode = 1;
     return;
   }
 
@@ -45,10 +43,9 @@ export function openReport() {
 
   try {
     execSync(`npx playwright show-report "${reportPath}"`, { stdio: 'inherit' });
-  } catch {
-    console.error('==================================================================');
-    console.error('Failed to open Playwright report.');
-    console.error('==================================================================');
+  } catch (e) {
+    printStyledFailure('Failed to open Playwright report.', e);
+    process.exitCode = 1;
   }
 }
 
@@ -68,10 +65,8 @@ export function runEslint() {
     console.log('\n==================================================================');
     console.log('ESLint finished with no issues.');
     console.log('==================================================================\n');
-  } catch {
-    console.error('==================================================================');
-    console.error('ESLint reported issues. See output above for details.');
-    console.error('==================================================================');
+  } catch (e) {
+    printStyledFailure('ESLint reported issues. \nSee output above for details.', e);
     process.exit(1);
   }
 }

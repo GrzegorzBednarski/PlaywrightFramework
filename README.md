@@ -40,7 +40,7 @@ This project is licensed under the MIT License. See [`LICENSE`](./LICENSE).
 
 Run the following commands in your console:
 ```sh
-npm install
+npm ci
 npx playwright install
 ```
 
@@ -81,7 +81,7 @@ PlaywrightFramework/
 │   ├── 📁 analytics/              # Analytics fixtures (used by checkAnalyticsEvent)
 │   │   └── ... (fixture files)
 │   ├── 📁 api/                    # API fixtures (request bodies, expected JSON)
-│   │   └── ... (fixture files)
+��   │   └── ... (fixture files)
 │   ├── 📁 cookies/                # Cookie fixtures in JSON format used by checkCookies (fixtures/cookies/*.json)
 │   │   └── ... (fixture files)
 │   ├── 📁 intercepts/             # Fixtures for HTTP intercepts (used by replaceIntercept)
@@ -97,6 +97,8 @@ PlaywrightFramework/
 │   │   ├── base.page.ts           # Base page with shared navigation and helpers
 │   │   └── pageFixture.ts         # Playwright fixtures exposing page objects
 │   └── ... (other domains)
+├── 📁 scripts/                    # JS entrypoints (e.g. runner bootstrapper)
+│   └── ... (script files)
 ├── 📁 tests/                      # Playwright test suites
 │   ├── 📁 accessibility/          # Accessibility tests
 │   │   └── ... (spec files)

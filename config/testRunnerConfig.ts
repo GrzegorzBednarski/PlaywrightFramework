@@ -4,9 +4,9 @@ export const testRunnerConfig = {
   // ---------------------------------------------------------------------------
 
   testTypes: {
-    api: ['tests/api'],
     accessibility: ['tests/accessibility'],
     analytics: ['tests/analytics'],
+    api: ['tests/api'],
     functional: ['tests/functional'],
     visual: ['tests/visual'],
   },
@@ -16,7 +16,7 @@ export const testRunnerConfig = {
   // ---------------------------------------------------------------------------
 
   testGroups: {
-    all: ['accessibility', 'analytics', 'functional'],
+    all: ['accessibility', 'analytics', 'api', 'functional'],
     critical: ['analytics', 'functional'],
   },
 

@@ -10,6 +10,7 @@ import {
 import { buildDir } from '../../playwright.config';
 import { performanceMonitoringConfig } from '../../config/performanceMonitoringConfig';
 import { runPerformanceMonitoringAll } from '../performance/performanceMonitoring';
+import { printStyledFailure } from './errorHandling';
 
 /**
  * Convert a device key (from performanceDevicesConfig) into a nicer label for console output.
@@ -244,7 +245,7 @@ export function runPerformanceMonitoring(env: string) {
       );
     })
     .catch(error => {
-      console.error('Error during performance monitoring:', error);
+      printStyledFailure('Performance monitoring failed.', error);
       process.exitCode = 1;
     });
 }

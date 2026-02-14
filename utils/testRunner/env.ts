@@ -1,6 +1,7 @@
 import * as fs from 'fs';
 import * as path from 'path';
 import { testRunnerConfig } from '../../config/testRunnerConfig';
+import { printStyledFailure } from './errorHandling';
 
 /**
  * Discover available environments based on files in the /env directory.
@@ -28,10 +29,8 @@ export function validateEnvironmentExists(env: string): boolean {
   const envFilePath = path.resolve(process.cwd(), 'env', `.env.${env}`);
 
   if (!fs.existsSync(envFilePath)) {
-    console.error(
-      `Environment "${env}" is not configured.\n` +
-        `Missing file: env/.env.${env}\n` +
-        'Make sure the environment file exists.'
+    printStyledFailure(
+      `Environment "${env}" is not configured. \nMissing file: env/.env.${env}. \nMake sure the environment file exists.`
     );
     return false;
   }

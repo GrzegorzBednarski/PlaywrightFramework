@@ -31,7 +31,7 @@
   },
   "scripts": {
     "prepare": "husky",
-    "test": "ts-node scripts/run.ts"
+    "test": "node scripts/run.cjs"
   },
   "lint-staged": {
     "**/*.{js,ts}": [

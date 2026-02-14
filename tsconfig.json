@@ -4,8 +4,9 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "strict": true,
-    "target": "ES2017"
+    "target": "ES2017",
+    "skipLibCheck": true
   },
   "include": ["**/*.ts"],
-  "exclude": ["**/*.js", "build", "node_modules"]
+  "exclude": ["**/*.js", "**/*.d.ts", "build", "node_modules"]
 }

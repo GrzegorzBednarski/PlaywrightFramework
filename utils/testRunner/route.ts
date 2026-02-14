@@ -8,6 +8,7 @@ import {
 import { openReport, runEslint, runPrettier } from './commands';
 import { testRunnerConfig } from '../../config/testRunnerConfig';
 import { runPerformanceMonitoring, runPerformanceTest } from './performance';
+import { printStyledFailure } from './errorHandling';
 
 /**
  * Route the resolved mode to the appropriate handler.
@@ -63,5 +64,6 @@ export function routeMode(env: string, mode: string) {
     }
   }
 
-  console.error(`Unknown mode: ${mode}`);
+  printStyledFailure(`Unknown mode: ${mode}`);
+  process.exitCode = 1;
 }

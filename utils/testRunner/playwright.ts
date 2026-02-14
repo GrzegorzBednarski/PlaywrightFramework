@@ -2,26 +2,7 @@ import * as fs from 'fs';
 import * as path from 'path';
 import { spawnSync } from 'child_process';
 import { testRunnerConfig } from '../../config/testRunnerConfig';
-
-const BUILD_DIR = 'build';
-const ERROR_LOG_RELATIVE_PATH = `${BUILD_DIR}\\error.log`;
-const ANSI_ESCAPE_REGEX = /\u001b\[[0-9;]*[A-Za-z]/g;
-
-/**
- * Ensures the build directory exists and returns its absolute path.
- */
-function ensureBuildDir(): string {
-  const dir = path.resolve(process.cwd(), BUILD_DIR);
-  fs.mkdirSync(dir, { recursive: true });
-  return dir;
-}
-
-/**
- * Strips ANSI color/control codes from Playwright output.
- */
-function stripAnsi(text: string): string {
-  return text.replace(ANSI_ESCAPE_REGEX, '').trim();
-}
+import { printStyledFailure, writeErrorLog } from './errorHandling';
 
 /**
  * Runs a shell command and exits the process if it fails.
@@ -39,11 +20,8 @@ function runCommandOrExit(command: string, failureTitle: string) {
   });
 
   /** Writes best-effort diagnostics to build/error.log (used for non-zero exit codes). */
-  const writeErrorLog = () => {
+  const writePlaywrightDiagErrorLog = () => {
     try {
-      const logDir = ensureBuildDir();
-      const logPath = path.join(logDir, 'error.log');
-
       const diagCommand = `${command} --reporter=line --workers=1`;
       const diag = spawnSync(diagCommand, {
         shell: true,
@@ -57,38 +35,27 @@ function runCommandOrExit(command: string, failureTitle: string) {
       }
       if (!bestErrorText) bestErrorText = failureTitle;
 
-      bestErrorText = stripAnsi(bestErrorText);
-
-      const body = `${bestErrorText}\n`;
-      fs.writeFileSync(logPath, body, 'utf8');
-      console.error(`More details saved to: ${ERROR_LOG_RELATIVE_PATH}\n`);
+      writeErrorLog(bestErrorText);
     } catch (e) {
-      console.error('Failed to write error.log');
-      console.error(e);
+      printStyledFailure('Failed to write build/error.log.', e);
     }
   };
 
   if (res.status !== null && res.status !== 0) {
-    console.error('==================================================================');
-    console.error(failureTitle);
-    console.error('==================================================================');
-    writeErrorLog();
+    printStyledFailure(failureTitle);
+    writePlaywrightDiagErrorLog();
     process.exit(res.status);
   }
 
   if (res.status === null && res.signal) {
-    console.error('==================================================================');
-    console.error(failureTitle);
-    console.error('==================================================================');
-    writeErrorLog();
+    printStyledFailure(failureTitle);
+    writePlaywrightDiagErrorLog();
     process.exit(1);
   }
 
   if (res.error) {
-    console.error('==================================================================');
-    console.error(failureTitle);
-    console.error('==================================================================');
-    writeErrorLog();
+    printStyledFailure(failureTitle, res.error);
+    writePlaywrightDiagErrorLog();
     process.exit(1);
   }
 }
@@ -119,7 +86,7 @@ function buildGrepExcludeRegex(): string | null {
     return null;
   }
 
-  const escaped = exclude.map(e => escapeRegex(e));
+  const escaped = exclude.map((e: string) => escapeRegex(e));
   return `(${escaped.join('|')})`;
 }
 
@@ -135,9 +102,7 @@ export function runPlaywrightTests(env: string, testType: string) {
     | undefined;
 
   if (!folders || folders.length === 0) {
-    console.error('==================================================================');
-    console.error(`No test folders configured for testType "${testType}".`);
-    console.error('==================================================================');
+    printStyledFailure(`No test folders configured for testType "${testType}".`);
     process.exit(1);
   }
 
@@ -172,9 +137,7 @@ export function runTestGroup(env: string, group: string) {
   ] as string[] | undefined;
 
   if (!testTypes || testTypes.length === 0) {
-    console.error('==================================================================');
-    console.error(`Test group "${group}" is not defined or empty.`);
-    console.error('==================================================================');
+    printStyledFailure(`Test group "${group}" is not defined or empty.`);
     process.exit(1);
   }
 
@@ -186,9 +149,7 @@ export function runTestGroup(env: string, group: string) {
       | undefined;
 
     if (!folders) {
-      console.error('==================================================================');
-      console.error(`Test type "${type}" in group "${group}" is not defined.`);
-      console.error('==================================================================');
+      printStyledFailure(`Test type "${type}" in group "${group}" is not defined.`);
       process.exit(1);
     }
 
@@ -198,9 +159,7 @@ export function runTestGroup(env: string, group: string) {
   allFolders = excludeVisualFolders(allFolders);
 
   if (allFolders.length === 0) {
-    console.error('==================================================================');
-    console.error(`No valid folders found for test group "${group}".`);
-    console.error('==================================================================');
+    printStyledFailure(`No valid folders found for test group "${group}".`);
     process.exit(1);
   }
 
@@ -234,9 +193,7 @@ export function runGrep(env: string, grepMode: string) {
   ] as string | undefined;
 
   if (!rawRegex) {
-    console.error('==================================================================');
-    console.error(`Grep group "${grepKey}" is not defined in testRunnerConfig.`);
-    console.error('==================================================================');
+    printStyledFailure(`Grep group "${grepKey}" is not defined in testRunnerConfig.`);
     process.exit(1);
   }
 
@@ -257,9 +214,7 @@ export function runGrep(env: string, grepMode: string) {
   allFolders = excludeVisualFolders(allFolders);
 
   if (allFolders.length === 0) {
-    console.error('==================================================================');
-    console.error('No valid folders found for grep mode.');
-    console.error('==================================================================');
+    printStyledFailure('No valid folders found for grep mode.');
     process.exit(1);
   }
 
@@ -292,9 +247,7 @@ export function runVisualTests(env: string) {
     | undefined;
 
   if (!folders || folders.length === 0) {
-    console.error('==================================================================');
-    console.error('No test folders configured for visual tests.');
-    console.error('==================================================================');
+    printStyledFailure('No test folders configured for visual tests.');
     process.exit(1);
   }
 
@@ -303,8 +256,8 @@ export function runVisualTests(env: string) {
   let fileContent = '';
   try {
     fileContent = fs.readFileSync(envFile, 'utf8');
-  } catch {
-    console.error(`Failed to read environment file: ${envFile}`);
+  } catch (e) {
+    printStyledFailure(`Failed to read environment file: ${envFile}`, e);
     process.exit(1);
   }
 
@@ -316,11 +269,9 @@ export function runVisualTests(env: string) {
   if (!branchInEnvFile) missingInEnvFile.push('PERCY_BRANCH');
 
   if (missingInEnvFile.length > 0) {
-    console.error('==================================================================');
-    console.error(`Missing Percy configuration in env/.env.${env}`);
-    console.error('The following variables are missing:');
-    missingInEnvFile.forEach(v => console.error(`  - ${v}`));
-    console.error('==================================================================');
+    printStyledFailure(
+      `Missing Percy configuration in env/.env.${env}. Missing: ${missingInEnvFile.join(', ')}`
+    );
     process.exit(1);
   }
 

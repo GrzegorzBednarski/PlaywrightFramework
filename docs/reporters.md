@@ -61,21 +61,10 @@ Generates an interactive HTML report with detailed test results, traces, and art
 To open the HTML report after a test run:
 
 ```sh
-npm run test:report
+npm run test report
 ```
 
-Script is configured in package.json:
-
-```sh
-// package.json (scripts)
-{
-  // ...existing fields...
-  "scripts": {
-    // ...existing scripts...
-    "test:report": "npx playwright show-report build/html-report"
-  }
-}
-```
+This project uses the custom test runner to open the report (it calls `npx playwright show-report build/html-report`).
 
 ---
 
