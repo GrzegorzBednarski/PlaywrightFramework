@@ -28,6 +28,9 @@ export const testRunnerConfig = {
   grepGroups: {
     sanity: '[sanity]',
     smoke: '[smoke]',
+    security: '[security]',
+    csp: '[csp]',
+    securityheaders: '[securityHeaders]',
   },
 
   // ---------------------------------------------------------------------------

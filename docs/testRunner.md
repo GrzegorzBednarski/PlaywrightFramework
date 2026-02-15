@@ -45,6 +45,9 @@ export const testRunnerConfig = {
   grepGroups: {
     sanity: '[sanity]',
     smoke: '[smoke]',
+    security: '[security]',
+    csp: '[csp]',
+    securityheaders: '[securityHeaders]',
   },
 
   // ---------------------------------------------------------------------------
@@ -100,6 +103,15 @@ npm run test dev all
 
 # Run tests matching a grep pattern (for example smoke tests)
 npm run test dev grep:smoke
+
+# Run security checks (all tests tagged [security])
+npm run test dev grep:security
+
+# Run only CSP checks
+npm run test dev grep:csp
+
+# Run only security headers checks
+npm run test dev grep:securityheaders
 
 # Run visual tests (Percy integration requires PERCY_* variables in .env)
 npm run test dev visual

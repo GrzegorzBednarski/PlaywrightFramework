@@ -46,14 +46,28 @@ export type LinkCheckOverrides = {
   brokenLinksReportLimit?: number;
 };
 
+/**
+ * Extract origin (protocol + host + port) from a URL.
+ * Used to enforce `sameOriginOnly` filtering.
+ */
 function toOrigin(url: string): string {
   return new URL(url).origin;
 }
 
+/**
+ * Returns true when `url` should be skipped based on enabled substring patterns.
+ *
+ * Matching is a simple `url.includes(pattern)`.
+ */
 function shouldSkipByPattern(url: string, patterns: Record<string, boolean>): boolean {
   return Object.entries(patterns).some(([pattern, enabled]) => enabled && url.includes(pattern));
 }
 
+/**
+ * Formats linkinator `failureDetails` into a short, readable suffix for error output.
+ *
+ * We intentionally avoid printing raw objects to prevent `([object Object])` noise.
+ */
 function formatFailureDetails(details: unknown): string {
   if (!details) return '';
   if (typeof details === 'string') return details;

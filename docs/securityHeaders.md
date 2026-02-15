@@ -133,6 +133,6 @@ Reports are merged in `global-teardown.ts`.
 
 Sample reports:
 
-- [Sample JSON report](samples/securityHeaders/security-headers-report.json)
-- [Sample Markdown report](samples/securityHeaders/security-headers-report.md)
-- [Sample PDF report](samples/securityHeaders/security-headers-report.pdf)
+- [Sample JSON report](samples/securityHeaders-reports/security-headers-report.json)
+- [Sample Markdown report](samples/securityHeaders-reports/security-headers-report.md)
+- [Sample PDF report](samples/securityHeaders-reports/security-headers-report.pdf)

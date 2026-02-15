@@ -6,17 +6,33 @@ import { buildDir } from '../../playwright.config';
 import { securityHeadersConfig } from '../../config/securityHeadersConfig';
 
 export type SecurityHeadersOverrides = {
+  /**
+   * Headers that must be present (case-insensitive).
+   *
+   * `true` = enabled, `false` = disabled.
+   */
   requiredHeaders?: Record<string, boolean>;
+
+  /**
+   * Headers that must NOT be present (case-insensitive).
+   *
+   * `true` = enabled, `false` = disabled.
+   */
   forbiddenHeaders?: Record<string, boolean>;
+
+  /** When `true`, includes all response headers in the JSON report (`headers` field). */
   includeAllHeadersInReport?: boolean;
+
   /** When true, uses the page navigation response headers when available. */
   preferNavigationResponse?: boolean;
 };
 
+/** Normalize header names to a comparable form (lowercase + trimmed). */
 function normalizeHeaderName(name: string): string {
   return name.trim().toLowerCase();
 }
 
+/** Convert a headers object to a normalized map keyed by lowercase header name. */
 function toHeaderMap(headers: Record<string, string>): Record<string, string> {
   const out: Record<string, string> = {};
   for (const [k, v] of Object.entries(headers)) out[normalizeHeaderName(k)] = v;
@@ -36,6 +52,25 @@ async function fetchHeaders(
  *
  * @param page Playwright Page (must already be navigated; page.url() must be non-empty)
  * @param override Optional per-call overrides
+ *
+ * @throws Error when required headers are missing or forbidden headers are present.
+ *
+ * @example
+ * // Minimal usage
+ * await page.goto('https://example.com');
+ * await runSecurityHeadersCheck(page);
+ *
+ * @example
+ * // Override rules for a single test
+ * await runSecurityHeadersCheck(page, {
+ *   requiredHeaders: {
+ *     'x-content-type-options': true,
+ *     'content-security-policy': true,
+ *   },
+ *   forbiddenHeaders: {
+ *     'x-powered-by': true,
+ *   },
+ * });
  */
 export async function runSecurityHeadersCheck(
   page: Page,

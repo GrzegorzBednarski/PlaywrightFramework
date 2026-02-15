@@ -13,12 +13,14 @@ Key capabilities (optional modules/features you can enable per project):
 
 - Accessibility testing (axe)
 - Analytics event assertions
+- CSP validation (CSP Check)
 - Client-side performance testing & monitoring (Lighthouse)
 - Cookie scenarios (set, validate, and reuse)
 - HTTP request assertions & API auth helpers
 - Link checking (Linkinator)
 - Multi-environment support (dotenv + `.env.*`)
 - Network mocking & intercept helpers (fixtures + replace/wait for intercept)
+- Security headers validation
 - Session-based authentication (reusable authenticated state + configurable login flows)
 - Stability helpers for flaky tests (wait for page idle)
 - UI quality guardrails (assert no console errors)
@@ -249,6 +251,8 @@ PlaywrightFramework/
 
 - **[Assert No Console Errors](./docs/assertNoConsoleErrors.md)** - Validate that pages load without JavaScript console errors
   - [Configuration](./docs/assertNoConsoleErrors.md#configuration) | [Usage](./docs/assertNoConsoleErrors.md#usage)
+- **[CSP Check](./docs/cspCheck.md)** - Validate Content-Security-Policy (CSP) on pages
+  - [Configuration](./docs/cspCheck.md#configuration) | [Usage](./docs/cspCheck.md#usage) | [Reports](./docs/cspCheck.md#reports)
 - **[Link Check](./docs/linkCheck.md)** - Validate that pages have no broken links (Linkinator)
   - [Configuration](./docs/linkCheck.md#configuration) | [Usage](./docs/linkCheck.md#usage) | [Reports](./docs/linkCheck.md#reports)
 - **[iFrames](./docs/iFrames.md)** - Working with embedded frames and nested browsing contexts
