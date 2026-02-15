@@ -184,8 +184,21 @@ export async function runSecurityHeadersCheck(
     fs.writeFileSync(mdPath, md, 'utf8');
 
     if (missingHeaders.length || forbiddenPresentHeaders.length) {
+      const lines: string[] = [];
+      if (missingHeaders.length) {
+        lines.push(`Missing required headers:`);
+        lines.push(...missingHeaders.map(h => `  - ${h}`));
+      }
+      if (forbiddenPresentHeaders.length) {
+        if (lines.length) lines.push('');
+        lines.push(`Forbidden headers present:`);
+        lines.push(...forbiddenPresentHeaders.map(h => `  - ${h}`));
+      }
+
       throw new Error(
-        `Security headers issues found on ${startUrl}: missing=${missingHeaders.length}, forbiddenPresent=${forbiddenPresentHeaders.length}\n\nReports saved to:\n  ${jsonPath}\n  ${mdPath}`
+        `Security headers issues found on ${startUrl}: missing=${missingHeaders.length}, forbiddenPresent=${forbiddenPresentHeaders.length}` +
+          `\n\nIssues:\n${lines.join('\n')}` +
+          `\n\nDetailed reports saved to:\n  ${jsonPath}\n  ${mdPath}`
       );
     }
   });

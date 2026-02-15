@@ -272,8 +272,11 @@ export async function runCspCheck(page: Page, overrides?: CspCheckOverrides): Pr
     fs.writeFileSync(mdPath, md, 'utf8');
 
     if (issues.length) {
+      const details = issues.map((i, idx) => `${idx + 1}) ${i.code} - ${i.message}`).join('\n');
       throw new Error(
-        `CSP issues found on ${url}: issues=${issues.length}\n\nReports saved to:\n  ${jsonPath}\n  ${mdPath}`
+        `CSP issues found on ${url}: issues=${issues.length}` +
+          `\n\nIssues:\n${details}` +
+          `\n\nDetailed reports saved to:\n  ${jsonPath}\n  ${mdPath}`
       );
     }
   });

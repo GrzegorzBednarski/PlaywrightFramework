@@ -26,11 +26,12 @@ export const testRunnerConfig = {
   // ---------------------------------------------------------------------------
 
   grepGroups: {
-    sanity: '[sanity]',
-    smoke: '[smoke]',
-    security: '[security]',
     csp: '[csp]',
+    htmlvalidator: '[htmlValidator]',
+    sanity: '[sanity]',
+    security: '[security]',
     securityheaders: '[securityHeaders]',
+    smoke: '[smoke]',
   },
 
   // ---------------------------------------------------------------------------

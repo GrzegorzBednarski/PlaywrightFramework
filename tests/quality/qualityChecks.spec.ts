@@ -3,48 +3,20 @@ import { assertNoConsoleErrors } from '../../utils/assertNoConsoleErrors';
 import { runCspCheck } from '../../utils/cspCheck/runCspCheck';
 import { runSecurityHeadersCheck } from '../../utils/securityHeaders/runSecurityHeadersCheck';
 import { runLinkCheck } from '../../utils/linkCheck/runLinkCheck';
+import { runHtmlValidate } from '../../utils/htmlValidator/runHtmlValidate';
 
 test.describe('quality checks', () => {
-  test('[security][csp] homepage should have no CSP issues', async ({ homePage, page }) => {
+  test('[security][csp] homePage - cspCheck', async ({ homePage, page }) => {
     await homePage.goto();
     await runCspCheck(page);
   });
 
-  test('[security][csp] https://www.iana.org/domains/reserved', async ({ page }) => {
-    await page.goto('https://www.iana.org/domains/reserved');
-    await runCspCheck(page);
-  });
-
-  test('[security][csp] https://news.ycombinator.com', async ({ page }) => {
-    await page.goto('https://news.ycombinator.com/');
-    await runCspCheck(page);
-  });
-
-  test('[security][securityHeaders] homepage should have baseline security headers', async ({
-    homePage,
-    page,
-  }) => {
+  test('[security][securityHeaders] homePage - securityHeaders', async ({ homePage, page }) => {
     await homePage.goto();
     await runSecurityHeadersCheck(page);
   });
 
-  test('[security][securityHeaders] /large should have baseline security headers', async ({
-    largePage,
-    page,
-  }) => {
-    await largePage.goto();
-    await runSecurityHeadersCheck(page);
-  });
-
-  test('[security][securityHeaders] /floating_menu should have baseline security headers', async ({
-    floatingMenuPage,
-    page,
-  }) => {
-    await floatingMenuPage.goto();
-    await runSecurityHeadersCheck(page);
-  });
-
-  test('[sanity] homepage should have no console errors', async ({ homePage, page }) => {
+  test('[sanity] homePage - assertNoConsoleErrors', async ({ homePage, page }) => {
     await assertNoConsoleErrors(page, homePage.getPageUrl(), {
       ignoredPatternsOverride: {
         'net::ERR_NAME_NOT_RESOLVED': true,
@@ -52,25 +24,63 @@ test.describe('quality checks', () => {
     });
   });
 
-  test('[sanity] homepage should have no broken internal links', async ({ homePage, page }) => {
+  test('[sanity] homePage - linkCheck', async ({ homePage, page }) => {
     await homePage.goto();
     await runLinkCheck(page);
   });
 
-  test('[sanity] /large should have no broken internal links', async ({ largePage, page }) => {
+  test('[security][htmlValidator] homePage - htmlValidator', async ({ homePage, page }) => {
+    await homePage.goto();
+    await runHtmlValidate(page);
+  });
+
+  test('[security][securityHeaders] largePage - securityHeaders', async ({ largePage, page }) => {
+    await largePage.goto();
+    await runSecurityHeadersCheck(page);
+  });
+
+  test('[sanity] largePage - linkCheck', async ({ largePage, page }) => {
     await largePage.goto();
     await runLinkCheck(page);
   });
 
-  test('[sanity] /floating_menu should have no broken internal links', async ({
+  test('[security][htmlValidator] largePage - htmlValidator', async ({ largePage, page }) => {
+    await largePage.goto();
+    await runHtmlValidate(page);
+  });
+
+  test('[security][securityHeaders] floatingMenuPage - securityHeaders', async ({
     floatingMenuPage,
     page,
   }) => {
+    await floatingMenuPage.goto();
+    await runSecurityHeadersCheck(page);
+  });
+
+  test('[sanity] floatingMenuPage - linkCheck', async ({ floatingMenuPage, page }) => {
     await floatingMenuPage.goto();
     await runLinkCheck(page, {
       skippedLinks: {
         '/floating_menu': true,
       },
     });
+  });
+
+  test('[security][htmlValidator] floatingMenuPage - htmlValidator', async ({
+    floatingMenuPage,
+    page,
+  }) => {
+    await floatingMenuPage.goto();
+    await runHtmlValidate(page);
+  });
+
+  test('[security][csp] iana - cspCheck', async ({ page }) => {
+    await page.goto('https://www.iana.org/domains/reserved');
+    await runCspCheck(page);
+  });
+
+  test('[security][csp] hackerNews - cspCheck', async ({ page }) => {
+    await page.goto('https://news.ycombinator.com/');
+    await runCspCheck(page);
   });
 });

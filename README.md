@@ -16,6 +16,7 @@ Key capabilities (optional modules/features you can enable per project):
 - CSP validation (CSP Check)
 - Client-side performance testing & monitoring (Lighthouse)
 - Cookie scenarios (set, validate, and reuse)
+- HTML validation
 - HTTP request assertions & API auth helpers
 - Link checking (Linkinator)
 - Multi-environment support (dotenv + `.env.*`)
@@ -253,9 +254,11 @@ PlaywrightFramework/
   - [Configuration](./docs/assertNoConsoleErrors.md#configuration) | [Usage](./docs/assertNoConsoleErrors.md#usage)
 - **[CSP Check](./docs/cspCheck.md)** - Validate Content-Security-Policy (CSP) on pages
   - [Configuration](./docs/cspCheck.md#configuration) | [Usage](./docs/cspCheck.md#usage) | [Reports](./docs/cspCheck.md#reports)
+- **[HTML Validator](./docs/htmlValidator.md)** - Validate rendered HTML using html-validate
+  - [Configuration](./docs/htmlValidator.md#configuration) | [Usage](./docs/htmlValidator.md#usage) | [Reports](./docs/htmlValidator.md#reports)
+- **[iFrames](./docs/iFrames.md)** - Working with embedded frames and nested browsing contexts
 - **[Link Check](./docs/linkCheck.md)** - Validate that pages have no broken links (Linkinator)
   - [Configuration](./docs/linkCheck.md#configuration) | [Usage](./docs/linkCheck.md#usage) | [Reports](./docs/linkCheck.md#reports)
-- **[iFrames](./docs/iFrames.md)** - Working with embedded frames and nested browsing contexts
 - **[Replace Text](./docs/replaceText.md)** - Modify text content in DOM elements for testing scenarios
   - [Usage](./docs/replaceText.md#usage)
 - **[Security Headers](./docs/securityHeaders.md)** - Validate baseline security headers on responses

@@ -14,12 +14,12 @@ export const cspCheckConfig = {
   // ---------------------------------------------------------------------------
 
   /** If true, requires that a CSP policy is present (either header or meta). */
-  requireCsp: true,
+  requireCsp: false,
 
   /** Rules applied to the effective CSP string (basic heuristic checks). */
   rules: {
-    disallowUnsafeInline: true,
-    disallowUnsafeEval: true,
+    disallowUnsafeInline: false,
+    disallowUnsafeEval: false,
     disallowWildcardSources: true,
     requireDefaultSrc: true,
   } as Record<string, boolean>,

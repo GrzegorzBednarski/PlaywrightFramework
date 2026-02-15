@@ -296,18 +296,16 @@ export async function runLinkCheck(page: Page, override?: LinkCheckOverrides): P
     fs.writeFileSync(mdPath, md, 'utf8');
 
     if (broken.length > 0) {
-      const details = limitedBroken
-        .slice(0, 50)
-        .map(l => {
-          const note = formatFailureDetails(l.failureDetails);
-          const suffix = note ? ` (${note})` : '';
-          return `  - ${l.url} -> ${l.status ?? 'unknown'}${suffix}`;
-        })
-        .join('\n');
-
-      const more = broken.length > 50 ? `\n  ...and ${broken.length - 50} more` : '';
       throw new Error(
-        `Broken links found on ${startUrl}:\n${details}${more}\n\nReports saved to:\n  ${jsonPath}\n  ${mdPath}`
+        `Broken links found on ${startUrl}: broken=${broken.length}` +
+          `\n\nIssues:\n${broken
+            .map(l => {
+              const note = formatFailureDetails(l.failureDetails);
+              const suffix = note ? ` (${note})` : '';
+              return `  - ${l.url} -> ${l.status ?? 'unknown'}${suffix}`;
+            })
+            .join('\n')}` +
+          `\n\nDetailed reports saved to:\n  ${jsonPath}\n  ${mdPath}`
       );
     }
   });
