@@ -85,7 +85,7 @@ PlaywrightFramework/
 │   ├── 📁 analytics/              # Analytics fixtures (used by checkAnalyticsEvent)
 │   │   └── ... (fixture files)
 │   ├── 📁 api/                    # API fixtures (request bodies, expected JSON)
-��   │   └── ... (fixture files)
+│   │   └── ... (fixture files)
 │   ├── 📁 cookies/                # Cookie fixtures in JSON format used by checkCookies (fixtures/cookies/*.json)
 │   │   └── ... (fixture files)
 │   ├── 📁 intercepts/             # Fixtures for HTTP intercepts (used by replaceIntercept)
@@ -254,6 +254,8 @@ PlaywrightFramework/
 - **[iFrames](./docs/iFrames.md)** - Working with embedded frames and nested browsing contexts
 - **[Replace Text](./docs/replaceText.md)** - Modify text content in DOM elements for testing scenarios
   - [Usage](./docs/replaceText.md#usage)
+- **[Security Headers](./docs/securityHeaders.md)** - Validate baseline security headers on responses
+  - [Configuration](./docs/securityHeaders.md#configuration) | [Usage](./docs/securityHeaders.md#usage) | [Reports](./docs/securityHeaders.md#reports)
 - **[Wait for Page Idle](./docs/waitForPageIdle.md)** - Waiting for page stability and AJAX completion
   - [Configuration](./docs/waitForPageIdle.md#configuration) | [Usage](./docs/waitForPageIdle.md#usage)
 

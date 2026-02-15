@@ -4,7 +4,7 @@
 
 ## Overview
 
-Link validation utility for Playwright tests (Linkinator).
+Link validation utility for Playwright tests using **[Linkinator](https://github.com/JustinBeckwith/linkinator)**.
 
 Scans links found on the current page and reports broken ones.
 
@@ -55,17 +55,17 @@ export const linkCheckConfig = {
 } as const;
 ```
 
-#### Scope
+### Scope
 
 - **`sameOriginOnly`** – when `true`, checks only links from the same origin as the current page.
 - **`recurse`** – when `true`, crawls beyond the initial page (can significantly increase scan size).
 
-#### Timeouts & concurrency
+### Timeouts & concurrency
 
 - **`timeoutMs`** – per-link timeout in milliseconds.
 - **`concurrency`** – max number of parallel link checks.
 
-#### Skip / allow rules
+### Skip / allow rules
 
 - **`skippedLinks`** – patterns to skip (substring match: `url.includes(pattern)`).
 
@@ -75,10 +75,16 @@ export const linkCheckConfig = {
     '/search?': true,
     'utm_source=': true,
     '/some-legacy-endpoint': false,
-  }
+  };
   ```
 
 - **`allowedStatusCodes`** – HTTP statuses treated as OK (`true` = allow, `false` = disallow).
+
+### Reporting
+
+- **`includeOkLinksInReport`** – when `true`, includes OK links in per-page reports.
+- **`okLinksReportLimit`** – max OK links included in the report (`0`/`undefined` = no limit).
+- **`brokenLinksReportLimit`** – max broken links included in the report (`0`/`undefined` = no limit).
 
 ---
 
@@ -120,11 +126,11 @@ Output directory (generated): `build/linkCheck/`
 
 Files:
 
-- `link-check_<url>_<timestamp>.json` – per-page JSON report
-- `link-check_<url>_<timestamp>.md` – per-page Markdown report
-- `link-check-report.json` – merged summary
-- `link-check-report.md` – merged summary
-- `link-check-report.pdf` – PDF version of the summary
+- **`link-check_<url>_<timestamp>.json`** – per-page JSON report
+- **`link-check_<url>_<timestamp>.md`** – per-page Markdown report
+- **`link-check-report.json`** – merged summary
+- **`link-check-report.md`** – merged summary
+- **`link-check-report.pdf`** – PDF version of the summary
 
 Reports are merged in `global-teardown.ts`.
 
