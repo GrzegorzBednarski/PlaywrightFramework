@@ -22,6 +22,10 @@ import { printStyledFailure } from './errorHandling';
  * @param mode Resolved mode (test type, group, grep:<group>, performance mode, or command like 'eslint').
  */
 export function routeMode(env: string, mode: string) {
+  const optional = (testRunnerConfig as any).optionalModes as
+    | { visual?: boolean; performanceTest?: boolean; performanceMonitoring?: boolean }
+    | undefined;
+
   if (mode === 'ui') {
     openPlaywrightUI(env);
     return;
@@ -32,16 +36,33 @@ export function routeMode(env: string, mode: string) {
   if (mode === 'report') return openReport();
 
   if (mode === 'visual') {
+    if (optional?.visual === false) {
+      printStyledFailure('Mode "visual" is disabled in testRunnerConfig.optionalModes.');
+      process.exitCode = 1;
+      return;
+    }
     runVisualTests(env);
     return;
   }
 
   if (mode === 'performancetest') {
+    if (optional?.performanceTest === false) {
+      printStyledFailure('Mode "performanceTest" is disabled in testRunnerConfig.optionalModes.');
+      process.exitCode = 1;
+      return;
+    }
     runPerformanceTest(env);
     return;
   }
 
   if (mode === 'performancemonitoring') {
+    if (optional?.performanceMonitoring === false) {
+      printStyledFailure(
+        'Mode "performanceMonitoring" is disabled in testRunnerConfig.optionalModes.'
+      );
+      process.exitCode = 1;
+      return;
+    }
     runPerformanceMonitoring(env);
     return;
   }

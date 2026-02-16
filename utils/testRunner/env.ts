@@ -42,8 +42,17 @@ export function validateEnvironmentExists(env: string): boolean {
  * Return configured test types, groups and grep groups from testRunnerConfig.
  */
 export function getTestCategories() {
+  const optional = (testRunnerConfig as any).optionalModes as
+    | { visual?: boolean; performanceTest?: boolean; performanceMonitoring?: boolean }
+    | undefined;
+
+  const enabledTestTypes = Object.keys(testRunnerConfig.testTypes).filter(type => {
+    if (type === 'visual') return optional?.visual !== false;
+    return true;
+  });
+
   return {
-    testTypes: Object.keys(testRunnerConfig.testTypes),
+    testTypes: enabledTestTypes,
     testGroups: Object.keys(testRunnerConfig.testGroups),
     grepGroups: Object.keys(testRunnerConfig.grepGroups),
   };

@@ -263,7 +263,6 @@ PlaywrightFramework/
   - [Usage](./docs/replaceText.md#usage)
 - **[Security Headers](./docs/securityHeaders.md)** - Validate baseline security headers on responses
   - [Configuration](./docs/securityHeaders.md#configuration) | [Usage](./docs/securityHeaders.md#usage) | [Reports](./docs/securityHeaders.md#reports)
-- **[Wait for Page Idle](./docs/waitForPageIdle.md)** - Waiting for page stability and AJAX completion
   - [Configuration](./docs/waitForPageIdle.md#configuration) | [Usage](./docs/waitForPageIdle.md#usage)
 
 ### 🌐 Working with HTTP requests

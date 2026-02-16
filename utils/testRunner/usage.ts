@@ -22,6 +22,8 @@ export function printInvalidUsage(
 ) {
   console.error('==================================================================');
   console.error('Some arguments are invalid. Please review the details below.');
+  console.error('==================================================================');
+
   console.error('\nArgument analysis:');
 
   if (analysis.length === 0) {
@@ -32,11 +34,23 @@ export function printInvalidUsage(
 
   console.error('==================================================================');
 
+  const optional = (testRunnerConfig as any).optionalModes as
+    | { visual?: boolean; performanceTest?: boolean; performanceMonitoring?: boolean }
+    | undefined;
+
+  const isVisualEnabled = optional?.visual !== false;
+  const isPerformanceMonitoringEnabled = optional?.performanceMonitoring !== false;
+  const isPerformanceTestEnabled = optional?.performanceTest !== false;
+
   console.error('\nCommands:');
-  console.error('  - npm run test <environment> <testCategory> ui');
+  console.error('  - npm run test <environment> <testCategory>');
   console.error('  - npm run test <environment> ui');
-  console.error('  - npm run test <environment> performanceMonitoring');
-  console.error('  - npm run test <environment> performanceTest');
+  if (isPerformanceMonitoringEnabled) {
+    console.error('  - npm run test <environment> performanceMonitoring');
+  }
+  if (isPerformanceTestEnabled) {
+    console.error('  - npm run test <environment> performanceTest');
+  }
   console.error('  - npm run test eslint');
   console.error('  - npm run test prettier');
   console.error('  - npm run test report');
@@ -51,10 +65,17 @@ export function printInvalidUsage(
   console.error('\nTest categories:');
 
   console.error('\n  Test types:');
-  if (testTypes.length === 0) {
+  // Include performance modes in 'test types' so users discover them next to regular categories.
+  const extra: string[] = [];
+  if (isPerformanceMonitoringEnabled) extra.push('performanceMonitoring');
+  if (isPerformanceTestEnabled) extra.push('performanceTest');
+
+  // NOTE: 'visual' is handled upstream via `getTestCategories()` filtering.
+  const extendedTestTypes = Array.from(new Set([...(testTypes || []), ...extra]));
+  if (extendedTestTypes.length === 0) {
     console.error('    (no test types configured in testRunnerConfig.ts)');
   } else {
-    testTypes.sort().forEach(t => console.error(`    - ${t}`));
+    extendedTestTypes.sort().forEach(t => console.error(`    - ${t}`));
   }
 
   console.error('\n  Test groups:');
@@ -86,15 +107,18 @@ export function printInvalidUsage(
     grepGroups.sort().forEach(g => console.error(`    - grep:${g}`));
   }
 
-  console.error(
-    '\nExamples:\n' +
-      '  npm run test dev functional ui\n' +
-      '  npm run test dev visual\n' +
-      '  npm run test dev all ui\n' +
-      '  npm run test dev grep:smoke\n' +
-      '  npm run test dev ui\n' +
-      '  npm run test dev performanceMonitoring\n' +
-      '  npm run test dev performanceTest\n' +
-      '  npm run test report\n'
-  );
+  const exampleLines: string[] = [];
+  exampleLines.push('  npm run test dev functional');
+
+  if (isPerformanceMonitoringEnabled) exampleLines.push('  npm run test dev performanceMonitoring');
+  if (isPerformanceTestEnabled) exampleLines.push('  npm run test dev performanceTest');
+  if (isVisualEnabled) exampleLines.push('  npm run test dev visual');
+
+  exampleLines.push('  npm run test dev all');
+  exampleLines.push('  npm run test dev grep:smoke');
+  exampleLines.push('  npm run test dev ui');
+  exampleLines.push('  npm run test report');
+
+  console.error('\nExamples:\n' + exampleLines.join('\n') + '\n');
+  console.error('==================================================================');
 }

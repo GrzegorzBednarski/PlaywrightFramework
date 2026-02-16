@@ -51,7 +51,13 @@ export function resolveArgs(...rawArgs: string[]) {
   const hasUI = analysis.some((a: AnalysisEntry) => a.type === 'ui');
   if (hasUI) {
     const env = analysis.find((a: AnalysisEntry) => a.type === 'environment')?.value;
-    if (!env) {
+    const hasExtra = analysis.some(
+      (a: AnalysisEntry) =>
+        a.type.startsWith('testCategory<') || a.type === 'command' || a.type === 'performanceMode'
+    );
+
+    // UI mode is intentionally strict: only `<env> ui` is allowed.
+    if (!env || hasExtra) {
       printInvalidUsage(
         analysis,
         availableEnvs,

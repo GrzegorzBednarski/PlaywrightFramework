@@ -17,6 +17,16 @@ A simplified version of `testRunnerConfig` looks like this:
 ```ts
 export const testRunnerConfig = {
   // ---------------------------------------------------------------------------
+  // Optional modes (feature flags)
+  // ---------------------------------------------------------------------------
+
+  optionalModes: {
+    visual: true,
+    performanceTest: true,
+    performanceMonitoring: true,
+  },
+
+  // ---------------------------------------------------------------------------
   // Test types (maps "type" to folders)
   // ---------------------------------------------------------------------------
 
@@ -64,6 +74,30 @@ Key fields:
 - **`testGroups`** – named groups that combine multiple test types (for example `all`).
 - **`grepGroups`** – named patterns used with Playwright `grep` (for example `grep:smoke`).
 - **`grepExclude`** – patterns that should be excluded from runs.
+- **`optionalModes`** – feature flags that let you turn optional runner modes on/off per project.
+  
+  What it affects:
+  - when a mode is disabled, it **doesn't show up in the runner help** (Commands / Test types / Examples)
+  - trying to run a disabled mode will **fail fast** with a clear message
+  
+  Available flags:
+  - `visual` – enables/disables the `visual` test type (Percy)
+  - `performanceTest` – enables/disables `performanceTest` mode (threshold-based Lighthouse run)
+  - `performanceMonitoring` – enables/disables `performanceMonitoring` mode (median aggregation)
+  
+  Example (disable all optional modes):
+  
+  ```ts
+  export const testRunnerConfig = {
+    // ...
+    optionalModes: {
+      visual: false,
+      performanceTest: false,
+      performanceMonitoring: false,
+    },
+    // ...
+  };
+  ```
 
 The runner uses these definitions to map CLI arguments to Playwright options and decide which tests to run.
 
@@ -73,10 +107,14 @@ The runner uses these definitions to map CLI arguments to Playwright options and
 
 ### Running tests
 
-The main entrypoint is a single npm script that accepts an environment and one or more test selectors:
+The main entrypoint is a single npm script that accepts an environment and a single mode:
 
 ```sh
-npm run test <env> <testSelector> [ui]
+# Test runs
+npm run test <env> <testSelector>
+
+# UI mode
+npm run test <env> ui
 ```
 
 Where:
@@ -86,11 +124,9 @@ Where:
   - a test type (for example `functional`, `accessibility`, `analytics`, `visual`),
   - a test group (for example `all`),
   - a grep pattern (for example `grep:smoke`).
-- `ui` (optional) – when present, starts the Playwright UI for the selected tests.
+- `ui` – starts Playwright Test UI for the given environment.
 
-Arguments can be provided in any order (for example `npm run test dev all ui` or `npm run test dev ui all`).
-
-> **Note:** visual tests are never run together with other types or groups. They are excluded from combined runs and must be executed explicitly using the `visual` test type.
+> UI mode is intentionally strict: it runs as `npm run test <env> ui` (no test selector).
 
 Examples:
 
@@ -104,15 +140,6 @@ npm run test dev all
 # Run tests matching a grep pattern (for example smoke tests)
 npm run test dev grep:smoke
 
-# Run security checks (all tests tagged [security])
-npm run test dev grep:security
-
-# Run only CSP checks
-npm run test dev grep:csp
-
-# Run only security headers checks
-npm run test dev grep:securityheaders
-
 # Run visual tests (Percy integration requires PERCY_* variables in .env)
 npm run test dev visual
 
@@ -122,8 +149,8 @@ npm run test dev performancetest
 # Run Lighthouse performance monitoring (median aggregation)
 npm run test dev performancemonitoring
 
-# Open Playwright Test UI for functional tests
-npm run test dev functional ui
+# Open Playwright Test UI
+npm run test dev ui
 ```
 
 If you pass invalid or unknown arguments, the runner prints a detailed help message that includes:
