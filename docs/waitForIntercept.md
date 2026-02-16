@@ -10,8 +10,8 @@ Utility for waiting on specific HTTP requests and returning the matched `Request
 
 ## Configuration
 
-URL patterns are defined centrally in **[Intercepts](./intercepts.md)** (`data/intercepts.ts`).
-Use keys from `INTERCEPTS` as the `urlPattern` argument.
+You can pass a wildcard string or a `RegExp` as `urlPattern`.
+For readability, many projects keep patterns in a shared `INTERCEPTS` map (see **[Intercepts](./intercepts.md)**).
 
 Function signature:
 

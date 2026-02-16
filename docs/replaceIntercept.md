@@ -10,8 +10,7 @@ Utility for intercepting HTTP requests and responding with data loaded from JSON
 
 ## Configuration
 
-URL patterns are defined centrally in **[Intercepts](./intercepts.md)** (`data/intercepts.ts`).
-Use keys from `INTERCEPTS` as the `urlPattern` argument.
+For readability, you can centralize URL patterns in an `INTERCEPTS` map (see **[Intercepts](./intercepts.md)**) and pass `INTERCEPTS.SOME_KEY` as the `urlPattern` argument.
 
 Fixture files are stored under `fixtures/intercepts/`.
 

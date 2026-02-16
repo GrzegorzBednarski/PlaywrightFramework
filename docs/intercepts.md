@@ -10,14 +10,15 @@ Centralized configuration for HTTP intercept URL patterns used across tests.
 
 ## Configuration
 
-Define reusable URL patterns in `data/intercepts.ts`:
+This framework doesn't ship with a predefined `INTERCEPTS` map.
+Create it in your project to keep URL patterns reusable and consistent, e.g. `data/intercepts.ts`:
 
 ```typescript
 export const INTERCEPTS = {
   API_SEARCH: '*/api/search/*',
   USER_PROFILE_REGEXP: /\/api\/users\/[0-9]+\/profile/,
-  USER_LOGIN: '*/occ/v2/orgUsers/*',
-};
+  USER_LOGIN: '*/api/login/orgUsers/*',
+} as const;
 ```
 
 Supported pattern types:

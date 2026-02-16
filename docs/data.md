@@ -10,7 +10,8 @@ Central place for shared test data (users, products, etc.) to keep specs clean a
 
 ## Configuration
 
-Data is stored in a single file: `data/data.ts`.
+This framework doesn't ship with a built-in `data` module.
+If you want centralized, typed test data, create it in your project (commonly as `data/data.ts`).
 
 If values differ between environments (dev/stg), define separate datasets and export the one matching `process.env.ENV`.
 
