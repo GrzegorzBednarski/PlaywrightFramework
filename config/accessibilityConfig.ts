@@ -1,4 +1,4 @@
-import { buildDir } from '../../PlaywrightStarterKit/global-setup';
+import { buildDir } from '../playwright.config';
 
 const accessibilityConfig = {
   // ---------------------------------------------------------------------------
